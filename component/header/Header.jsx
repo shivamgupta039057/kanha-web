@@ -14,6 +14,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const { isOpen: showLogin } = useSelector((state) => state.loginModal);
   const token = useSelector((state) => state.auth.token);
+  console.log("djfsklsjsdlsdtokentokentokentokentokentoken" , token);
+  
   useEffect(() => {
     // Import token from localStorage if available
     const localhostToken = typeof window !== 'undefined' ? localStorage.getItem('khana-token') : null;
@@ -22,7 +24,7 @@ const Header = () => {
   }, []);
 
 
-  console.log("tokendsfkljdsklllllllllllllllllllllllll" , token);
+  console.log("tokendsfkljdsklllllllllllllllllllllllll" , token !== null );
   
 
 
@@ -112,7 +114,7 @@ const Header = () => {
                       <li className="menu-item">
                         <Link href="/contact">Contact</Link>
                       </li>
-                      {token ? (
+                      {token !== null ? (
                         <li className="menu-item">
                           <button
                             type="button"

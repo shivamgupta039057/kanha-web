@@ -151,7 +151,8 @@ const Booking = ({roomId}) => {
       }
     },
     onError: (error) => {
-      toast.error(error && error.message ? error.message : "An error occurred while adding the room.");
+      console.log("errorerrorerrorerrorerrorerror" , error);
+      toast.error(error.response.data.message || "An error occurred while booking the room.");
     },
   });
 
@@ -299,7 +300,7 @@ const Booking = ({roomId}) => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-3 bg-orange-500 text-white font-semibold rounded-lg shadow hover:bg-orange-600 transition text-lg"
+                  className="w-full py-3 bg-orange-500 text-black font-semibold rounded-lg shadow hover:bg-orange-600 transition text-lg"
                   disabled={addRoomMutation.isLoading || isSubmitting}
                 >
                   {addRoomMutation.isLoading || isSubmitting ? "Booking..." : "Book Now"}

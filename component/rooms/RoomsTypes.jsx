@@ -176,7 +176,7 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
                           </h4>
                           <div className="lh-room-price">
                             <h4 className="xl:text-[22px] text-[18px] text-[#ed5b31] font-bold leading-[22px]">
-                              ${selectedRoom.price || "--"} /
+                              ₹{selectedRoom.price || "--"} /
                               <span className="ml-[5px] text-[14px] font-normal text-[#777]">
                                 Per night
                               </span>
@@ -256,7 +256,7 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
                         {/* IMPLEMENTED FIELD: Book Now Button */}
                         <div className="mt-6 flex justify-end">
                           <button
-                            className="bg-[#ed5b31] hover:bg-[#d14a22] text-white font-semibold py-2 px-6 rounded-[8px] transition-colors"
+                            className="bg-[000000] hover:bg-[#000000] text-[#000000] font-semibold py-2 px-6 rounded-[8px]"
                             onClick={() => handleBookHandle(selectedRoom._id)}
                           >
                             Book Now
@@ -307,7 +307,7 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
                           </h4>
                           <div className="lh-room-price">
                             <h4 className="xl:text-[22px] text-[18px] text-[#ed5b31] font-bold leading-[22px]">
-                              ${selectedRoom.price} /
+                              ₹{selectedRoom.price} /
                               <span className="ml-[5px] text-[14px] font-normal text-[#777]">
                                 Per night
                               </span>
