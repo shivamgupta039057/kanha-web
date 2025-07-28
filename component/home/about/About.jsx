@@ -12,8 +12,8 @@ const aboutData = {
     "Whether you're here for a stay, a function, or a fine dining experience, New Kanha Hotel ensures comfort, luxury, and exceptional service—all under one roof. A perfect destination for every occasion in the heart of Jaipur."
   ],
   signature: {
-    src: "/images/sign.png",
-    alt: "Signature"
+    // src: "/images/sign.png",
+    // alt: "Signature"
   }
 };
 

@@ -34,7 +34,7 @@ const Rooms = () => {
       <SubHeader title="Rooms & Banquets" subtitle="Rooms & Banquets" rating="5" />
       <RoomsTypes roomTypeData={roomTypeData} isLoading={isLoading} />
       <PricesData />
-      <Partner />
+      {/* <Partner /> */}
     </>
   )
 

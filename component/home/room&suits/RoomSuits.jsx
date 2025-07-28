@@ -63,7 +63,7 @@ const RoomSuits = () => {
         <div className="section-header">
           <div className="section-heading mb-3">
             <h3 className="text-custom-black mb-0">The New Kanha Hotel</h3>
-            <span>Room & Suits</span>
+            <span>Rooms , Banquets & Restaurent </span>
           </div>
         </div>
         <div className="row">

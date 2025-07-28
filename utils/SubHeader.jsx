@@ -8,14 +8,14 @@ const SubHeader = ({ title, subtitle, rating }) => {
       <div className="container">
         <div className="row">
           <div className="col-12 text-left" style={{ marginTop: "30px" }}>
-            <div className="rating mb-2">
+            {/* <div className="rating mb-2">
               {[...Array(stars)].map((_, idx) => (
                 <i key={idx} className="fa-sharp fa-solid fa-star"></i>
               ))}
               {[...Array(5 - stars)].map((_, idx) => (
                 <i key={stars + idx} className="fa-sharp fa-regular fa-star"></i>
               ))}
-            </div>
+            </div> */}
             <h5 className="text-custom-white">{subtitle}</h5>
             <h1 className="subheader-h1">{title}</h1>
           </div>

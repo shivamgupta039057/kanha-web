@@ -6,14 +6,14 @@ const CONTACT_INFO = [
   {
     icon: 'flaticon-call',
     label: 'Booking',
-    value: '+91 2586931478',
+    value: '9783252121',
     type: 'phone',
     href: 'tel:+912586931478',
   },
   {
     icon: 'flaticon-envelope',
     label: 'Email Info',
-    value: 'info@Kanhahotel.com',
+    value: 'newkanha220@gmail.com',
     type: 'email',
     href: 'mailto:info@Kanhahotel.com',
   },
@@ -22,9 +22,7 @@ const CONTACT_INFO = [
     label: 'Address',
     value: (
       <>
-        20 Mall Road, India 30032
-        <br />
-        South Africa Of India
+        Kala Nagari, Kalwar Rd, opp. New Kanha Restaurant, Radha Vihar, Govindpura, Jaipur, Rajasthan 302012 
       </>
     ),
     type: 'address',
@@ -72,9 +70,7 @@ const ContactPage = () => {
                 </div>
                 <div className="luxury-p">
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut.
+                 New Kanha Hotel, Jaipur’s best newly opened hotel with premium amenities, is located in Govindpura, Kalwar Road. We proudly offer top-notch hospitality with facilities including a well-appointed hotel, an elegant banquet hall for celebrations, and a delightful restaurant serving delicious cuisine. Whether you're here for a stay, a function, or a fine dining experience, New Kanha Hotel ensures comfort, luxury, and exceptional service—all under one roof. A perfect destination for every occasion in the heart of Jaipur.
                   </p>
                 </div>
                 {CONTACT_INFO.map((info, idx) => (

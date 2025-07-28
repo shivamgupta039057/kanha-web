@@ -56,13 +56,13 @@ const Banner = () => {
                     data-aos-duration="3000"
                   >
                     <div className="slider-content">
-                      <div className="rating">
+                      {/* <div className="rating">
                         <i className="fa fa-star"></i>
                         <i className="fa fa-star"></i>
                         <i className="fa fa-star"></i>
                         <i className="fa fa-star"></i>
                         <i className="fa fa-star"></i>
-                      </div>
+                      </div> */}
                       <p>{slide.subheading}</p>
                       <h1 className="text-custom-white"> {slide.heading} </h1>
                       <Link href={slide.btnLink} className="btn-first btn-small">

@@ -22,7 +22,7 @@ export default function Home() {
    <PricesData />
    <Testimonials />
    <Blog />
-   <Partner />
+   {/* <Partner /> */}
    </>
   );
 }

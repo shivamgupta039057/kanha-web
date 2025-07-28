@@ -30,30 +30,6 @@ const pricesData = [
     ],
     aos: "zoom-in-down",
   },
-  {
-    img: "/images/extra/4.jpg",
-    title: "Superior Double Room",
-    price: "₹126",
-    period: "/ month",
-    features: [
-      "Hotel ut nisan the duru",
-      "Orci miss natoque vasa ince",
-      "Clean sorem ipsum morbin",
-    ],
-    aos: "",
-  },
-  {
-    img: "/images/extra/5.jpg",
-    title: "Balcony Double Room",
-    price: "₹89",
-    period: "/ month",
-    features: [
-      "Hotel ut nisan the duru",
-      "Orci miss natoque vasa ince",
-      "Clean sorem ipsum morbin",
-    ],
-    aos: "",
-  },
 ];
 
 // Slider settings for react-slick
