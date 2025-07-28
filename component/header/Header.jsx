@@ -42,7 +42,7 @@ const Header = () => {
                   <div className="logo">
                     <Link href="/">
                       <Image
-                        src="/images/logo.png"
+                        src="/images/kanhalogo.png"
                         className="img-fluid"
                         alt="logo"
                         width={120}
@@ -60,14 +60,12 @@ const Header = () => {
                         <Link href="/about">About</Link>
                       </li>
                       <li className="menu-item">
-                        <Link href="/roomtype">Rooms &amp; Suites</Link>
+                        <Link href="/roomtype">Rooms</Link>
                       </li>
                       <li className="menu-item">
                         <Link href="/resturent">Restaurant</Link>
                       </li>
-                      <li className="menu-item">
-                        <Link href="/spa">Spa</Link>
-                      </li>
+                    
                       <li className="menu-item menu-item-has-children">
                         <a href="#">Pages</a>
                         <ul className="submenu custom">
@@ -80,24 +78,14 @@ const Header = () => {
                           <li className="menu-item">
                             <Link href="/gallery">Gallery</Link>
                           </li>
-                          <li className="menu-item">
-                            <Link href="/team">Team</Link>
-                          </li>
-                          <li className="menu-item">
-                            <Link href="/pricing">Pricing</Link>
-                          </li>
+                          
                           <li className="menu-item">
                             <Link href="/faq">FAQ</Link>
                           </li>
-                          <li className="menu-item">
-                            <Link href="/404">404</Link>
-                          </li>
-                          <li className="menu-item">
-                            <Link href="/coming-soon">Comming Soon</Link>
-                          </li>
+                         
                         </ul>
                       </li>
-                      <li className="menu-item menu-item-has-children">
+                      {/* <li className="menu-item menu-item-has-children">
                         <a href="#">Blog</a>
                         <ul className="submenu custom">
                           <li className="menu-item">
@@ -110,7 +98,7 @@ const Header = () => {
                             <Link href="/blog-2">Blog Details</Link>
                           </li>
                         </ul>
-                      </li>
+                      </li> */}
                       <li className="menu-item">
                         <Link href="/contact">Contact</Link>
                       </li>

@@ -11,19 +11,19 @@ const Slider = dynamic(() => import("react-slick"), { ssr: false });
 const bannerSlides = [
   {
     img: "/images/banner/10.jpg",
-    alt: "New Kanha Hotel Experience",
-    heading: "New Kanha Hotel Experience",
-    subheading: "Unique Place To Relaxe & Enjoy",
+    alt: "New Kanha Hotel In Kalwar Road",
+    heading: "New Kanha Hotel In Kalwar Road",
+    subheading: "Stay in Jaipur’s Best Hotel",
     btnText: "Room Booking",
     btnLink: "roomtype",
   },
   {
     img: "/images/banner/11.jpg",
-    alt: "New Kanha Hotel In The World",
-    heading: "New Kanha Hotel In The World",
-    subheading: "Unique Place To Relaxe & Enjoy",
+    alt: "New Kanha Hotel In Kalwar Road",
+    heading: "New Kanha Hotel In Kalwar Road",
+    subheading: "Stay in Jaipur’s Best Hotel",
     btnText: "Blanquette Booking",
-    btnLink: "banquete",
+    btnLink: "banquete-view",
   },
 ];
 

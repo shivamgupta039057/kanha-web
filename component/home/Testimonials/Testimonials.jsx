@@ -9,16 +9,16 @@ const testimonialsData = [
   {
     image: "/images/tes.jpg",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    name: "Roberta Cozza",
-    position: "General Director",
+      "Nice Restaurant, good service, good behaviour, good cleaning, tasty foods.",
+    name: "Ram Chandra Keelka",
+    position: "Client",
   },
   {
     image: "/images/test.jpg",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    name: "Jessica UK",
-    position: "General Manager",
+      "Main pavbaji aur daipapdi chat packing liye dono hi sade hue baji aur papdi chat packing kar k de de Ghar jakar call Kiya to no. Bi off aa raha ... Es liye koi bi fast food packaging lene se phle test jaru kare...",
+    name: "Sunil Yadav",
+    position: "Client",
   },
   // Add more testimonials as needed
 ];

@@ -143,7 +143,6 @@ const Booking = ({roomId}) => {
         paymentObject.open();
         // end rapor pay 
         toast.success(response.data.message);
-        submittedRef.current = true;
         reset();
         forceUpdate();
       } else {
@@ -173,8 +172,7 @@ const Booking = ({roomId}) => {
       phone: details.phone,
       checkIn: "",
       checkOut: "",
-    });
-    submittedRef.current = false;
+    });a
     forceUpdate();
   };
 
@@ -213,22 +211,7 @@ const Booking = ({roomId}) => {
           </div>
           {/* Right Side: Booking Form */}
           <div className="md:w-1/2 w-full flex flex-col justify-center p-8 md:p-10 bg-white">
-            {submittedRef.current ? (
-              <div className="text-center">
-                <div className="text-2xl text-green-600 font-semibold mb-2">Booking Successful!</div>
-                <div className="text-gray-700 mb-4">
-                  Thank you, <span className="font-bold">{guestNameValue}</span>.<br />
-                  We will contact you at <span className="font-bold">{phoneValue}</span>.
-                </div>
-                <button
-                  className="mt-2 px-6 py-2 bg-orange-500 text-white rounded-lg shadow hover:bg-orange-600 transition"
-                  onClick={handleBookAnother}
-                >
-                  Book Another
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
                 <div>
                   <label htmlFor="guestName" className="block text-sm font-medium text-gray-700 mb-1">
                     Guest Name
@@ -306,7 +289,6 @@ const Booking = ({roomId}) => {
                   {addRoomMutation.isLoading || isSubmitting ? "Booking..." : "Book Now"}
                 </button>
               </form>
-            )}
           </div>
         </div>
       </div>

@@ -8,25 +8,25 @@ import "slick-carousel/slick/slick-theme.css";
 const pricesData = [
   {
     img: "/images/extra/2.jpg",
-    title: "Classic Balcony Room",
-    price: "$50",
+    title: "Deluxe room with breakfast",
+    price: "₹2250",
     period: "/ month",
     features: [
-      "Hotel ut nisan the duru",
-      "Orci miss natoque vasa ince",
-      "Clean sorem ipsum morbin",
+      "Comfortable AC Rooms with elegant interiors",
+      "Complimentary Wi-Fi for all guests",
+      "Daily Breakfast Included for a fresh start to your day",
     ],
     aos: "zoom-in-up",
   },
   {
     img: "/images/extra/3.jpg",
-    title: "Room cleaning",
-    price: "$240",
+    title: "Deluxe room with breakfast ",
+    price: "₹2750",
     period: "/ month",
     features: [
-      "Hotel ut nisan the duru",
-      "Orci miss natoque vasa ince",
-      "Clean sorem ipsum morbin",
+      "Comfortable AC Rooms with elegant interiors",
+      "Complimentary Wi-Fi for all guests",
+      "Daily Breakfast Included for a fresh start to your day",
     ],
     aos: "zoom-in-down",
   },
@@ -93,18 +93,16 @@ const PricesData = () => {
               }}
             >
               <div className="section-heading mb-3">
-                <h3 className="text-custom-black mb-0">Best Prices</h3>
-                <span>Other Services</span>
+                <h3 className="text-custom-black mb-0">Hotel Booking</h3>
+                <span>Types Of Room We Provide</span>
               </div>
             </div>
             <div className="sell-up-le">
               <p>
-                The best prices for your relaxing vacation. The utanislen quam
-                nestibulum ac quame odion elementum sceisue the aucan.
+              We offers the best stay experience in Jaipur with well-furnished, air-conditioned rooms designed for comfort and relaxation. 
               </p>
               <p>
-                Orci varius natoque penatibus et magnis disney parturient monte
-                nascete ridiculus mus nellen etesque habitant morbine.
+              Each room features modern amenities like free Wi-Fi, room service, and clean interiors. Whether for business or leisure, enjoy a peaceful and premium stay at New Kanha Hotel.
               </p>
 
               <div className="reservation-section">
@@ -112,7 +110,7 @@ const PricesData = () => {
                   <i className="flaticon-call"></i>
                 </div>
                 <div className="reservation-Description">
-                  <address> +91 0009988767 </address>
+                  <address> +91 9783252121 </address>
                 </div>
               </div>
 
@@ -121,7 +119,7 @@ const PricesData = () => {
                   <i className="flaticon-mail"></i>
                 </div>
                 <div className="reservation-Description">
-                  <address> info@Rudrahotel.com </address>
+                  <address> newkanha220@gmail.com </address>
                 </div>
               </div>
 
@@ -130,7 +128,7 @@ const PricesData = () => {
                   <i className="fa fa-globe"></i>
                 </div>
                 <div className="reservation-Description">
-                  <address> www.rudra.com </address>
+                  <address> Kala Nagari, Kalwar Rd, opp. New Kanha Restaurant, Radha Vihar, Govindpura, Jaipur, Rajasthan 302012 </address>
                 </div>
               </div>
             </div>

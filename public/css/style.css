@@ -2087,7 +2087,7 @@ p.pppp {
 ========================*/
 /*sub header*/
 .subheader {
-	background-image: url(../images/subheader.jpg);
+	background-image: url('/images/subheader.jpg');
 	text-align: center;
 	height: 410px;
 	padding-top: 142px;
@@ -2549,7 +2549,7 @@ p.pppp {
 9. 404
 ========================*/
 .page-404 {
-	background-image: url(../images/subheader.jpg);
+	background-image: url('/images/subheader.jpg');
 	height: 100vh;
 	display: flex;
 	align-items: center;

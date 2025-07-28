@@ -7,11 +7,11 @@ import "slick-carousel/slick/slick-theme.css";
 // Example dynamic partner data
 const partners = [
   { img: "/images/partner/1.png", alt: "Partner 1" },
-  { img: "/images/partner/2.png", alt: "Partner 2" },
-  { img: "/images/partner/3.png", alt: "Partner 3" },
-  { img: "/images/partner/4.png", alt: "Partner 4" },
-  { img: "/images/partner/5.png", alt: "Partner 5" },
-  { img: "/images/partner/6.png", alt: "Partner 6" },
+  { img: "/images/partner/1.png", alt: "Partner 2" },
+  { img: "/images/partner/1.png", alt: "Partner 3" },
+  { img: "/images/partner/1.png", alt: "Partner 4" },
+  { img: "/images/partner/1.png", alt: "Partner 5" },
+  { img: "/images/partner/1.png", alt: "Partner 6" },
 ];
 
 // Slider settings for react-slick
