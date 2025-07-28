@@ -18,7 +18,13 @@ const Header = () => {
   
   useEffect(() => {
     // Import token from localStorage if available
-    const localhostToken = typeof window !== 'undefined' ? localStorage.getItem('khana-token') : null;
+    let localhostToken = typeof window !== 'undefined' ? localStorage.getItem('khana-token') : null;
+    // Convert string "null" to actual null
+    if (localhostToken === "null") {
+      localhostToken = null;
+    }
+    console.log("localhostTokenlocalhostTokenlocalhostToken", typeof(localhostToken), localhostToken);
+
     dispatch(setToken(localhostToken));
     // You can use localhostToken as needed here
   }, []);
@@ -102,7 +108,7 @@ const Header = () => {
                       <li className="menu-item">
                         <Link href="/contact">Contact</Link>
                       </li>
-                      {token !== null ? (
+                      {token?.length > 0 && token !== null ? (
                         <li className="menu-item">
                           <button
                             type="button"

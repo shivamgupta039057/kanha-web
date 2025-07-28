@@ -16,9 +16,14 @@ const testimonialsData = [
   {
     image: "/images/test.jpg",
     content:
-      "Main pavbaji aur daipapdi chat packing liye dono hi sade hue baji aur papdi chat packing kar k de de Ghar jakar call Kiya to no. Bi off aa raha ... Es liye koi bi fast food packaging lene se phle test jaru kare...",
-    name: "Sunil Yadav",
+      "Tasty food with excellent service. Delicious indian #food. Very tasty food and service is very good... Thanks New Kanha",
     position: "Client",
+  },
+  {
+    image: "/images/test.jpg",
+    content:
+      "Best palace Best food Quality Staff Behaviour excellent food Quality Best Er Gourav Bhardwaj  Devlopment Authority jaipur",
+    position: "Assistant Engineer Jaipur",
   },
   // Add more testimonials as needed
 ];

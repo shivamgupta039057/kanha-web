@@ -20,7 +20,7 @@ const pricesData = [
   },
   {
     img: "/images/extra/3.jpg",
-    title: "Deluxe room with breakfast ",
+    title: "Super Deluxe room with breakfast ",
     price: "₹2750",
     period: "/ month",
     features: [
@@ -33,7 +33,7 @@ const pricesData = [
   {
     img: "/images/extra/4.jpg",
     title: "Superior Double Room",
-    price: "$126",
+    price: "₹126",
     period: "/ month",
     features: [
       "Hotel ut nisan the duru",
@@ -45,7 +45,7 @@ const pricesData = [
   {
     img: "/images/extra/5.jpg",
     title: "Balcony Double Room",
-    price: "$89",
+    price: "₹89",
     period: "/ month",
     features: [
       "Hotel ut nisan the duru",
