@@ -178,7 +178,7 @@ hr {
 }
 
 .section-heading span, .about-content span {
-	font-family: 'Island Moments', cursive;
+	/* font-family: 'Island Moments', cursive; */
 	color: #222;
 	position: relative;
 	line-height: 1.25em;
