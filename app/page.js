@@ -9,6 +9,7 @@ import PricesData from "@/component/home/Prices/PricesData";
 import Testimonials from "@/component/home/Testimonials/Testimonials";
 import Blog from "@/component/home/Blog/Blog";
 import Partner from "@/component/home/Partner/Partner";
+import GoogleMapEmbed from "@/component/googlemap/GoogleMapEmbed";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
    <PricesData />
    <Testimonials />
    <Blog />
+   <GoogleMapEmbed/>
    {/* <Partner /> */}
    </>
   );

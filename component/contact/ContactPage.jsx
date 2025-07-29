@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import SubHeader from '@/utils/SubHeader'
+import GoogleMapEmbed from '../googlemap/GoogleMapEmbed';
 
 const CONTACT_INFO = [
   {
@@ -175,6 +176,7 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
+      <GoogleMapEmbed/>
     </>
   );
 };
