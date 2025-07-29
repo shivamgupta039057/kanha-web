@@ -26,6 +26,9 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
     }
   };
 
+  console.log("roomTypeDataroomTypeDataroomTypeData" , roomTypeData);
+  
+
   // Prepare data for tabs and details
   const hasApiData = roomTypeData && roomTypeData.length > 0;
   const tabs = hasApiData
@@ -98,315 +101,353 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
 
   return (
     <>
-      <section
-        className="section-room relative xl:py-[100px] py-[70px]"
-        data-aos="fade-up"
-        data-aos-duration="2000"
-        id="rooms"
-      >
-        {/* Decorative background */}
-        <div
-          className="pointer-events-none absolute z-[-1] right-0 top-0 2xl:w-[150px] xl:w-[130px] w-[80px] 2xl:h-[150px] xl:h-[130px] h-[80px] bg-no-repeat bg-contain"
-          style={{ backgroundImage: "url('/img/theme/1.png')" }}
-        />
-        <div className="flex flex-wrap justify-between items-center mx-auto 2xl:max-w-[1320px] xl:max-w-[1140px] lg:max-w-[960px] md:max-w-[720px] sm:max-w-[540px] px-[12px]">
-          <div className="text-center w-full mb-[30px]">
-            <h2 className="text-[#000] font-medium leading-[1.2] 2xl:text-[40px] xl:text-[35px] xl:pb-0 lg:text-[30px] md:text-[28px] sm:text-[26px] text-[22px]">
-              Choose Your Luxurious <span className="text-[#ed5b31]">Room</span>
-            </h2>
-          </div>
-          {/* Room Tabs */}
-          <nav className="w-full">
-            <ul
-              className="nav nav-tabs rooms lh-room border-0 flex flex-wrap mb-[-24px]"
-              id="nav_tab"
-              role="tablist"
-            >
-              {tabs.map((tab, idx) => (
-                <li
-                  key={tab.id}
-                  className={`mb-0 text-[20px] px-[12px] mb-[24px] leading-[28px] text-[#000] focus:text-[#000] lg:w-[25%] md:w-[50%] border-0 text-center nav-link${
-                    selectedTab === idx ? " active" : ""
-                  }`}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => setSelectedTab(idx)}
-                >
-                  <div
-                    className="hover:text-[#000] focus:outline-none"
-                    role="tab"
-                    aria-controls={tab.id}
-                    aria-selected={selectedTab === idx ? "true" : "false"}
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") setSelectedTab(idx);
-                    }}
-                  >
+    <div className="roomsuite-container">
+      {/* Page Header */}
+      <div className="roomsuite-page-header">
+        <h1 className="roomsuite-page-title">Our Rooms & Suites</h1>
+        <p className="roomsuite-page-subtitle">
+          Experience luxury and comfort in our beautifully designed rooms, each offering unique amenities 
+          and traditional Rajasthani hospitality with modern conveniences.
+        </p>
+      </div>
+
+      {/* Rooms Grid */}
+      <div className="roomsuite-rooms-grid">
+        {/* Deluxe Room */}
+        {
+          roomTypeData.map((item, idx) => {
+            return (
+              <div className="roomsuite-room-card" key={item._id || idx}>
+                <div className="roomsuite-room-image">
+                  {item.images && item.images.length > 0 ? (
                     <img
-                      src={tab.img}
-                      className="w-full mb-[15px] rounded-[15px]"
-                      alt={tab.title || "Room Image"}
-                      loading="lazy"
+                      src={`${imgBaseUrl}${item.images[0]}`}
+                      alt={item.title || "Room Image"}
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
                     />
-                    {tab.title}
+                  ) : (
+                    <div className="roomsuite-room-image-text">🏨</div>
+                  )}
+                  {item.isAvailable && (
+                    <div className="roomsuite-room-type-badge">Available</div>
+                  )}
+                </div>
+                <div className="roomsuite-room-content">
+                  <div className="roomsuite-room-header">
+                    <div>
+                      <h2 className="roomsuite-room-title">{item.title || "Room"}</h2>
+                      <div className="roomsuite-room-type" style={{ color: "#666", fontSize: "0.9rem" }}>
+                        {item.type || "Standard Room"}
+                      </div>
+                    </div>
+                    <div className="roomsuite-room-price">
+                      <div className="roomsuite-price-amount">
+                        ₹{item.price ? item.price.toLocaleString() : "N/A"}
+                      </div>
+                      <div className="roomsuite-price-period">per night</div>
+                    </div>
                   </div>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          {/* Tab Content */}
-          <div
-            className="tab-content border border-solid border-[#e3e1e1] rounded-[15px] bg-[#fff] relative p-0 mt-[25px] overflow-hidden"
-            id="nav-tabContent"
-          >
-            {hasApiData ? (
-              selectedRoom && (
-                <div
-                  key={selectedRoom._id}
-                  className="tab-pane fade active show"
-                  id={selectedRoom._id}
-                  role="tabpanel"
-                  aria-labelledby={`${selectedRoom._id}-tab`}
-                >
-                  <div className="flex flex-wrap justify-between mx-auto 2xl:max-w-[1320px] xl:max-w-[1140px] lg:max-w-[960px] md:max-w-[720px] sm:max-w-[540px]">
-                    <div className="xl:w-1/2 w-full px-[12px]">
-                      <div className="lh-room-contain relative px-[12px] py-[24px]">
-                        <div className="lh-contain-heading pb-[15px] flex justify-between">
-                          <h4 className="xl:text-[22px] text-[18px] leading-[1.2] font-bold text-[#000] text-left">
-                            {selectedRoom.title || "Room"}
-                          </h4>
-                          <div className="lh-room-price">
-                            <h4 className="xl:text-[22px] text-[18px] text-[#ed5b31] font-bold leading-[22px]">
-                              ₹{selectedRoom.price || "--"} /
-                              <span className="ml-[5px] text-[14px] font-normal text-[#777]">
-                                Per night
-                              </span>
-                            </h4>
-                          </div>
-                        </div>
-                        <div className="lh-room-size flex flex-wrap">
-                          <p className="pb-[15px] text-[14px] text-[#777] leading-[1.2]">
-                            {selectedRoom.size || "N/A"} <span className="px-[15px]">|</span>
-                          </p>
-                          <p className="pb-[15px] text-[14px] text-[#777] leading-[1.2]">
-                            {selectedRoom.beds || "N/A"} <span className="px-[15px]">|</span>
-                          </p>
-                          <p className="pb-[15px] text-[14px] text-[#777] leading-[1.2]">
-                            {selectedRoom.guests || "N/A"}
-                          </p>
-                        </div>
-                        <p>
-                          {selectedRoom.description ||
-                            "This is the dolor sit amet consectetur adipisicing elit. Culpa necessitatibus consequatur nostrum iure? Similique voluptatibus totam nobis exercitationem perferendis id, cupiditate at et praesentium quas? Quae amet, magni suscipit sequi."}
-                        </p>
-                        <div className="lh-main-features border-t border-solid border-[#e3e1e1] pt-[30px] mt-[30px]">
-                          <div className="lh-contain-heading pb-[15px] flex justify-between">
-                            <h4 className="xl:text-[22px] text-[18px] leading-[1.2] font-bold text-[#000] text-left">
-                              Room Features
-                            </h4>
-                          </div>
-                          <div className="lh-room-features flex">
-                            <div className="lh-cols-room">
-                              <ul className="pl-[16px] mb-0">
-                                {selectedRoom.amenities && selectedRoom.amenities.length > 0 ? (
-                                  selectedRoom.amenities.slice(0, 3).map((amenity, i) => (
-                                    <li key={i} className="text-[15px] text-[#777] leading-[1.2]">
-                                      {amenity}
-                                    </li>
-                                  ))
-                                ) : (
-                                  <>
-                                    <li className="text-[15px] text-[#777] leading-[1.2]">
-                                      42 Inch flat screen TV
-                                    </li>
-                                    <li className="text-[15px] text-[#777] leading-[1.2]">
-                                      In-room Safe
-                                    </li>
-                                    <li className="text-[15px] text-[#777] leading-[1.2]">
-                                      Mini-refrigerator
-                                    </li>
-                                  </>
-                                )}
-                              </ul>
-                            </div>
-                            <div className="lh-cols-room">
-                              <ul className="pl-[16px] mb-0">
-                                {selectedRoom.amenities && selectedRoom.amenities.length > 3 ? (
-                                  selectedRoom.amenities.slice(3, 6).map((amenity, i) => (
-                                    <li key={i} className="text-[15px] text-[#777] leading-[1.2]">
-                                      {amenity}
-                                    </li>
-                                  ))
-                                ) : (
-                                  <>
-                                    <li className="text-[15px] text-[#777] leading-[1.2]">
-                                      Mini-refrigerator
-                                    </li>
-                                    <li className="text-[15px] text-[#777] leading-[1.2]">
-                                      Breakfast
-                                    </li>
-                                    <li className="text-[15px] text-[#777] leading-[1.2]">
-                                      Complimentary bottled water
-                                    </li>
-                                  </>
-                                )}
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                        {/* IMPLEMENTED FIELD: Book Now Button */}
-                        <div className="mt-6 flex justify-end">
-                          <button
-                            className="bg-[000000] hover:bg-[#000000] text-[#000000] font-semibold py-2 px-6 rounded-[8px]"
-                            onClick={() => handleBookHandle(selectedRoom._id)}
-                          >
-                            Book Now
-                          </button>
-                        </div>
-                        {/* END IMPLEMENTED FIELD */}
-                      </div>
+
+                  <div className="roomsuite-room-capacity">
+                    <div className="roomsuite-capacity-item">
+                      <span className="roomsuite-capacity-icon">👥</span>
+                      <span>
+                        {item.capacity
+                          ? `Up to ${item.capacity} Guest${item.capacity > 1 ? "s" : ""}`
+                          : "Capacity N/A"}
+                      </span>
                     </div>
-                    <div className="xl:w-1/2 w-full">
-                      <div className="room-img h-full w-full relative">
-                        <img
-                          src={
-                            selectedRoom.images && selectedRoom.images.length > 0
-                              ? `${imgBaseUrl}${selectedRoom.images[1]}`
-                              : "/images/room/default.jpg"
-                          }
-                          alt="room-img"
-                          className="room-image h-full w-full rounded-[15px]"
-                        />
-                        <a
-                          href={`/roomdetails/${selectedRoom._id}`}
-                          className="link w-[200px] h-[200px] absolute bottom-[-200px] right-[-200px] bg-[#000000cc] rounded-full flex items-center justify-center"
-                          tabIndex={-1}
-                          aria-label="View room details"
-                        >
-                          <FaArrowRight className="text-[#fff] text-[25px]" />
-                        </a>
-                      </div>
+                    {/* You can add more capacity info if available in item */}
+                  </div>
+
+                  <div className="roomsuite-room-description">
+                    {item.description ||
+                      "Experience traditional Rajasthani decor in these beautifully designed rooms. The elegantly decorated deluxe rooms have all the modern facilities with comfortable accommodation in a Fresco style setting."}
+                  </div>
+
+                  <div className="roomsuite-amenities-section">
+                    <h3 className="roomsuite-amenities-title">
+                      <span>✨</span>Key Amenities
+                    </h3>
+                    <div className="roomsuite-amenities-grid">
+                      {Array.isArray(item.amenities) && item.amenities.length > 0 ? (
+                        item.amenities.map((amenity, i) => (
+                          <div className="roomsuite-amenity-item" key={i}>
+                            {/* You can add icons based on amenity name if desired */}
+                            <span className="roomsuite-amenity-icon">✔️</span>
+                            {amenity}
+                          </div>
+                        ))
+                      ) : (
+                        <>
+                          <div className="roomsuite-amenity-item">
+                            <span className="roomsuite-amenity-icon">📶</span>Free WiFi
+                          </div>
+                          <div className="roomsuite-amenity-item">
+                            <span className="roomsuite-amenity-icon">❄️</span>AC
+                          </div>
+                        </>
+                      )}
                     </div>
+                  </div>
+
+                  <div className="roomsuite-room-actions">
+                    <Link href={`/bookingPage/${item?._id}`} className="roomsuite-btn roomsuite-btn-primary">
+                      <span>📖</span>Book Now
+                    </Link>
+                    <Link href={`/bookingPage/${item?._id}`} className="roomsuite-btn roomsuite-btn-secondary">
+                      <span>👁️</span>View Details
+                    </Link>
                   </div>
                 </div>
-              )
-            ) : (
-              selectedRoom && (
-                <div
-                  key={tabs[selectedTab].id}
-                  className="tab-pane fade active show"
-                  id={tabs[selectedTab].id}
-                  role="tabpanel"
-                  aria-labelledby={`${tabs[selectedTab].id}-tab`}
-                >
-                  <div className="flex flex-wrap justify-between mx-auto 2xl:max-w-[1320px] xl:max-w-[1140px] lg:max-w-[960px] md:max-w-[720px] sm:max-w-[540px]">
-                    <div className="xl:w-1/2 w-full px-[12px]">
-                      <div className="lh-room-contain relative px-[12px] py-[24px]">
-                        <div className="lh-contain-heading pb-[15px] flex justify-between">
-                          <h4 className="xl:text-[22px] text-[18px] leading-[1.2] font-bold text-[#000] text-left">
-                            {selectedRoom.name}
-                          </h4>
-                          <div className="lh-room-price">
-                            <h4 className="xl:text-[22px] text-[18px] text-[#ed5b31] font-bold leading-[22px]">
-                              ₹{selectedRoom.price} /
-                              <span className="ml-[5px] text-[14px] font-normal text-[#777]">
-                                Per night
-                              </span>
-                            </h4>
-                          </div>
-                        </div>
-                        <div className="lh-room-size flex flex-wrap">
-                          <p className="pb-[15px] text-[14px] text-[#777] leading-[1.2]">
-                            {selectedRoom.size} <span className="px-[15px]">|</span>
-                          </p>
-                          <p className="pb-[15px] text-[14px] text-[#777] leading-[1.2]">
-                            {selectedRoom.beds} <span className="px-[15px]">|</span>
-                          </p>
-                          <p className="pb-[15px] text-[14px] text-[#777] leading-[1.2]">
-                            {selectedRoom.guests}
-                          </p>
-                        </div>
-                        <p>
-                          This is the dolor sit amet consectetur adipisicing elit. Culpa necessitatibus
-                          consequatur nostrum iure? Similique voluptatibus totam nobis exercitationem
-                          perferendis id, cupiditate at et praesentium quas? Quae amet, magni suscipit
-                          sequi.
-                        </p>
-                        <div className="lh-main-features border-t border-solid border-[#e3e1e1] pt-[30px] mt-[30px]">
-                          <div className="lh-contain-heading pb-[15px] flex justify-between">
-                            <h4 className="xl:text-[22px] text-[18px] leading-[1.2] font-bold text-[#000] text-left">
-                              Room Features
-                            </h4>
-                          </div>
-                          <div className="lh-room-features flex">
-                            <div className="lh-cols-room">
-                              <ul className="pl-[16px] mb-0">
-                                <li className="text-[15px] text-[#777] leading-[1.2]">
-                                  42 Inch flat screen TV
-                                </li>
-                                <li className="text-[15px] text-[#777] leading-[1.2]">
-                                  In-room Safe
-                                </li>
-                                <li className="text-[15px] text-[#777] leading-[1.2]">
-                                  Mini-refrigerator
-                                </li>
-                              </ul>
-                            </div>
-                            <div className="lh-cols-room">
-                              <ul className="pl-[16px] mb-0">
-                                <li className="text-[15px] text-[#777] leading-[1.2]">
-                                  Mini-refrigerator
-                                </li>
-                                <li className="text-[15px] text-[#777] leading-[1.2]">
-                                  Breakfast
-                                </li>
-                                <li className="text-[15px] text-[#777] leading-[1.2]">
-                                  Complimentary bottled water
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                        {/* IMPLEMENTED FIELD: Book Now Button */}
-                        <div className="mt-6 flex justify-end">
-                          <button
-                            className="bg-[#ed5b31] hover:bg-[#d14a22] text-white font-semibold py-2 px-6 rounded-[8px] transition-colors"
-                            onClick={() => handleBookHandle(tabs[selectedTab].id)}
-                          >
-                            Book Now
-                          </button>
-                        </div>
-                        {/* END IMPLEMENTED FIELD */}
-                      </div>
-                    </div>
-                    <div className="xl:w-1/2 w-full">
-                      <div className="room-img h-full w-full relative">
-                        <img
-                          src={selectedRoom.img}
-                          alt="room-img"
-                          className="room-image h-full w-full rounded-[15px]"
-                        />
-                        <a
-                          href="/room-details"
-                          className="link w-[200px] h-[200px] absolute bottom-[-200px] right-[-200px] bg-[#000000cc] rounded-full flex items-center justify-center"
-                          tabIndex={-1}
-                          aria-label="View room details"
-                        >
-                          <i className="ri-arrow-right-line text-[#fff] text-[25px]" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )
-            )}
-          </div>
-        </div>
-        {/* Decorative background bottom left */}
-        <div
-          className="pointer-events-none absolute z-[-1] left-[-180px] 2xl:top-[100px] top-[75px] 2xl:w-[500px] lg:w-[400px] w-[300px] 2xl:h-[500px] xl:h-[400px] h-[300px] bg-no-repeat bg-contain"
-          style={{ backgroundImage: "url('/img/theme/2.png')" }}
-        />
-      </section>
+              </div>
+            );
+          })
+        }
+      </div>
+
+      <style>{`
+        .roomsuite-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 40px 20px;
+        }
+        .roomsuite-page-header {
+          text-align: center;
+          margin-bottom: 50px;
+        }
+        .roomsuite-page-title {
+          font-size: 3rem;
+          color: #aa8453;
+          font-weight: bold;
+          margin-bottom: 15px;
+          text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .roomsuite-page-subtitle {
+          font-size: 1.2rem;
+          color: #666;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+        .roomsuite-rooms-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+          gap: 40px;
+          margin-bottom: 40px;
+        }
+        .roomsuite-room-card {
+          background: white;
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+          transition: all 0.3s ease;
+          position: relative;
+          animation: roomsuite-fadeInUp 0.6s ease forwards;
+        }
+        .roomsuite-room-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        .roomsuite-room-image {
+          position: relative;
+          height: 280px;
+          overflow: hidden;
+          background: linear-gradient(45deg, #aa8453, #D2691E);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .roomsuite-room-image::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="bed" patternUnits="userSpaceOnUse" width="20" height="20"><rect fill="%23ffffff" fill-opacity="0.1" width="20" height="20"/><rect fill="%23ffffff" fill-opacity="0.05" x="5" y="5" width="10" height="10"/></pattern></defs><rect fill="url(%23bed)" width="100" height="100"/></svg>') repeat;
+        }
+        .roomsuite-room-image-text {
+          color: white;
+          font-size: 4rem;
+          font-weight: bold;
+          text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+          z-index: 2;
+          position: relative;
+        }
+        .roomsuite-room-type-badge {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          background: rgba(139, 69, 19, 0.9);
+          color: white;
+          padding: 8px 16px;
+          border-radius: 20px;
+          font-size: 0.85rem;
+          font-weight: bold;
+          z-index: 3;
+        }
+        .roomsuite-room-content {
+          padding: 30px;
+        }
+        .roomsuite-room-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 20px;
+        }
+        .roomsuite-room-title {
+          font-size: 1.8rem;
+          color: #aa8453;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+        .roomsuite-room-price {
+          text-align: right;
+        }
+        .roomsuite-price-amount {
+          font-size: 2rem;
+          color: #aa8453;
+          font-weight: bold;
+        }
+        .roomsuite-price-period {
+          color: #666;
+          font-size: 0.9rem;
+        }
+        .roomsuite-room-capacity {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          margin-bottom: 20px;
+          padding: 15px;
+          background: #f8f9fa;
+          border-radius: 10px;
+        }
+        .roomsuite-capacity-item {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          color: #555;
+          font-weight: 500;
+        }
+        .roomsuite-capacity-icon {
+          font-size: 1.2rem;
+        }
+        .roomsuite-room-description {
+          color: #666;
+          line-height: 1.7;
+          margin-bottom: 25px;
+        }
+        .roomsuite-amenities-section {
+          margin-bottom: 25px;
+        }
+        .roomsuite-amenities-title {
+          font-size: 1.1rem;
+          color: #aa8453;
+          font-weight: bold;
+          margin-bottom: 15px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .roomsuite-amenities-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          gap: 10px;
+        }
+        .roomsuite-amenity-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 12px;
+          background: #f0f8ff;
+          border-radius: 20px;
+          font-size: 0.85rem;
+          color: #555;
+        }
+        .roomsuite-amenity-icon {
+          color: #aa8453;
+        }
+        .roomsuite-room-actions {
+          display: flex;
+          gap: 15px;
+        }
+        .roomsuite-btn {
+          padding: 12px 25px;
+          border: none;
+          border-radius: 25px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 0.95rem;
+        }
+        .roomsuite-btn-primary {
+          background: linear-gradient(135deg, #aa8453, #A0522D);
+          color: white;
+          flex: 1;
+          justify-content: center;
+        }
+        .roomsuite-btn-primary:hover {
+          background: linear-gradient(135deg, #7A3D10, #aa8453);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(139, 69, 19, 0.3);
+        }
+        .roomsuite-btn-secondary {
+          background: transparent;
+          color: #aa8453;
+          border: 2px solid #aa8453;
+          flex: 1;
+          justify-content: center;
+        }
+        .roomsuite-btn-secondary:hover {
+          background: #aa8453;
+          color: white;
+          transform: translateY(-2px);
+        }
+        @media (max-width: 768px) {
+          .roomsuite-container {
+            padding: 20px 15px;
+          }
+          .roomsuite-page-title {
+            font-size: 2rem;
+          }
+          .roomsuite-rooms-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
+          }
+          .roomsuite-room-content {
+            padding: 20px;
+          }
+          .roomsuite-room-header {
+            flex-direction: column;
+            gap: 15px;
+          }
+          .roomsuite-room-capacity {
+            flex-wrap: wrap;
+            gap: 10px;
+          }
+          .roomsuite-amenities-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+          .roomsuite-room-actions {
+            flex-direction: column;
+          }
+        }
+        @keyframes roomsuite-fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
+    </div>
     </>
   );
 };
