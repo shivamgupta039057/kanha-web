@@ -413,11 +413,11 @@ const Booking = ({ roomId }) => {
           responsive={{
             superLargeDesktop: {
               breakpoint: { max: 4000, min: 1200 },
-              items: 4
+              items: 3
             },
             desktop: {
               breakpoint: { max: 1200, min: 900 },
-              items: 4
+              items: 3
             },
             tablet: {
               breakpoint: { max: 900, min: 600 },
@@ -452,7 +452,7 @@ const Booking = ({ roomId }) => {
           margin: 30px 0 40px 0;
         }
         .bookingx-carousel-image-wrapper {
-          width: 260px;
+          width: 380px;
           height: 380px;
           overflow: hidden;
           border-radius: 12px;

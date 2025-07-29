@@ -1,4 +1,6 @@
 import React from 'react'
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 // Example dynamic blog data
 const blogPosts = [
@@ -44,6 +46,7 @@ const blogPosts = [
 ];
 
 const Blog = ({ posts = blogPosts }) => {
+  const router = useRouter();
   return (
     <section
       className="work-area bg-ght sell-up-area"
@@ -82,9 +85,9 @@ const Blog = ({ posts = blogPosts }) => {
                 <div className="bolg-boottom">
                   <span className="caos">{post.category}</span>
                   <h5>
-                    <a href={post.link}>
+                    <Link href={`/blog/${"484484888"}`}>
                       {post.title}
-                    </a>
+                    </Link>
                   </h5>
                 </div>
               </div>
