@@ -4163,7 +4163,7 @@ ul.ft_contact.ft_menu li a i:hover {
   }
   .bookingx-amenities-grid {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(2, 1fr);
 	gap: 20px;
   }
   .bookingx-amenity-category {

@@ -32,7 +32,7 @@ const Banquet = () => {
   return (
     // <div>Rooms</div>
     <>
-      <SubHeader title="Banquet" subtitle="Banquet" rating="5" />
+      <SubHeader title="Ideal for Weddings, Birthdays, Anniversaries, & Corporate Events" subtitle="Celebrate in Style at New Kanha Hotel Banquet Hall" rating="5" />
       <BanquetTypes roomTypeData={roomTypeData} isLoading={isLoading} />
       <PricesData />
       {/* <Partner /> */}

@@ -22,7 +22,7 @@ const bannerSlides = [
     alt: "New Kanha Hotel In Kalwar Road",
     heading: "New Kanha Hotel In Kalwar Road",
     subheading: "Stay in Jaipur’s Best Hotel",
-    btnText: "Blanquette Booking",
+    btnText: "Banquet Booking",
     btnLink: "banquete-view",
   },
 ];

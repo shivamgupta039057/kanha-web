@@ -14,7 +14,7 @@ const AboutPage = () => {
   <About />
   <PricesData />
   <HotelFacilities />
-  <MeetOurTeam />
+  {/* <MeetOurTeam /> */}
   <Testimonials />
   </>
   )

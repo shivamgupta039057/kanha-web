@@ -13,6 +13,7 @@ import { usePayment } from "@/utils/usePayment";
 import { useRouter } from 'next/navigation';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import BanqueteFaqsPage from './BanqueteFaqsPage';
 
 const schema = yup.object().shape({
   guestName: yup.string().required("Guest name is required"),
@@ -151,9 +152,15 @@ const BanquetBookingData = ({ roomId }) => {
         // Accept HTML in description/overview
         overview: roomTypeData?.description || "",
         beds: `${roomTypeData.capacity} Capacity`,
-        size: "Room size 170 sq. ft",
-        count: "12 Deluxe Rooms",
-        occupancy: "2 Adults - 1 Children",
+        Weddings  : "Weddings & Receptions",
+        Birthday  : "Birthday Parties",
+        Baby  : "Baby Showers",
+        Anniversary  : "Anniversary Celebrations",
+        Corporate  : "Corporate Events & Conferences",
+        Religious  : "Religious Functions",
+        size: "Up to 200 guests in floating setup",
+        count: "100+ guests in seated dining",
+        occupancy: "Customizable arrangements for buffet, stage, DJ, mandap, etc",
         offers: [
           "Daily complimentary tea, coffee, water",
           "Free wifi high speed",
@@ -185,6 +192,19 @@ const BanquetBookingData = ({ roomId }) => {
         ],
         amenities: [
           {
+            category: "Our room features",
+            items: [
+              "Centralized air-conditioning",
+              "Beautiful décor & lighting",
+              "Stage, sound system, and projector (on request)",
+              "In-house catering & decoration",
+              "Clean restrooms & changing rooms",
+              "Power backup",
+              "Ample parking space" , 
+              "Event planning assistance"
+            ]
+          },
+          {
             category: "Safety and security features",
             items: [
               "24 Hour Security",
@@ -215,16 +235,7 @@ const BanquetBookingData = ({ roomId }) => {
               "Telephone"
             ]
           },
-          {
-            category: "Dining, drinking, and snacking",
-            items: [
-              "Electric Bed Water Pot",
-              "Coffee/Tea maker",
-              "Kitchenette",
-              "Free Bottled Water",
-              "Mini Refrigerator"
-            ]
-          }
+      
         ],
         // Added new details as per instruction
         type: roomTypeData?.type || "AC",
@@ -568,7 +579,37 @@ const BanquetBookingData = ({ roomId }) => {
           </div>
           {/* Room Information */}
           <div className="bookingx-section">
-            <h2 className="bookingx-section-title">Room Information</h2>
+            <h2 className="bookingx-section-title">Events We Host</h2>
+            <div className="bookingx-room-info">
+              <div className="bookingx-info-item">
+                <span className="bookingx-info-icon">💍</span>
+                <span>{currentRoom.Weddings}</span>
+              </div>
+              <div className="bookingx-info-item">
+                <span className="bookingx-info-icon">🎉</span>
+                <span>{currentRoom.Birthday}</span>
+              </div>
+              <div className="bookingx-info-item">
+                <span className="bookingx-info-icon">🧁</span>
+                <span>{currentRoom.Baby}</span>
+              </div>
+              <div className="bookingx-info-item">
+                <span className="bookingx-info-icon">🥂</span>
+                <span>{currentRoom.Anniversary}</span>
+              </div>
+               <div className="bookingx-info-item">
+                <span className="bookingx-info-icon">🏢</span>
+                <span>{currentRoom.Corporate}</span>
+              </div>
+               <div className="bookingx-info-item">
+                <span className="bookingx-info-icon">🙏</span>
+                <span>{currentRoom.Religious}</span>
+              </div>
+            </div>
+          </div>
+          {/* HTML Details Section */}
+           <div className="bookingx-section">
+            <h2 className="bookingx-section-title">Banquet Information</h2>
             <div className="bookingx-room-info">
               <div className="bookingx-info-item">
                 <span className="bookingx-info-icon">🛏️</span>
@@ -588,7 +629,7 @@ const BanquetBookingData = ({ roomId }) => {
               </div>
             </div>
           </div>
-          {/* HTML Details Section */}
+          {/*  */}
           {currentRoom.detailsHtml && (
             <div className="bookingx-section">
               <h2 className="bookingx-section-title">Details</h2>
@@ -599,7 +640,7 @@ const BanquetBookingData = ({ roomId }) => {
             </div>
           )}
           {/* Available Offers */}
-          {hasArrayItems(currentRoom.offers) && (
+          {/* {hasArrayItems(currentRoom.offers) && (
             <div className="bookingx-section">
               <h2 className="bookingx-section-title">Available Offers</h2>
               <div className="bookingx-offers-grid">
@@ -608,9 +649,9 @@ const BanquetBookingData = ({ roomId }) => {
                 ))}
               </div>
             </div>
-          )}
+          )} */}
           {/* Room Policies */}
-          {hasArrayItems(currentRoom.policies) && (
+          {/* {hasArrayItems(currentRoom.policies) && (
             <div className="bookingx-section">
               <h2 className="bookingx-section-title">Room Policies</h2>
               {currentRoom.policies.map((policy, idx) => (
@@ -624,7 +665,7 @@ const BanquetBookingData = ({ roomId }) => {
                 </div>
               ))}
             </div>
-          )}
+          )} */}
           {/* Amenities & Services */}
           {hasArrayItems(currentRoom.amenities) && (
             <div className="bookingx-section">
@@ -657,7 +698,7 @@ const BanquetBookingData = ({ roomId }) => {
         >
           <div className="bookingx-booking-sidebar shadow-lg rounded-lg border border-gray-200 bg-white">
             <div className="bookingx-booking-header text-center text-white bg-[#aa8453] py-4 text-lg font-bold">
-              Book Room
+              Book Banquet
             </div>
             <form className="bookingx-booking-form p-6" onSubmit={handleSubmit(onSubmit)}>
               <div className="bookingx-form-group mb-4">
@@ -735,7 +776,9 @@ const BanquetBookingData = ({ roomId }) => {
             </form>
           </div>
         </section>
+      
       </div>
+      <BanqueteFaqsPage />
     </>
   );
 };

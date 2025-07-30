@@ -86,15 +86,15 @@ const Testimonials = () => {
               {testimonialsData.map((testimonial, idx) => (
                 <div key={idx}>
                   <div className="robert-test">
-                    <div className="robert-image">
+                    {/* <div className="robert-image">
                       <img src={testimonial.image} alt={testimonial.name} />
-                    </div>
+                    </div> */}
                     <div className="robert-content">
                       <p>{testimonial.content}</p>
                     </div>
-                    <div className="robert-s">
+                    {/* <div className="robert-s">
                       <QuoteSVG />
-                    </div>
+                    </div> */}
                     <div className="robert-cot">
                       <h2>
                         <strong>{testimonial.name}</strong>

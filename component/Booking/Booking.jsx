@@ -13,6 +13,7 @@ import { usePayment } from "@/utils/usePayment";
 import { useRouter } from 'next/navigation';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import RoomFaqsPage from './RoomFaqsPage';
 
 const schema = yup.object().shape({
   guestName: yup.string().required("Guest name is required"),
@@ -609,7 +610,7 @@ const Booking = ({ roomId }) => {
             </div>
           )}
           {/* Available Offers */}
-          {hasArrayItems(currentRoom.offers) && (
+          {/* {hasArrayItems(currentRoom.offers) && (
             <div className="bookingx-section">
               <h2 className="bookingx-section-title">Available Offers</h2>
               <div className="bookingx-offers-grid">
@@ -618,9 +619,9 @@ const Booking = ({ roomId }) => {
                 ))}
               </div>
             </div>
-          )}
+          )} */}
           {/* Room Policies */}
-          {hasArrayItems(currentRoom.policies) && (
+          {/* {hasArrayItems(currentRoom.policies) && (
             <div className="bookingx-section">
               <h2 className="bookingx-section-title">Room Policies</h2>
               {currentRoom.policies.map((policy, idx) => (
@@ -634,7 +635,7 @@ const Booking = ({ roomId }) => {
                 </div>
               ))}
             </div>
-          )}
+          )} */}
           {/* Amenities & Services */}
           {hasArrayItems(currentRoom.amenities) && (
             <div className="bookingx-section">
@@ -740,12 +741,13 @@ const Booking = ({ roomId }) => {
                 type="submit"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Booking..." : "Book Now"}
+                {isSubmitting ? "Booking..." : "Book Your Event"}
               </button>
             </form>
           </div>
         </section>
       </div>
+      {/* <RoomFaqsPage /> */}
     </>
   );
 };

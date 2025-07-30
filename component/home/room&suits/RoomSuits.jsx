@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const roomSuitsData = [
@@ -6,7 +7,7 @@ const roomSuitsData = [
     img: "/images/room/1.jpg",
     price: "$150/Day",
     priceLink: "#",
-    title: "Standard Room",
+    title: "Rooms",
     titleLink: "#",
     facilities: [
       "flaticon-bed",
@@ -14,7 +15,7 @@ const roomSuitsData = [
       "flaticon-towel",
       "flaticon-towel",
     ],
-    detailsLink: "#",
+    detailsLink: "/roomtype",
     detailsText: "Details",
     detailsIcon: "fa fa-angle-right",
     facilitiesColClass: "col col-md-7",
@@ -25,13 +26,13 @@ const roomSuitsData = [
     img: "/images/room/2.jpg",
     price: "$15/Hour",
     priceLink: "#",
-    title: "Family Room",
+    title: "Banquet",
     titleLink: "#",
     facilities: [
       "flaticon-bed",
       "flaticon-bath",
     ],
-    detailsLink: "#",
+    detailsLink: "/banquete-view",
     detailsText: "Details",
     detailsIcon: "fa fa-angle-right",
     facilitiesColClass: "col col-md-5",
@@ -42,7 +43,7 @@ const roomSuitsData = [
     img: "/images/room/3.jpg",
     price: "$5/ Min",
     priceLink: "#",
-    title: "Double Room",
+    title: "Restaurant",
     titleLink: "#",
     facilities: [
       "flaticon-bed",
@@ -99,9 +100,9 @@ const RoomSuits = () => {
                     </div>
                     <div className={room.detailsColClass}>
                       <div className="permalink">
-                        <a href={room.detailsLink}>
+                        <Link href={room.detailsLink}>
                           {room.detailsText} <i className={room.detailsIcon}></i>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>

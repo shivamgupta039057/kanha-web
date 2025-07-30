@@ -54,61 +54,27 @@ const Footer = () => {
                   <li>
                     <Link href="/contact"><i className="fa fa-caret-right"></i>Contact US</Link>
                   </li>
+                
+                </ul>
+              </div>
+            </div>
+          
+            <div className="col-lg-4 col-sm-6">
+              <div className="ft_widgets">
+                <h5 className="ft_title">Privacy Policy</h5>
+                <div className="border-border"></div>
+                <ul className="ft_menu">
+                 
                   <li>
                     <Link href="/privacy-policy"><i className="fa fa-caret-right"></i>Privacy Policy</Link>
                   </li>
                   <li>
                     <Link href="/refund-policy"><i className="fa fa-caret-right"></i>Refund Policy</Link>
                   </li>
-                </ul>
-              </div>
-            </div>
-            {/* <div className="col-lg-4 col-sm-6">
-              <div className="ft_widgets">
-                <h5 className="ft_title">Categories</h5>
-                <div className="border-border"></div>
-                <ul className="ft_menu">
                   <li>
-                    <a href="shop-grid.html"><i className="fa fa-caret-right"></i>Calendars & Diaries</a>
-                  </li>
-                  <li>
-                    <a href="shop-grid.html"><i className="fa fa-caret-right"></i>Awards & Trophies</a>
-                  </li>
-                  <li>
-                    <a href="shop-grid.html"><i className="fa fa-caret-right"></i>Engraved Pens</a>
-                  </li>
-                  <li>
-                    <a href="shop-grid.html"><i className="fa fa-caret-right"></i>Crystal Gifts</a>
-                  </li>
-                  <li>
-                    <a href="shop-grid.html"><i className="fa fa-caret-right"></i>Notebooks</a>
-                  </li>
-                  <li>
-                    <a href="shop-grid.html"><i className="fa fa-caret-right"></i>Keychains</a>
+                    <Link href="/refund-policy"><i className="fa fa-caret-right"></i>Term of use</Link>
                   </li>
                 </ul>
-              </div>
-            </div> */}
-            <div className="col-lg-4 col-sm-6">
-              <div className="ft_widgets ft_newsletter">
-                <h5 className="ft_title">Newsletter</h5>
-                <div className="border-border"></div>
-                <p className="lh-base mb-3">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit dolor sit
-                </p>
-                <div className="input-group">
-                  <input
-                    type="email"
-                    name="#"
-                    className="form-control form-control-custom"
-                    placeholder="Email I'd"
-                    autoComplete="off"
-                    required
-                  />
-                </div>
-                <button className="theme-btn rrr" type="submit">
-                  <span className="far fa-envelope"></span> Subscribe Now
-                </button>
               </div>
             </div>
           </div>

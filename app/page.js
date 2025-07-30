@@ -19,7 +19,7 @@ export default function Home() {
    <RoomSuits />
    <HotelFacilities />
    <PromotionalVideo />
-   <PresidentialData />
+   {/* <PresidentialData /> */}
    <PricesData />
    <Testimonials />
    <Blog />
