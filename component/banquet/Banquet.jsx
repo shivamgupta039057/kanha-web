@@ -1,20 +1,21 @@
+"use client"
 import SubHeader from '@/utils/SubHeader'
 import React, { useEffect, useState } from 'react'
 import PricesData from '../home/Prices/PricesData'
 import Partner from '../home/Partner/Partner'
 import { useQuery } from '@tanstack/react-query'
-import { API_GET_ROOMS } from '@/utils/APIConstant'
+import { API_GET_BANQUET, API_GET_ROOMS } from '@/utils/APIConstant'
 import { Apiservice } from '@/services/apiservices'
-import RoomsTypes from './RoomsTypes'
 import { useSelector } from 'react-redux'
+import BanquetTypes from './BanquetTypes'
 
-const Rooms = () => {
+const Banquet = () => {
   // dispatch(openLoginModal());
   const token = useSelector((state) => state.auth.token);
   const [roomTypeData, setRoomTypeData] = useState([]);
   const { data: roomType, isLoading } = useQuery({
-    queryKey: ["get-roomTypeData"],
-    queryFn: () => Apiservice.get(`${API_GET_ROOMS}`),
+    queryKey: ["get-banquet-Data"],
+    queryFn: () => Apiservice.get(`${API_GET_BANQUET}`),
     staleTime: 5 * 60 * 1000,
   });
 
@@ -31,8 +32,8 @@ const Rooms = () => {
   return (
     // <div>Rooms</div>
     <>
-      <SubHeader title="Rooms" subtitle="Rooms" rating="5" />
-      <RoomsTypes roomTypeData={roomTypeData} isLoading={isLoading} />
+      <SubHeader title="Banquet" subtitle="Banquet" rating="5" />
+      <BanquetTypes roomTypeData={roomTypeData} isLoading={isLoading} />
       <PricesData />
       {/* <Partner /> */}
     </>
@@ -40,4 +41,4 @@ const Rooms = () => {
 
 }
 
-export default Rooms
+export default Banquet

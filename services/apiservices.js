@@ -1,10 +1,9 @@
 
 import axios from "axios";
-// const baseurl = "http://159.89.164.11:7677/admin/v1"
-// const baseurl = "http://localhost:7000";
-// export const imgBaseUrl = "http://localhost:7000";
-const baseurl = "http://159.89.174.140:7000";
-export const imgBaseUrl = "http://159.89.174.140:7000";
+const baseurl = "http://localhost:7000";
+export const imgBaseUrl = "http://localhost:7000";
+// const baseurl = "http://159.89.174.140:7000";
+// export const imgBaseUrl = "http://159.89.174.140:7000";
 
 export const Apiservice = {
     get: async (endpoint) => {

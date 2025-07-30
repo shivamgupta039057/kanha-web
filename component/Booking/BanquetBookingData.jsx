@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Apiservice, imgBaseUrl } from "@/services/apiservices";
 import { toast } from "react-toastify";
-import { API_BOOKING_ROOM, API_GET_BANQUET_DETAILS, API_GET_ROOM_DETAILS } from '@/utils/APIConstant';
+import { API_BOOKING_BANQUET, API_BOOKING_ROOM, API_GET_BANQUET_DETAILS, API_GET_ROOM_DETAILS } from '@/utils/APIConstant';
 import { useSelector } from 'react-redux';
 import { usePayment } from "@/utils/usePayment";
 import { useRouter } from 'next/navigation';
@@ -107,7 +107,7 @@ const ImageModal = ({ isOpen, imageUrl, onClose }) => {
   );
 };
 
-const Booking = ({ roomId }) => {
+const BanquetBookingData = ({ roomId }) => {
   const { submitPayment } = usePayment();
   const RAZORPAY_KEY_ID = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "YOUR_RAZORPAY_KEY_ID";
   const submittedRef = useRef(false);
@@ -131,7 +131,7 @@ const Booking = ({ roomId }) => {
 
   const { data: roomType, isLoading } = useQuery({
     queryKey: ["get-roomTypeDetials", roomId],
-    queryFn: () => Apiservice.get(`${API_GET_ROOM_DETAILS}/${roomId}`),
+    queryFn: () => Apiservice.get(`${API_GET_BANQUET_DETAILS}/${roomId}`),
     staleTime: 5 * 60 * 1000,
   });
 
@@ -145,12 +145,12 @@ const Booking = ({ roomId }) => {
   const ROOM_TYPES = [
     {
       value: "deluxe-room",
-      label: roomTypeData?.title || "Deluxe Room",
+      label: roomTypeData?.name || "Deluxe Room",
       info: {
-        title: roomTypeData?.title || "Deluxe Room",
+        title: roomTypeData?.name || "Deluxe Room",
         // Accept HTML in description/overview
         overview: roomTypeData?.description || "",
-        beds: "1 King Bed / 2 Single Beds",
+        beds: `${roomTypeData.capacity} Capacity`,
         size: "Room size 170 sq. ft",
         count: "12 Deluxe Rooms",
         occupancy: "2 Adults - 1 Children",
@@ -228,10 +228,10 @@ const Booking = ({ roomId }) => {
         ],
         // Added new details as per instruction
         type: roomTypeData?.type || "AC",
-        price: roomTypeData?.price || 3000,
+        price: roomTypeData?.pricePerHour || 3000,
         withBreakfastPrice: roomTypeData?.withBreakfastPrice || 3500,
         capacity: roomTypeData?.capacity || 4,
-        extraAmenities: roomTypeData?.extraAmenities || [
+        extraAmenities: roomTypeData?.amenities || [
           "42 Inch flat screen TV",
           "Mini-refrigerator"
         ],
@@ -381,7 +381,7 @@ const Booking = ({ roomId }) => {
   // useMutation for booking submission
   const addRoomMutation = useMutation({
     mutationFn: async (data) => {
-      return await Apiservice.postAuth(`${API_BOOKING_ROOM}/${roomId}`, data, token);
+      return await Apiservice.postAuth(`${API_BOOKING_BANQUET}/${roomId}`, data, token);
     },
     onSuccess: async (response) => {
       const { amount } = response.data.data.payment;
@@ -451,17 +451,7 @@ const Booking = ({ roomId }) => {
     addRoomMutation.mutate(params);
   };
 
-  const handleBookAnother = () => {
-    const details = getProfileDetails();
-    reset({
-      guestName: details.guestName,
-      phone: details.phone,
-      email: details.email,
-      checkIn: "",
-      checkOut: "",
-    });
-    forceUpdate();
-  };
+
 
   // Get current room info
   const currentRoom = ROOM_TYPES.find(r => r.value === selectedRoomType)?.info || ROOM_TYPES[0].info;
@@ -750,4 +740,4 @@ const Booking = ({ roomId }) => {
   );
 };
 
-export default Booking;
+export default BanquetBookingData;

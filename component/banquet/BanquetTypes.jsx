@@ -12,7 +12,7 @@ const getColClass = (idx) => {
   return "col-lg-3";
 };
 
-const RoomsTypes = ({ roomTypeData, isLoading }) => {
+const BanquetTypes = ({ roomTypeData, isLoading }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -27,89 +27,12 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
   };
 
   console.log("roomTypeDataroomTypeDataroomTypeData" , roomTypeData);
-  
 
-  // Prepare data for tabs and details
-  const hasApiData = roomTypeData && roomTypeData.length > 0;
-  const tabs = hasApiData
-    ? roomTypeData.map((tab, idx) => ({
-        id: tab._id,
-        title: tab.title,
-        img:
-          tab.images && tab.images.length > 0
-            ? `${imgBaseUrl}${tab.images[0]}`
-            : "/images/room/default.jpg",
-        data: tab,
-      }))
-    : [
-        {
-          id: "navDeluxe",
-          title: "Deluxe Room",
-          img: "/img/room/room-1.png",
-          data: {
-            name: "Deluxe Room",
-            price: 30,
-            size: "1100 sq.ft",
-            beds: "1 king Bed",
-            guests: "Up to 4 Guest",
-            img: "/img/room/room-1.png",
-          },
-        },
-        {
-          id: "navSingle",
-          title: "Single Room",
-          img: "/img/room/room-2.png",
-          data: {
-            name: "Single Room",
-            price: 40,
-            size: "1200 sq.ft",
-            beds: "1 king Bed",
-            guests: "Up to 6 Guest",
-            img: "/img/room/room-2.png",
-          },
-        },
-        {
-          id: "navSuper",
-          title: "Super Room",
-          img: "/img/room/room-3.png",
-          data: {
-            name: "Super Room",
-            price: 50,
-            size: "1350 sq.ft",
-            beds: "2 king Bed",
-            guests: "Up to 8 Guest",
-            img: "/img/room/room-3.png",
-          },
-        },
-        {
-          id: "navPresidential",
-          title: "Presidential Room",
-          img: "/img/room/room-4.png",
-          data: {
-            name: "Presidential Room",
-            price: 100,
-            size: "1500 sq.ft",
-            beds: "2 king Bed",
-            guests: "Up to 8 Guest",
-            img: "/img/room/room-4.png",
-          },
-        },
-      ];
-
-  // Get the selected tab's data
-  const selectedRoom = tabs[selectedTab]?.data;
 
   return (
     <>
     <div className="roomsuite-container">
       {/* Page Header */}
-      <div className="roomsuite-page-header">
-        <h1 className="roomsuite-page-title">Our Rooms & Suites</h1>
-        <p className="roomsuite-page-subtitle">
-          Experience luxury and comfort in our beautifully designed rooms, each offering unique amenities 
-          and traditional Rajasthani hospitality with modern conveniences.
-        </p>
-      </div>
 
       {/* Rooms Grid */}
       <div className="roomsuite-rooms-grid">
@@ -121,8 +44,8 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
                 <div className="roomsuite-room-image">
                   {item.images && item.images.length > 0 ? (
                     <img
-                      src={`${imgBaseUrl}${item.images[0]}`}
-                      alt={item.title || "Room Image"}
+                      src={`${item.images[0]}`}
+                      alt={item.name || "Room Image"}
                       style={{ width: "100%", height: "100%", objectFit: "cover" }}
                     />
                   ) : (
@@ -135,9 +58,9 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
                 <div className="roomsuite-room-content">
                   <div className="roomsuite-room-header">
                     <div>
-                      <h2 className="roomsuite-room-title">{item.title || "Room"}</h2>
+                      <h2 className="roomsuite-room-title">{item.name || "Room"}</h2>
                       <div className="roomsuite-room-type" style={{ color: "#666", fontSize: "0.9rem" }}>
-                        {item.type || "Standard Room"}
+                        {item.description || "Standard Room"}
                       </div>
                     </div>
                     <div className="roomsuite-room-price">
@@ -192,10 +115,10 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
                   </div>
 
                   <div className="roomsuite-room-actions">
-                    <Link href={`/bookingPage/${item?._id}`} className="roomsuite-btn roomsuite-btn-primary">
+                    <Link href={`/BanquetPage/${item?._id}`} className="roomsuite-btn roomsuite-btn-primary">
                       Book Now
                     </Link>
-                    <Link href={`/bookingPage/${item?._id}`} className="roomsuite-btn roomsuite-btn-secondary">
+                    <Link href={`/BanquetPage/${item?._id}`} className="roomsuite-btn roomsuite-btn-secondary">
                       View Details
                     </Link>
                   </div>
@@ -453,4 +376,4 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
   );
 };
 
-export default RoomsTypes;
+export default BanquetTypes;
