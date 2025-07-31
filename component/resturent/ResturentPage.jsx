@@ -83,7 +83,7 @@ const ResturentPage = () => {
                     </Link>
 
                     <Link
-                      href="/meu.pdf"
+                      href="/menu.pdf"
                       className="btn-first btn-small text-black"
                       download
                       target="_blank"

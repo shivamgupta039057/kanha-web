@@ -138,7 +138,7 @@ const CustomeBookingHeader = () => {
                               type="button"
                               onClick={() => dispatch(openLoginModal())}
 
-                              className="inline-block px-6 py-2 rounded-full font-semibold text-white bg-[#b99365] hover:bg-[#a07c44] shadow transition-all duration-200 border-2 border-[#b99365] hover:border-[#a07c44] focus:outline-none focus:ring-2 focus:ring-[#b99365] focus:ring-offset-2"
+                              className="inline-block px-6 py-2 rounded-full font-semibold text-black bg-[#b99365] hover:bg-[#a07c44] shadow transition-all duration-200 border-2 border-[#b99365] hover:border-[#a07c44] focus:outline-none focus:ring-2 focus:ring-[#b99365] focus:ring-offset-2"
                               style={{ minWidth: 90, textAlign: 'center', letterSpacing: 1 }}
                             >
                               Login
