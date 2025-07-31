@@ -3,26 +3,40 @@ import React, { useEffect, useState } from 'react'
 import Testimonials from '../home/Testimonials/Testimonials'
 import SubHeader from '@/utils/SubHeader'
 import { useQuery } from '@tanstack/react-query';
-import { API_GET_BANQUET, API_GET_MENU_LIST } from '@/utils/APIConstant';
+import { API_GET_BANQUET, API_GET_MENU_LIST, API_GET_TABLE_LIST } from '@/utils/APIConstant';
 import { useSelector } from 'react-redux';
 import { Apiservice } from '@/services/apiservices';
 import Link from 'next/link';
+import TableBooking from './TableBooking';
 
 const ResturentPage = () => {
   const token = useSelector((state) => state.auth.token);
   const [roomTypeData, setRoomTypeData] = useState([]);
+  const [tablebookingData , setTableBookingData] = useState([]);
   const [activeTab, setActiveTab] = useState(0);
-  const { data: menulist, isLoading } = useQuery({
+  const { data: menulist } = useQuery({
     queryKey: ["get-menu-list"],
     queryFn: () => Apiservice.get(`${API_GET_MENU_LIST}`),
     staleTime: 5 * 60 * 1000,
   });
+
+  const { data: tableList } = useQuery({
+    queryKey: ["get-table-list"],
+    queryFn: () => Apiservice.getAuth(`${API_GET_TABLE_LIST}` , token),
+    staleTime: 5 * 60 * 1000,
+  });
+
+  console.log("tableListtableList" , tableList);
+  useEffect(() => {
+    setTableBookingData(tableList?.data?.data)
+  },[tableList]);
 
   useEffect(() => {
     if (menulist) {
       setRoomTypeData(menulist?.data?.data)
     }
   }, [menulist]);
+console.log("dsjkldfskldkldjfkldsjsklstablebookingDatatablebookingData" , tablebookingData , tableList);
 
   // If the menu data changes and the current activeTab is out of bounds, reset to 0
   useEffect(() => {
@@ -199,7 +213,10 @@ const ResturentPage = () => {
             </div>
           )}
         </div>
+    
+        
       </section>
+      <TableBooking tablebookingData={tablebookingData}/>
       <Testimonials />
     </>
   )

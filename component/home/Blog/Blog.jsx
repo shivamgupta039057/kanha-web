@@ -1,14 +1,19 @@
 import React from 'react'
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Apiservice } from '@/services/apiservices';
+import { useQuery } from '@tanstack/react-query';
+import { API_GET_ALL_BLOG, API_GET_ALL_BOOKING } from '@/utils/APIConstant';
+import { useSelector } from 'react-redux';
 
 // Example dynamic blog data
 const blogPosts = [
   {
-    image: "/images/blog/1.jpg",
+    image: "/images/blog-detail1.jpg",
     date: { month: "May", day: "22" },
-    category: "Restaurant",
-    title: "Nullam molestie lacus sit amet velit fermentum feugiat.",
+    category: "New Kanha Hotel",
+    slug: 'kanha-hotel',
+    title: "Why New Kanha Hotel is the Perfect Stay in Jaipur.",
     link: "#",
     aos: {
       type: "fade-right",
@@ -18,10 +23,11 @@ const blogPosts = [
     },
   },
   {
-    image: "/images/blog/2.jpg",
-    date: { month: "Feb", day: "02" },
-    category: "Spa & Wellness",
-    title: "Nullam molestie lacus sit amet velit fermentum feugiat.",
+    image: "/images/blog-detail2.jpg",
+    date: { month: "July", day: "31" },
+    category: "Things to Do",
+    slug: 'kalwar-road',
+    title: "Top 5 Things to Do Near Kalwar Road, Jaipur.",
     link: "#",
     aos: {
       type: "fade-up",
@@ -30,22 +36,21 @@ const blogPosts = [
       duration: "3000",
     },
   },
-  {
-    image: "/images/blog/3.jpg",
-    date: { month: "Apr", day: "25" },
-    category: "Sport Center",
-    title: "Nullam molestie lacus sit amet velit fermentum feugiat.",
-    link: "#",
-    aos: {
-      type: "fade-left",
-      offset: undefined,
-      easing: undefined,
-      duration: undefined,
-    },
-  },
+
 ];
 
 const Blog = ({ posts = blogPosts }) => {
+  const token = useSelector((state) => state.auth.token);
+   const { blogdetails } =
+    useQuery({
+      queryKey: ["get-blog-list"],
+      queryFn: () =>
+        Apiservice.getAuth(`${API_GET_ALL_BLOG}`, token),
+      staleTime: 5 * 60 * 1000,
+    });
+
+    console.log("blogdetailsblogdetails", blogdetails);
+    
   const router = useRouter();
   return (
     <section
@@ -85,7 +90,7 @@ const Blog = ({ posts = blogPosts }) => {
                 <div className="bolg-boottom">
                   <span className="caos">{post.category}</span>
                   <h5>
-                    <Link href={`/blog/${"484484888"}`}>
+                    <Link href={`/blog/${post.slug}`} >
                       {post.title}
                     </Link>
                   </h5>

@@ -13,6 +13,13 @@ export const API_BOOKING_BANQUET = "/bookings/banquet-booking"
 
 export const API_GET_MENU_LIST = "/restaurants/menu-list"
 export const API_GET_TABLE_LIST = "/restaurants/table-list"
+export const API_GET_TABLE_BOOKING = "/restaurants/table-booking"
+
+export const API_ADD_CONTACT_DETAILS = "/contact/submit"
+export const API_GET_ALL_BLOG = "/blog/published-blog-listing"
+export const API_GET_BLOG_DETAILS = "/blog/blog-details"
+
+
 
 
 

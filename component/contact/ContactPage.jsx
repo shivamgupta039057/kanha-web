@@ -2,6 +2,12 @@
 import React, { useState } from 'react'
 import SubHeader from '@/utils/SubHeader'
 import GoogleMapEmbed from '../googlemap/GoogleMapEmbed';
+import { API_ADD_CONTACT_DETAILS, API_GET_TABLE_BOOKING } from '@/utils/APIConstant';
+import { useMutation } from '@tanstack/react-query';
+import { Apiservice } from '@/services/apiservices';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { set } from 'react-hook-form';
 
 const CONTACT_INFO = [
   {
@@ -40,6 +46,7 @@ const initialFormState = {
 
 const ContactPage = () => {
   const [form, setForm] = useState(initialFormState);
+  const token = useSelector((state) => state.auth.token);
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
@@ -50,12 +57,29 @@ const ContactPage = () => {
     }));
   };
 
+  const addContactMutation = useMutation({
+      mutationFn: async (data) => {
+        return await Apiservice.postAuth(`${API_ADD_CONTACT_DETAILS}`, data, token);
+      },
+      onSuccess: async (response) => {
+       console.log("response", response);
+       toast.success(response.data.message || "Contact details submitted successfully.");
+        setSubmitted(true);
+        setForm(initialFormState);
+       setTimeout(() => {
+         setSubmitted(false);
+       }, 3000);
+      },
+      onError: (error) => {
+        toast.error(error.response?.data?.message || "An error occurred while booking the room.");
+      },
+    });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Here you would typically send the form data to your backend or an email service
-    setSubmitted(true);
-    setForm(initialFormState);
-    setTimeout(() => setSubmitted(false), 3000);
+    addContactMutation.mutate(form);
+    
   };
 
   return (
