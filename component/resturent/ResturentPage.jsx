@@ -216,7 +216,7 @@ console.log("dsjkldfskldkldjfkldsjsklstablebookingDatatablebookingData" , tableb
     
         
       </section>
-      <TableBooking tablebookingData={tablebookingData}/>
+      {/* <TableBooking tablebookingData={tablebookingData}/> */}
       <Testimonials />
     </>
   )

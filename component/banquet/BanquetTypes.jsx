@@ -26,7 +26,6 @@ const BanquetTypes = ({ roomTypeData, isLoading }) => {
     }
   };
 
-  console.log("roomTypeDataroomTypeDataroomTypeData" , roomTypeData);
 
 
   return (

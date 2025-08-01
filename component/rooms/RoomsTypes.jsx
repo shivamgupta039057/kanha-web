@@ -26,187 +26,188 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
     }
   };
 
-  console.log("roomTypeDataroomTypeDataroomTypeData" , roomTypeData);
-  
+  console.log("roomTypeDataroomTypeDataroomTypeData", roomTypeData);
+
 
   // Prepare data for tabs and details
   const hasApiData = roomTypeData && roomTypeData.length > 0;
   const tabs = hasApiData
     ? roomTypeData.map((tab, idx) => ({
-        id: tab._id,
-        title: tab.title,
-        img:
-          tab.images && tab.images.length > 0
-            ? `${imgBaseUrl}${tab.images[0]}`
-            : "/images/room/default.jpg",
-        data: tab,
-      }))
+      id: tab._id,
+      title: tab.title,
+      img:
+        tab.images && tab.images.length > 0
+          ? `${imgBaseUrl}${tab.images[0]}`
+          : "/images/room/default.jpg",
+      data: tab,
+    }))
     : [
-        {
-          id: "navDeluxe",
-          title: "Deluxe Room",
+      {
+        id: "navDeluxe",
+        title: "Deluxe Room",
+        img: "/img/room/room-1.png",
+        data: {
+          name: "Deluxe Room",
+          price: 30,
+          size: "1100 sq.ft",
+          beds: "1 king Bed",
+          guests: "Up to 4 Guest",
           img: "/img/room/room-1.png",
-          data: {
-            name: "Deluxe Room",
-            price: 30,
-            size: "1100 sq.ft",
-            beds: "1 king Bed",
-            guests: "Up to 4 Guest",
-            img: "/img/room/room-1.png",
-          },
         },
-        {
-          id: "navSingle",
-          title: "Single Room",
+      },
+      {
+        id: "navSingle",
+        title: "Single Room",
+        img: "/img/room/room-2.png",
+        data: {
+          name: "Single Room",
+          price: 40,
+          size: "1200 sq.ft",
+          beds: "1 king Bed",
+          guests: "Up to 6 Guest",
           img: "/img/room/room-2.png",
-          data: {
-            name: "Single Room",
-            price: 40,
-            size: "1200 sq.ft",
-            beds: "1 king Bed",
-            guests: "Up to 6 Guest",
-            img: "/img/room/room-2.png",
-          },
         },
-        {
-          id: "navSuper",
-          title: "Super Room",
+      },
+      {
+        id: "navSuper",
+        title: "Super Room",
+        img: "/img/room/room-3.png",
+        data: {
+          name: "Super Room",
+          price: 50,
+          size: "1350 sq.ft",
+          beds: "2 king Bed",
+          guests: "Up to 8 Guest",
           img: "/img/room/room-3.png",
-          data: {
-            name: "Super Room",
-            price: 50,
-            size: "1350 sq.ft",
-            beds: "2 king Bed",
-            guests: "Up to 8 Guest",
-            img: "/img/room/room-3.png",
-          },
         },
-        {
-          id: "navPresidential",
-          title: "Presidential Room",
+      },
+      {
+        id: "navPresidential",
+        title: "Presidential Room",
+        img: "/img/room/room-4.png",
+        data: {
+          name: "Presidential Room",
+          price: 100,
+          size: "1500 sq.ft",
+          beds: "2 king Bed",
+          guests: "Up to 8 Guest",
           img: "/img/room/room-4.png",
-          data: {
-            name: "Presidential Room",
-            price: 100,
-            size: "1500 sq.ft",
-            beds: "2 king Bed",
-            guests: "Up to 8 Guest",
-            img: "/img/room/room-4.png",
-          },
         },
-      ];
+      },
+    ];
 
   // Get the selected tab's data
   const selectedRoom = tabs[selectedTab]?.data;
 
   return (
     <>
-    <div className="roomsuite-container">
-      {/* Page Header */}
-      <div className="roomsuite-page-header">
-        <h1 className="roomsuite-page-title">Our Rooms & Suites</h1>
-        <p className="roomsuite-page-subtitle">
-          Experience luxury and comfort in our beautifully designed rooms, each offering unique amenities 
-          and traditional Rajasthani hospitality with modern conveniences.
-        </p>
-      </div>
+      <div className="roomsuite-container">
+        {/* Page Header */}
+        <div className="roomsuite-page-header">
+          <h1 className="roomsuite-page-title">Our Rooms & Suites</h1>
+          <p className="roomsuite-page-subtitle">
+            Experience luxury and comfort in our beautifully designed rooms, each offering unique amenities
+            and traditional Rajasthani hospitality with modern conveniences.
+          </p>
+        </div>
 
-      {/* Rooms Grid */}
-      <div className="roomsuite-rooms-grid">
-        {/* Deluxe Room */}
-        {
-          roomTypeData.map((item, idx) => {
-            return (
-              <div className="roomsuite-room-card" key={item._id || idx}>
-                <div className="roomsuite-room-image">
-                  {item.images && item.images.length > 0 ? (
-                    <img
-                      src={`${imgBaseUrl}${item.images[0]}`}
-                      alt={item.title || "Room Image"}
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
-                  ) : (
-                    <div className="roomsuite-room-image-text">🏨</div>
-                  )}
-                  {item.isAvailable && (
-                    <div className="roomsuite-room-type-badge">Available</div>
-                  )}
-                </div>
-                <div className="roomsuite-room-content">
-                  <div className="roomsuite-room-header">
-                    <div>
-                      <h2 className="roomsuite-room-title">{item.title || "Room"}</h2>
-                      <div className="roomsuite-room-type" style={{ color: "#666", fontSize: "0.9rem" }}>
-                        {item.type || "Standard Room"}
+        {/* Rooms Grid */}
+        <div className="roomsuite-rooms-grid">
+          {/* Deluxe Room */}
+          {
+            roomTypeData.map((item, idx) => {
+              return (
+                <div className="roomsuite-room-card" key={item._id || idx}>
+                  <div className="roomsuite-room-image">
+                    {item.images && item.images.length > 0 ? (
+                      <img
+                        src={`${imgBaseUrl}${item.images[0]}`}
+                        alt={item.title || "Room Image"}
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                      />
+                    ) : (
+                      <div className="roomsuite-room-image-text">🏨</div>
+                    )}
+                    {item.isAvailable && (
+                      <div className="roomsuite-room-type-badge">Available</div>
+                    )}
+                  </div>
+                  <div className="roomsuite-room-content">
+                    <div className="roomsuite-room-header">
+                      <div>
+                        <h2 className="roomsuite-room-title">{item.title || "Room"}</h2>
+                        <div className="roomsuite-room-type" style={{ color: "#666", fontSize: "0.9rem" }}>
+                          {item.type || "Standard Room"}
+                        </div>
+                      </div>
+                      <div className="roomsuite-room-price">
+                        <div className="roomsuite-price-amount">
+                          ₹{item.price ? item.price.toLocaleString()  : "N/A" } 
+                        </div>
+                        {/* <span>(Tax excluded)</span> */}
+                        <div className="roomsuite-price-period">per night</div>
                       </div>
                     </div>
-                    <div className="roomsuite-room-price">
-                      <div className="roomsuite-price-amount">
-                        ₹{item.price ? item.price.toLocaleString() : "N/A"}
+
+                    <div className="roomsuite-room-capacity">
+                      <div className="roomsuite-capacity-item">
+                        <span className="roomsuite-capacity-icon">👥</span>
+                        <span>
+                          {item.capacity
+                            ? `Up to ${item.capacity} Guest${item.capacity > 1 ? "s" : ""}`
+                            : "Capacity N/A"}
+                        </span>
                       </div>
-                      <div className="roomsuite-price-period">per night</div>
+                      {/* You can add more capacity info if available in item */}
                     </div>
-                  </div>
 
-                  <div className="roomsuite-room-capacity">
-                    <div className="roomsuite-capacity-item">
-                      <span className="roomsuite-capacity-icon">👥</span>
-                      <span>
-                        {item.capacity
-                          ? `Up to ${item.capacity} Guest${item.capacity > 1 ? "s" : ""}`
-                          : "Capacity N/A"}
-                      </span>
+                    <div className="roomsuite-room-description">
+                      {item.description ||
+                        "Experience traditional Rajasthani decor in these beautifully designed rooms. The elegantly decorated deluxe rooms have all the modern facilities with comfortable accommodation in a Fresco style setting."}
                     </div>
-                    {/* You can add more capacity info if available in item */}
-                  </div>
 
-                  <div className="roomsuite-room-description">
-                    {item.description ||
-                      "Experience traditional Rajasthani decor in these beautifully designed rooms. The elegantly decorated deluxe rooms have all the modern facilities with comfortable accommodation in a Fresco style setting."}
-                  </div>
-
-                  <div className="roomsuite-amenities-section">
-                    <h3 className="roomsuite-amenities-title">
-                      Key Amenities
-                    </h3>
-                    <div className="roomsuite-amenities-grid">
-                      {Array.isArray(item.amenities) && item.amenities.length > 0 ? (
-                        item.amenities.map((amenity, i) => (
-                          <div className="roomsuite-amenity-item" key={i}>
-                            {/* You can add icons based on amenity name if desired */}
-                            <span className="roomsuite-amenity-icon">✔️</span>
-                            {amenity}
-                          </div>
-                        ))
-                      ) : (
-                        <>
-                          <div className="roomsuite-amenity-item">
-                            <span className="roomsuite-amenity-icon">📶</span>Free WiFi
-                          </div>
-                          <div className="roomsuite-amenity-item">
-                            <span className="roomsuite-amenity-icon">❄️</span>AC
-                          </div>
-                        </>
-                      )}
+                    <div className="roomsuite-amenities-section">
+                      <h3 className="roomsuite-amenities-title">
+                        Key Amenities
+                      </h3>
+                      <div className="roomsuite-amenities-grid">
+                        {Array.isArray(item.amenities) && item.amenities.length > 0 ? (
+                          item.amenities.map((amenity, i) => (
+                            <div className="roomsuite-amenity-item" key={i}>
+                              {/* You can add icons based on amenity name if desired */}
+                              <span className="roomsuite-amenity-icon">✔️</span>
+                              {amenity}
+                            </div>
+                          ))
+                        ) : (
+                          <>
+                            <div className="roomsuite-amenity-item">
+                              <span className="roomsuite-amenity-icon">📶</span>Free WiFi
+                            </div>
+                            <div className="roomsuite-amenity-item">
+                              <span className="roomsuite-amenity-icon">❄️</span>AC
+                            </div>
+                          </>
+                        )}
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="roomsuite-room-actions">
-                    <Link href={`/bookingPage/${item?._id}`} className="roomsuite-btn roomsuite-btn-primary">
-                      Book Now
-                    </Link>
-                    <Link href={`/bookingPage/${item?._id}`} className="roomsuite-btn roomsuite-btn-secondary">
-                      View Details
-                    </Link>
+                    <div className="roomsuite-room-actions">
+                      <Link href={`/bookingPage/${item?._id}`} className="roomsuite-btn roomsuite-btn-primary">
+                        Book Now
+                      </Link>
+                      <Link href={`/bookingPage/${item?._id}`} className="roomsuite-btn roomsuite-btn-secondary">
+                        View Details
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })
-        }
-      </div>
+              );
+            })
+          }
+        </div>
 
-      <style>{`
+        <style>{`
         .roomsuite-container {
           max-width: 1200px;
           margin: 0 auto;
@@ -448,7 +449,7 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
           }
         }
       `}</style>
-    </div>
+      </div>
     </>
   );
 };

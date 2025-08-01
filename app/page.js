@@ -18,7 +18,7 @@ export default function Home() {
    <About />
    <RoomSuits />
    <HotelFacilities />
-   <PromotionalVideo />
+   {/* <PromotionalVideo /> */}
    {/* <PresidentialData /> */}
    <PricesData />
    <Testimonials />

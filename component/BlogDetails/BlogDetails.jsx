@@ -40,7 +40,8 @@ const BlogDetails = ({ blogId }) => {
         ]
       }
     ]
-  }, {
+  },
+   {
     title: 'Top 5 Things to Do Near Kalwar Road, Jaipur',
     author: 'Keshav',
     slug: 'kalwar-road',
@@ -73,7 +74,42 @@ const BlogDetails = ({ blogId }) => {
         ]
       }
     ]
-  }];
+  },
+  {
+    title: 'Why New Kanha Hotel is Ideal for Weddings and Events',
+    author: 'Keshav',
+    slug: 'wedding-events',
+    date: 'July 31, 2025',
+    image: '/images/Banquet_1.jpeg',
+    content: [
+      {
+        heading: 'Elegant Banquet Halls with Spacious Interiors',
+        points: [
+          'Our beautifully designed banquet halls provide the perfect backdrop for weddings, receptions, and celebrations of all sizes. With stylish décor, customizable layouts, and high ceilings, your event is guaranteed to feel grand and luxurious.'
+        ]
+      },
+      {
+        heading: 'Custom Catering with Multi-Cuisine Options',
+        points: ['From traditional Indian feasts to international favorites, our expert chefs offer curated menus tailored to your preferences. Whether its a wedding dinner or a business lunch, we ensure the food impresses every guest.']
+      },
+      {
+        heading: ' Comfortable Stay for Guests',
+        points: ['Your guests can enjoy a relaxing overnight stay in our premium rooms equipped with all modern amenities. With on-site accommodation, you don’t have to worry about guest logistics and travel.']
+      },
+      {
+        heading: 'Prime Location with Ample Parking',
+        points: [
+          'TLocated in Govindpura, Kalwar Road, New Kanha Hotel is easily accessible from all parts of Jaipur. We also offer spacious parking facilities to ensure smooth arrivals for all your guests.']
+      },
+      {
+        heading: 'Professional Event Support Teams',
+        points: [
+          'Our experienced staff is here to assist with every detail — from decoration to technical setup — ensuring your event runs smoothly and memorably.'
+        ]
+      }
+    ]
+  }
+];
   const blog = blogs.find((b) => b.slug === blogId);
   return (
     <>    <SubHeader title="Blog Details" subtitle="Blog Details" rating="5" />
@@ -160,8 +196,6 @@ const BlogDetails = ({ blogId }) => {
           </aside>
         </div>
       </main>
-
-
     </>
 
   )

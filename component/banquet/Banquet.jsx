@@ -8,6 +8,7 @@ import { API_GET_BANQUET, API_GET_ROOMS } from '@/utils/APIConstant'
 import { Apiservice } from '@/services/apiservices'
 import { useSelector } from 'react-redux'
 import BanquetTypes from './BanquetTypes'
+import ContactPage from '../contact/ContactPage'
 
 const Banquet = () => {
   // dispatch(openLoginModal());
@@ -28,13 +29,13 @@ const Banquet = () => {
     }
   }, [roomType])
 
-  console.log("roomTypeData", roomTypeData);
   return (
     // <div>Rooms</div>
     <>
       <SubHeader title="Ideal for Weddings, Birthdays, Anniversaries, & Corporate Events" subtitle="Celebrate in Style at New Kanha Hotel Banquet Hall" rating="5" />
       <BanquetTypes roomTypeData={roomTypeData} isLoading={isLoading} />
-      <PricesData />
+
+      {/* <PricesData /> */}
       {/* <Partner /> */}
     </>
   )

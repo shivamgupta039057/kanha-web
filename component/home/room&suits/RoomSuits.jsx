@@ -3,7 +3,7 @@ import React from "react";
 
 const roomSuitsData = [
   {
-    colClass: "col-lg-6",
+    colClass: "col-lg-4",
     img: "/images/room/1.jpg",
     price: "$150/Day",
     priceLink: "#",
@@ -22,8 +22,8 @@ const roomSuitsData = [
     detailsColClass: "col col-md-5 text-right",
   },
   {
-    colClass: "col-lg-3",
-    img: "/images/room/2.jpg",
+    colClass: "col-lg-4",
+    img: "/images/banquet_2.jpeg",
     price: "$15/Hour",
     priceLink: "#",
     title: "Banquet",
@@ -39,8 +39,8 @@ const roomSuitsData = [
     detailsColClass: "col col-md-7 text-right",
   },
   {
-    colClass: "col-lg-3",
-    img: "/images/room/3.jpg",
+    colClass: "col-lg-4",
+    img: "/images/restaurent.jpeg",
     price: "$5/ Min",
     priceLink: "#",
     title: "Restaurant",
@@ -49,7 +49,7 @@ const roomSuitsData = [
       "flaticon-bed",
       "flaticon-bath",
     ],
-    detailsLink: "#",
+    detailsLink: "/resturent",
     detailsText: "Details",
     detailsIcon: "fa fa-angle-right",
     facilitiesColClass: "col col-md-5",

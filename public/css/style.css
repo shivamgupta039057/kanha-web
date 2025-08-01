@@ -78,7 +78,7 @@ button:focus, *:focus {
 	outline: none;
 }
 body {
-	font-family: 'Gilda Display', serif;
+	font-family: 'Barlow', 'Montserrat', 'Open Sans', sans-serif;
 	margin: 0px;
 	padding: 0px;
 	font-size: 14px;

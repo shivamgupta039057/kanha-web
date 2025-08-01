@@ -36,7 +36,21 @@ const blogPosts = [
       duration: "3000",
     },
   },
-
+,
+  {
+    image: "/images/Banquet_1.jpeg",
+    date: { month: "July", day: "31" },
+    category: "Wedding & Events",
+    slug: 'wedding-events',
+    title: "Why New Kanha Hotel is Ideal for Weddings and Events.",
+    link: "#",
+    aos: {
+      type: "fade-up",
+      offset: undefined,
+      easing: undefined,
+      duration: "3000",
+    },
+  },
 ];
 
 const Blog = ({ posts = blogPosts }) => {
