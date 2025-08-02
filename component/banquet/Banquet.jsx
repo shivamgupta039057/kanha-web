@@ -9,6 +9,7 @@ import { Apiservice } from '@/services/apiservices'
 import { useSelector } from 'react-redux'
 import BanquetTypes from './BanquetTypes'
 import ContactPage from '../contact/ContactPage'
+import BanquetContact from './banquetContact'
 
 const Banquet = () => {
   // dispatch(openLoginModal());
@@ -34,6 +35,7 @@ const Banquet = () => {
     <>
       <SubHeader title="Ideal for Weddings, Birthdays, Anniversaries, & Corporate Events" subtitle="Celebrate in Style at New Kanha Hotel Banquet Hall" rating="5" />
       <BanquetTypes roomTypeData={roomTypeData} isLoading={isLoading} />
+    
 
       {/* <PricesData /> */}
       {/* <Partner /> */}

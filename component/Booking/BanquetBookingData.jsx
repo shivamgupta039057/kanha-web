@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import BanqueteFaqsPage from './BanqueteFaqsPage';
+import BanquetContact from '../banquet/banquetContact';
 
 const schema = yup.object().shape({
   guestName: yup.string().required("Guest name is required"),
@@ -778,6 +779,7 @@ const BanquetBookingData = ({ roomId }) => {
         </section>
       
       </div>
+        <BanquetContact />
       <BanqueteFaqsPage />
     </>
   );

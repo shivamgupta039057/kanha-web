@@ -741,7 +741,7 @@ const Booking = ({ roomId }) => {
                 type="submit"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Booking..." : "Book Your Event"}
+                {isSubmitting ? "Booking..." : "Book Now"}
               </button>
             </form>
           </div>

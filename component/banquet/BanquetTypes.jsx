@@ -1,7 +1,7 @@
 import { imgBaseUrl } from "@/services/apiservices";
 import { openLoginModal } from "@/store/features/loginModalSlice";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa";
@@ -13,6 +13,217 @@ const getColClass = (idx) => {
 };
 
 const BanquetTypes = ({ roomTypeData, isLoading }) => {
+    const [selectedRoomType, setSelectedRoomType] = useState("deluxe-room");
+    const ROOM_TYPES = [
+    {
+      value: "deluxe-room",
+      label: roomTypeData?.name || "Deluxe Room",
+      info: {
+        title: roomTypeData?.name || "Deluxe Room",
+        // Accept HTML in description/overview
+        overview: roomTypeData?.description || "",
+        beds: `${roomTypeData.capacity} Capacity`,
+        Weddings  : "Weddings & Receptions",
+        Birthday  : "Birthday Parties",
+        Baby  : "Baby Showers",
+        Anniversary  : "Anniversary Celebrations",
+        Corporate  : "Corporate Events & Conferences",
+        Religious  : "Religious Functions",
+        size: "Up to 200 guests in floating setup",
+        count: "100+ guests in seated dining",
+        occupancy: "Customizable arrangements for buffet, stage, DJ, mandap, etc",
+        offers: [
+          "Daily complimentary tea, coffee, water",
+          "Free wifi high speed",
+          "10% discount for tour service",
+          "Complimentary Breakfast"
+        ],
+        policies: [
+          {
+            title: "Cancellation Policy",
+            items: [
+              "Check in: from 14:00 PM",
+              "Check out: not later than 12:00 PM"
+            ]
+          },
+          {
+            title: "Payment method:",
+            items: [
+              "By cash",
+              "By Visa Card, Master Card, American Express plus 3% bank fee is applied"
+            ]
+          },
+          {
+            title: "Children Policy",
+            items: [
+              "Complimentary stay for two children upto 5 years of age on room only basis without extra bed.",
+              "Extra bed will be charged for children above 5 years"
+            ]
+          }
+        ],
+        amenities: [
+          {
+            category: "Our room features",
+            items: [
+              "Centralized air-conditioning",
+              "Beautiful décor & lighting",
+              "Stage, sound system, and projector (on request)",
+              "In-house catering & decoration",
+              "Clean restrooms & changing rooms",
+              "Power backup",
+              "Ample parking space" , 
+              "Event planning assistance"
+            ]
+          },
+          {
+            category: "Safety and security features",
+            items: [
+              "24 Hour Security",
+              "Fire Aid Kit",
+              "Smoke Detector",
+              "Fire Refrigerator",
+              "Safety Locker",
+              "Air Conditioning"
+            ]
+          },
+          {
+            category: "Bathroom and toiletries",
+            items: [
+              "Shower",
+              "Towel",
+              "Room Slippers",
+              "Mirror",
+              "Toiletries",
+              "Cleaning products"
+            ]
+          },
+          {
+            category: "Entertainment",
+            items: [
+              "Free Wi-Fi and internet",
+              "News Paper",
+              "Satellite Cable channels",
+              "Telephone"
+            ]
+          },
+      
+        ],
+        // Added new details as per instruction
+        type: roomTypeData?.type || "AC",
+        price: roomTypeData?.pricePerHour || 3000,
+        withBreakfastPrice: roomTypeData?.withBreakfastPrice || 3500,
+        capacity: roomTypeData?.capacity || 4,
+        extraAmenities: roomTypeData?.amenities || [
+          "42 Inch flat screen TV",
+          "Mini-refrigerator"
+        ],
+        isAvailable: roomTypeData?.isAvailable !== undefined ? roomTypeData.isAvailable : true,
+        // Add HTML details if present
+        detailsHtml: roomTypeData?.detailsHtml || ""
+      }
+    },
+    {
+      value: "standard-room",
+      label: "Standard Room",
+      info: {
+        title: "Standard Room",
+        overview: "A comfortable and affordable option with all basic amenities for a pleasant stay.",
+        beds: "1 Queen Bed",
+        size: "Room size 140 sq. ft",
+        count: "8 Standard Rooms",
+        occupancy: "2 Adults",
+        offers: [
+          "Free wifi high speed",
+          "Complimentary Breakfast"
+        ],
+        policies: [
+          {
+            title: "Cancellation Policy",
+            items: [
+              "Check in: from 14:00 PM",
+              "Check out: not later than 12:00 PM"
+            ]
+          }
+        ],
+        amenities: [
+          {
+            category: "Safety and security features",
+            items: [
+              "24 Hour Security",
+              "Smoke Detector"
+            ]
+          }
+        ],
+        type: "AC",
+        price: 2500,
+        withBreakfastPrice: 3000,
+        capacity: 2,
+        extraAmenities: [
+          "32 Inch flat screen TV",
+          "Mini-refrigerator"
+        ],
+        isAvailable: true,
+        detailsHtml: ""
+      }
+    },
+    {
+      value: "suite",
+      label: "Suite",
+      info: {
+        title: "Suite",
+        overview: "Spacious suite with luxury amenities and a separate living area.",
+        beds: "1 King Bed",
+        size: "Room size 250 sq. ft",
+        count: "4 Suites",
+        occupancy: "3 Adults - 2 Children",
+        offers: [
+          "Free minibar",
+          "Complimentary Breakfast",
+          "Late checkout"
+        ],
+        policies: [],
+        amenities: [],
+        type: "AC",
+        price: 5000,
+        withBreakfastPrice: 6000,
+        capacity: 5,
+        extraAmenities: [
+          "55 Inch flat screen TV",
+          "Mini-refrigerator"
+        ],
+        isAvailable: true,
+        detailsHtml: ""
+      }
+    },
+    {
+      value: "family-room",
+      label: "Family Room",
+      info: {
+        title: "Family Room",
+        overview: "Perfect for families, with extra space and kid-friendly amenities.",
+        beds: "2 Queen Beds",
+        size: "Room size 200 sq. ft",
+        count: "6 Family Rooms",
+        occupancy: "4 Adults - 2 Children",
+        offers: [
+          "Kids play area access",
+          "Complimentary Breakfast"
+        ],
+        policies: [],
+        amenities: [],
+        type: "AC",
+        price: 4000,
+        withBreakfastPrice: 4500,
+        capacity: 6,
+        extraAmenities: [
+          "42 Inch flat screen TV",
+          "Mini-refrigerator"
+        ],
+        isAvailable: true,
+        detailsHtml: ""
+      }
+    }
+  ];
   const router = useRouter();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -26,6 +237,10 @@ const BanquetTypes = ({ roomTypeData, isLoading }) => {
     }
   };
 
+
+    const currentRoom = ROOM_TYPES.find(r => r.value === selectedRoomType)?.info || ROOM_TYPES[0].info;
+
+      const hasArrayItems = arr => Array.isArray(arr) && arr.length > 0;
 
 
   return (
@@ -112,6 +327,134 @@ const BanquetTypes = ({ roomTypeData, isLoading }) => {
                       )}
                     </div>
                   </div>
+                  <div className="bookingx-container">
+        {/* Left Main Content */}
+        <div className="bookingx-main-contentddk">
+        
+          
+          {/* Room Information */}
+          <div className="bookingx-section">
+            <h2 className="bookingx-section-title">Events We Host</h2>
+            <div className="bookingx-room-info">
+              <div className="bookingx-info-item">
+                <span className="bookingx-info-icon">💍</span>
+                <span>{currentRoom.Weddings}</span>
+              </div>
+              <div className="bookingx-info-item">
+                <span className="bookingx-info-icon">🎉</span>
+                <span>{currentRoom.Birthday}</span>
+              </div>
+              <div className="bookingx-info-item">
+                <span className="bookingx-info-icon">🧁</span>
+                <span>{currentRoom.Baby}</span>
+              </div>
+              <div className="bookingx-info-item">
+                <span className="bookingx-info-icon">🥂</span>
+                <span>{currentRoom.Anniversary}</span>
+              </div>
+               <div className="bookingx-info-item">
+                <span className="bookingx-info-icon">🏢</span>
+                <span>{currentRoom.Corporate}</span>
+              </div>
+               <div className="bookingx-info-item">
+                <span className="bookingx-info-icon">🙏</span>
+                <span>{currentRoom.Religious}</span>
+              </div>
+            </div>
+          </div>
+          {/* HTML Details Section */}
+           <div className="bookingx-section">
+            <h2 className="bookingx-section-title">Banquet Information</h2>
+            <div className="bookingx-room-info">
+              <div className="bookingx-info-item">
+                <span className="bookingx-info-icon">🛏️</span>
+                <span>{currentRoom.beds}</span>
+              </div>
+              <div className="bookingx-info-item">
+                <span className="bookingx-info-icon">📏</span>
+                <span>{currentRoom.size}</span>
+              </div>
+              <div className="bookingx-info-item">
+                <span className="bookingx-info-icon">🏢</span>
+                <span>{currentRoom.count}</span>
+              </div>
+              <div className="bookingx-info-item">
+                <span className="bookingx-info-icon">👥</span>
+                <span>{currentRoom.occupancy}</span>
+              </div>
+            </div>
+          </div>
+          {/*  */}
+          {currentRoom.detailsHtml && (
+            <div className="bookingx-section">
+              <h2 className="bookingx-section-title">Details</h2>
+              <div
+                className="bookingx-details-html"
+                dangerouslySetInnerHTML={{ __html: currentRoom.detailsHtml }}
+              />
+            </div>
+          )}
+          {/* Available Offers */}
+          {/* {hasArrayItems(currentRoom.offers) && (
+            <div className="bookingx-section">
+              <h2 className="bookingx-section-title">Available Offers</h2>
+              <div className="bookingx-offers-grid">
+                {currentRoom.offers.map((offer, idx) => (
+                  <div className="bookingx-offer-item" key={idx}>{offer}</div>
+                ))}
+              </div>
+            </div>
+          )} */}
+          {/* Room Policies */}
+          {/* {hasArrayItems(currentRoom.policies) && (
+            <div className="bookingx-section">
+              <h2 className="bookingx-section-title">Room Policies</h2>
+              {currentRoom.policies.map((policy, idx) => (
+                <div className="bookingx-policy-section" key={idx}>
+                  <h3 className="bookingx-policy-title">{policy.title}</h3>
+                  <ul className="bookingx-policy-list">
+                    {Array.isArray(policy.items) && policy.items.map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )} */}
+          {/* Amenities & Services */}
+          {hasArrayItems(currentRoom.amenities) && (
+            <div className="bookingx-section">
+              <h2 className="bookingx-section-title">Amenities & Services</h2>
+              <div className="bookingx-amenities-grid">
+                {currentRoom.amenities.map((cat, idx) => (
+                  <div className="bookingx-amenity-category" key={idx}>
+                    <h4>{cat.category}</h4>
+                    <ul className="bookingx-amenity-list">
+                      {Array.isArray(cat.items) && cat.items.map((item, i) => (
+                        <li key={i}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+        {/* Right Sidebar - Sticky Section */}
+        <section
+          className="bookingx-sidebar"
+          style={{
+            position: "sticky",
+            top: "24px",
+            zIndex: 30,
+            background: "transparent",
+            height: "fit-content"
+          }}
+        >
+        
+        </section>
+      
+      </div>
 
                   <div className="roomsuite-room-actions">
                     <Link href={`/BanquetPage/${item?._id}`} className="roomsuite-btn roomsuite-btn-primary">
