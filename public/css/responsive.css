@@ -40,7 +40,7 @@ Version: 1.0.0
  width: 320px;
  height: 100vh;
  top: 0;
- background: #ff0000;
+ background: #e7c742;
  transition: 0.5s all;
  overflow: auto;
  z-index: 100;
@@ -66,9 +66,11 @@ Version: 1.0.0
  background: #fff;
  border: none;
  border-radius: 0;
+ color: #000 !important;
+
 }
  .header .navigation-wrapper nav>.main-navigation .main-menu>ul>.menu-item.active>a {
- color: #263077;
+ color: #263077 !important;
  font-weight: 500;
 }
  .menu-item-has-children>a>.arrow:after, .menu-item-has-megamenu>a>.arrow:after {

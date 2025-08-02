@@ -1,14 +1,10 @@
 "use client"
 import React, { useState } from 'react'
-import SubHeader from '@/utils/SubHeader'
-import GoogleMapEmbed from '../googlemap/GoogleMapEmbed';
-import { API_ADD_CONTACT_DETAILS, API_GET_TABLE_BOOKING } from '@/utils/APIConstant';
+import { API_ADD_CONTACT_DETAILS } from '@/utils/APIConstant';
 import { useMutation } from '@tanstack/react-query';
 import { Apiservice } from '@/services/apiservices';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { set } from 'react-hook-form';
-import { number } from 'yup';
 
 const CONTACT_INFO = [
     {
@@ -65,7 +61,6 @@ const BanquetContact = () => {
             return await Apiservice.postAuth(`${API_ADD_CONTACT_DETAILS}`, data, token);
         },
         onSuccess: async (response) => {
-            console.log("response", response);
             toast.success(response.data.message || "Contact details submitted successfully.");
             setSubmitted(true);
             setForm(initialFormState);
@@ -74,142 +69,164 @@ const BanquetContact = () => {
             }, 3000);
         },
         onError: (error) => {
-            toast.error(error.response?.data?.message || "An error occurred while booking the room.");
+            toast.error(error?.response?.data?.message || "An error occurred while booking the room.");
         },
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Here you would typically send the form data to your backend or an email service
         addContactMutation.mutate(form);
-
     };
 
     return (
         <>
-            <div className="section-padding contact-form-map ">
-                
-                    <div className="row">
-                        <div className="col-lg-6 mb-30 offset-md-1">
-                            <form className="mb-md-80" onSubmit={handleSubmit} autoComplete="off">
-                                <div className="contact-get-in-touch">
-                                    <h3>Planning an Event? Let’s make it memorable!</h3>
-                                </div>
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <select
-                                                name="typeofEvent"
-                                                className="form-control form-control-custom"
-                                                value={form.typeofEvent}
-                                                onChange={handleChange}
-                                                required
-                                            >
-                                                <option value="">Select Event Type *</option>
-                                                <option value="Banquet">Banquet</option>
-                                                <option value="Wedding">Wedding</option>
-                                                <option value="Birthday">Birthday</option>
-                                                <option value="Corporate">Corporate</option>
-                                                <option value="Other">Other</option>
-                                            </select>
-                                        </div>
+            <section
+                className="relative py-16 md:py-24 bg-gradient-to-br from-[#1a1a1a] via-[#222] to-[#3a2c1a] overflow-hidden"
+                id="banquet-contact"
+            >
+                {/* Decorative background shapes */}
+                <div className="pointer-events-none absolute -top-32 -left-32 w-[400px] h-[400px] rounded-full bg-[#b99365]/20 blur-3xl z-0"></div>
+                <div className="pointer-events-none absolute -bottom-32 -right-32 w-[400px] h-[400px] rounded-full bg-[#b99365]/20 blur-3xl z-0"></div>
+                <div className="container mx-auto relative z-10 px-4">
+                    <div className="text-center mb-12">
+                        <h3 className="text-3xl md:text-4xl font-extrabold text-[#b99365] drop-shadow-lg mb-2 tracking-tight">
+                            Planning an Event? <span className="text-white">Let’s Make it Memorable!</span>
+                        </h3>
+                        <p className="text-lg text-gray-200 mb-4">
+                            Fill out the form below and our team will contact you soon.
+                        </p>
+                        <div className="mx-auto w-24 h-1 bg-gradient-to-r from-[#b99365] to-[#fff] rounded-full mb-2"></div>
+                    </div>
+                    <div className="flex justify-center">
+                        <div className="w-full max-w-2xl bg-white/90 rounded-2xl shadow-2xl p-8 md:p-10 backdrop-blur-md border border-[#b99365]/20">
+                            <form className="space-y-7" onSubmit={handleSubmit} autoComplete="off">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label className="block text-[#b99365] font-semibold mb-1">Event Type *</label>
+                                        <select
+                                            name="typeofEvent"
+                                            className="w-full px-4 py-2 border border-[#b99365]/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b99365] bg-white"
+                                            value={form.typeofEvent}
+                                            onChange={handleChange}
+                                            required
+                                        >
+                                            <option value="">Select Event Type</option>
+                                            <option value="Banquet">Banquet</option>
+                                            <option value="Wedding">Wedding</option>
+                                            <option value="Birthday">Birthday</option>
+                                            <option value="Corporate">Corporate</option>
+                                            <option value="Other">Other</option>
+                                        </select>
                                     </div>
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <input
-                                                name="numberOfGuests"
-                                                type="number"
-                                                min="1"
-                                                placeholder="Number of Guests *"
-                                                required
-                                                className="form-control form-control-custom"
-                                                value={form.numberOfGuests}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
+                                    <div>
+                                        <label className="block text-[#b99365] font-semibold mb-1">Number of Guests *</label>
+                                        <input
+                                            name="numberOfGuests"
+                                            type="number"
+                                            min="1"
+                                            placeholder="Number of Guests"
+                                            required
+                                            className="w-full px-4 py-2 border border-[#b99365]/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b99365] bg-white"
+                                            value={form.numberOfGuests}
+                                            onChange={handleChange}
+                                        />
                                     </div>
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <input
-                                                name="name"
-                                                type="text"
-                                                placeholder="Your Name *"
-                                                required
-                                                className="form-control form-control-custom"
-                                                value={form.name}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
+                                    <div>
+                                        <label className="block text-[#b99365] font-semibold mb-1">Your Name *</label>
+                                        <input
+                                            name="name"
+                                            type="text"
+                                            placeholder="Your Name"
+                                            required
+                                            className="w-full px-4 py-2 border border-[#b99365]/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b99365] bg-white"
+                                            value={form.name}
+                                            onChange={handleChange}
+                                        />
                                     </div>
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <input
-                                                name="email"
-                                                type="email"
-                                                placeholder="Email I'd *"
-                                                required
-                                                className="form-control form-control-custom"
-                                                value={form.email}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
+                                    <div>
+                                        <label className="block text-[#b99365] font-semibold mb-1">Email ID *</label>
+                                        <input
+                                            name="email"
+                                            type="email"
+                                            placeholder="Email ID"
+                                            required
+                                            className="w-full px-4 py-2 border border-[#b99365]/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b99365] bg-white"
+                                            value={form.email}
+                                            onChange={handleChange}
+                                        />
                                     </div>
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <input
-                                                name="subject"
-                                                type="text"
-                                                placeholder="Subject *"
-                                                required
-                                                className="form-control form-control-custom"
-                                                value={form.subject}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
+                                    <div>
+                                        <label className="block text-[#b99365] font-semibold mb-1">Subject *</label>
+                                        <input
+                                            name="subject"
+                                            type="text"
+                                            placeholder="Subject"
+                                            required
+                                            className="w-full px-4 py-2 border border-[#b99365]/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b99365] bg-white"
+                                            value={form.subject}
+                                            onChange={handleChange}
+                                        />
                                     </div>
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <input
-                                                name="phone"
-                                                type="text"
-                                                placeholder="Phone No. *"
-                                                required
-                                                className="form-control form-control-custom"
-                                                value={form.phone}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="col-md-12">
-                                        <div className="form-group">
-                                            <textarea
-                                                name="message"
-                                                rows={5}
-                                                className="form-control form-control-custom"
-                                                placeholder="Message *"
-                                                required
-                                                value={form.message}
-                                                onChange={handleChange}
-                                            ></textarea>
-                                        </div>
-                                        <button type="submit" className="btn-first btn-submit">
-                                            Submit
-                                        </button>
-                                        {submitted && (
-                                            <div className="alert alert-success mt-3" role="alert">
-                                                Thank you for contacting us! We will get back to you soon.
-                                            </div>
-                                        )}
+                                    <div>
+                                        <label className="block text-[#b99365] font-semibold mb-1">Phone No. *</label>
+                                        <input
+                                            name="phone"
+                                            type="text"
+                                            placeholder="Phone No."
+                                            required
+                                            className="w-full px-4 py-2 border border-[#b99365]/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b99365] bg-white"
+                                            value={form.phone}
+                                            onChange={handleChange}
+                                        />
                                     </div>
                                 </div>
+                                <div>
+                                    <label className="block text-[#b99365] font-semibold mb-1">Message *</label>
+                                    <textarea
+                                        name="message"
+                                        rows={4}
+                                        className="w-full px-4 py-2 border border-[#b99365]/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b99365] bg-white"
+                                        placeholder="Message"
+                                        required
+                                        value={form.message}
+                                        onChange={handleChange}
+                                    ></textarea>
+                                </div>
+                                <button
+                                    type="submit"
+                                    className="w-full bg-[#e7c742] hover:bg-black text-black hover:text-white font-bold py-3 rounded-lg transition-all duration-200 shadow-lg text-lg tracking-wide uppercase"
+                                >
+                                    {addContactMutation.isLoading ? (
+                                        <span className="flex items-center justify-center gap-2">
+                                            <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+                                            </svg>
+                                            Submitting...
+                                        </span>
+                                    ) : (
+                                        "Submit"
+                                    )}
+                                </button>
+                                {submitted && (
+                                    <div className="mt-4 text-center text-green-600 font-semibold text-lg animate-fade-in">
+                                        Thank you for contacting us! We will get back to you soon.
+                                    </div>
+                                )}
                             </form>
                         </div>
-                        <div className="col-lg-6">
-                            dkdkk
-                        </div>
                     </div>
+                    <style>{`
+                        @keyframes fade-in {
+                            from { opacity: 0; transform: translateY(20px);}
+                            to { opacity: 1; transform: translateY(0);}
+                        }
+                        .animate-fade-in {
+                            animation: fade-in 0.7s cubic-bezier(.4,0,.2,1) both;
+                        }
+                    `}</style>
                 </div>
-        
+            </section>
         </>
     );
 };
