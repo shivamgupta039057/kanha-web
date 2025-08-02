@@ -23,7 +23,7 @@ const roomSuitsData = [
   },
   {
     colClass: "col-lg-4",
-    img: "/images/banquet_2.jpeg",
+    img: "/images/Banquetdkd.jpeg",
     price: "$15/Hour",
     priceLink: "#",
     title: "Banquet",

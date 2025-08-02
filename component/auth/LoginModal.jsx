@@ -82,6 +82,7 @@ const LoginModal = ({ isOpen, onClose }) => {
       return res || {};
     },
     onSuccess: (res) => {
+      
       if (res && res.data && res.data.status) {
         dispatch(setToken(res.data.token));
         toast.success(res.data.message);
@@ -106,7 +107,7 @@ const LoginModal = ({ isOpen, onClose }) => {
       if (res && res.data && res.data.status) {
         toast.success(res.data.message);
         setShowOtp(true);
-        setMobileForOtp(res.data.phone);
+        // setMobileForOtp(res.data.phone);
       } else {
         toast.error(res && res.data && res.data.message ? res.data.message : "Failed to send OTP.");
       }
