@@ -159,9 +159,65 @@ const Header = () => {
                           if (e.key === "Enter" || e.key === " ") setMenuActive((prev) => !prev);
                         }}
                       >
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                        {/* Show close icon if menuActive, else hamburger */}
+                        {menuActive ? (
+                          // Close icon (X)
+                          <span style={{
+                            display: 'block',
+                            width: 28,
+                            height: 28,
+                            position: 'relative'
+                          }}>
+                            <span style={{
+                              position: 'absolute',
+                              left: 0,
+                              top: '50%',
+                              width: '100%',
+                              height: 3,
+                              background: '#b99365',
+                              borderRadius: 2,
+                              transform: 'rotate(45deg) translateY(-50%)'
+                            }}></span>
+                            <span style={{
+                              position: 'absolute',
+                              left: 0,
+                              top: '50%',
+                              width: '100%',
+                              height: 3,
+                              background: '#b99365',
+                              borderRadius: 2,
+                              transform: 'rotate(-45deg) translateY(-50%)'
+                            }}></span>
+                          </span>
+                        ) : (
+                          // Hamburger icon
+                          <>
+                            <span style={{
+                              display: 'block',
+                              width: 28,
+                              height: 3,
+                              background: '#b99365',
+                              borderRadius: 2,
+                              margin: '5px 0'
+                            }}></span>
+                            <span style={{
+                              display: 'block',
+                              width: 28,
+                              height: 3,
+                              background: '#b99365',
+                              borderRadius: 2,
+                              margin: '5px 0'
+                            }}></span>
+                            <span style={{
+                              display: 'block',
+                              width: 28,
+                              height: 3,
+                              background: '#b99365',
+                              borderRadius: 2,
+                              margin: '5px 0'
+                            }}></span>
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>
