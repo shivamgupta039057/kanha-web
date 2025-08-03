@@ -14,67 +14,79 @@ import { setToken } from '../../store/features/authSlice';
 
 const SignupModal = dynamic(() => import("@/component/auth/SignupModal"), { ssr: false });
 
-
+// Updated validation schemas for stricter validation
 const loginSchema = yup.object().shape({
-  email: yup.string().email("Invalid email").required("Email is required"),
-  password: yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
+  email: yup
+    .string()
+    .email("Please enter a valid email address")
+    .required("Email is required"),
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
 });
 
 const mobileSchema = yup.object().shape({
   mobile: yup
     .string()
-    .matches(/^\d{10,15}$/, "Mobile number must be 10-15 digits")
-    .required("Mobile number is required"),
+    .required("Mobile number is required")
+    .matches(/^[0-9]{10}$/, "Mobile number must be exactly 10 digits"),
 });
 
 const otpSchema = yup.object().shape({
-  otp: yup.string().length(6, "OTP must be 6 digits").required("OTP is required"),
+  otp: yup
+    .string()
+    .required("OTP is required")
+    .matches(/^[0-9]{6}$/, "OTP must be exactly 6 digits"),
 });
 
 const LoginModal = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
-    // Move all useForm hooks to the top level of the component to ensure hooks are not conditionally rendered.
-    const {
-      register,
-      handleSubmit,
-      formState: { errors, isSubmitting },
-      reset,
-    } = useForm({
-      resolver: yupResolver(loginSchema),
-      mode: "onTouched",
-    });
-  
-    // Mobile form
-    const {
-      register: registerMobile,
-      handleSubmit: handleSubmitMobile,
-      formState: { errors: mobileErrors, isSubmitting: isMobileSubmitting },
-      reset: resetMobile,
-    } = useForm({
-      resolver: yupResolver(mobileSchema),
-      mode: "onTouched",
-    });
-  
-    // OTP form
-    const {
-      register: registerOtp,
-      handleSubmit: handleSubmitOtp,
-      formState: { errors: otpErrors, isSubmitting: isOtpSubmitting },
-      reset: resetOtp,
-      setValue: setOtpValue,
-      watch: watchOtp,
-    } = useForm({
-      resolver: yupResolver(otpSchema),
-      mode: "onTouched",
-    });
+
+  // Email/password form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm({
+    resolver: yupResolver(loginSchema),
+    mode: "onTouched",
+  });
+
+  // Mobile form
+  const {
+    register: registerMobile,
+    handleSubmit: handleSubmitMobile,
+    formState: { errors: mobileErrors, isSubmitting: isMobileSubmitting },
+    reset: resetMobile,
+    setValue: setMobileValue,
+    watch: watchMobile,
+  } = useForm({
+    resolver: yupResolver(mobileSchema),
+    mode: "onTouched",
+  });
+
+  // OTP form
+  const {
+    register: registerOtp,
+    handleSubmit: handleSubmitOtp,
+    formState: { errors: otpErrors, isSubmitting: isOtpSubmitting },
+    reset: resetOtp,
+    setValue: setOtpValue,
+    watch: watchOtp,
+  } = useForm({
+    resolver: yupResolver(otpSchema),
+    mode: "onTouched",
+  });
+
   const [showMobile, setShowMobile] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const [showOtp, setShowOtp] = useState(false);
   const [mobileForOtp, setMobileForOtp] = useState("");
 
-  console.log("mobileForOtpmobileForOtp" , mobileForOtp);
-  
-
+  // Remove debug log in production
+  // console.log("mobileForOtpmobileForOtp" , mobileForOtp);
 
   const emailSignInMutation = useMutation({
     mutationFn: async (data) => {
@@ -82,7 +94,6 @@ const LoginModal = ({ isOpen, onClose }) => {
       return res || {};
     },
     onSuccess: (res) => {
-      
       if (res && res.data && res.data.status) {
         dispatch(setToken(res.data.token));
         toast.success(res.data.message);
@@ -122,7 +133,6 @@ const LoginModal = ({ isOpen, onClose }) => {
   // OTP verification mutation
   const otpVerifyMutation = useMutation({
     mutationFn: async (data) => {
-      // You may need to adjust the API endpoint and payload as per your backend
       const res = await Apiservice.post(`${API_VERFIY_OTP}`, data);
       return res || {};
     },
@@ -153,22 +163,37 @@ const LoginModal = ({ isOpen, onClose }) => {
 
   if (!isOpen && !showSignup) return null;
 
-  // Email/password form
-
-
-  // Mutations
-
-
+  // Handlers
   const onSubmit = (data) => {
     emailSignInMutation.mutate(data);
   };
 
   const onMobileSubmit = (data) => {
-    mobileOtpMutation.mutate({ mobileNumber: data.mobile });
+    // Only allow 10 digits for mobile number
+    const mobile = data.mobile.replace(/\D/g, '').slice(0, 10);
+    mobileOtpMutation.mutate({ mobileNumber: mobile });
   };
 
   const onOtpSubmit = (data) => {
     otpVerifyMutation.mutate({ phone: mobileForOtp, otp: data.otp });
+  };
+
+  // Helper for mobile input: only allow 10 digits
+  const handleMobileInput = (e) => {
+    const value = e.target.value.replace(/\D/g, '').slice(0, 10);
+    setMobileValue("mobile", value, { shouldValidate: true });
+  };
+
+  // Helper for OTP input: only allow 6 digits
+  const handleOtpInput = (e) => {
+    const value = e.target.value.replace(/\D/g, '').slice(0, 6);
+    setOtpValue("otp", value, { shouldValidate: true });
+  };
+
+  // Handler to switch to mobile login and clear email field
+  const handleShowMobile = () => {
+    setShowMobile(true);
+    reset();
   };
 
   return (
@@ -209,6 +234,8 @@ const LoginModal = ({ isOpen, onClose }) => {
                       } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b99365]`}
                       placeholder="Enter your email"
                       autoComplete="email"
+                      inputMode="email"
+                      pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                     />
                     {errors.email && (
                       <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>
@@ -249,7 +276,7 @@ const LoginModal = ({ isOpen, onClose }) => {
                 </div>
                 <button
                   className="w-full border border-[#b99365] text-[#b99365] font-semibold py-2 rounded-full hover:bg-[#f8f5f0] transition-all duration-200"
-                  onClick={() => setShowMobile(true)}
+                  onClick={handleShowMobile}
                   type="button"
                 >
                   Continue with Mobile Number
@@ -272,6 +299,10 @@ const LoginModal = ({ isOpen, onClose }) => {
                           mobileErrors.mobile ? "border-red-400" : "border-gray-200"
                         } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b99365]`}
                         placeholder="Enter your mobile number"
+                        inputMode="numeric"
+                        pattern="[0-9]{10}"
+                        maxLength={10}
+                        onInput={handleMobileInput}
                       />
                       {mobileErrors.mobile && (
                         <p className="text-xs text-red-500 mt-1">{mobileErrors.mobile.message}</p>
@@ -301,7 +332,10 @@ const LoginModal = ({ isOpen, onClose }) => {
                           otpErrors.otp ? "border-red-400" : "border-gray-200"
                         } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#b99365]`}
                         placeholder="Enter OTP"
+                        inputMode="numeric"
+                        pattern="[0-9]{6}"
                         maxLength={6}
+                        onInput={handleOtpInput}
                       />
                       {otpErrors.otp && (
                         <p className="text-xs text-red-500 mt-1">{otpErrors.otp.message}</p>

@@ -16,13 +16,21 @@ import 'react-multi-carousel/lib/styles.css';
 import BanqueteFaqsPage from './BanqueteFaqsPage';
 import BanquetContact from '../banquet/banquetContact';
 
+// Updated validation schema for phone and email
 const schema = yup.object().shape({
   guestName: yup.string().required("Guest name is required"),
-  email: yup.string().email("Invalid email").required("Email is required"),
+  email: yup
+    .string()
+    .required("Email is required")
+    .email("Please enter a valid email address")
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      "Please enter a valid email address"
+    ),
   phone: yup
     .string()
     .required("Phone number is required")
-    .matches(/^[0-9]{10,15}$/, "Phone number must be 10-15 digits"),
+    .matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits"),
   checkIn: yup.string().required("Check-in date is required"),
   checkOut: yup
     .string()
@@ -109,6 +117,15 @@ const ImageModal = ({ isOpen, imageUrl, onClose }) => {
   );
 };
 
+// Helper to get today's date in yyyy-mm-dd format
+const getTodayDateString = () => {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+};
+
 const BanquetBookingData = ({ roomId }) => {
   const { submitPayment } = usePayment();
   const RAZORPAY_KEY_ID = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "YOUR_RAZORPAY_KEY_ID";
@@ -121,6 +138,9 @@ const BanquetBookingData = ({ roomId }) => {
   // State for modal image preview
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState(null);
+
+  // For min date on check-in
+  const [minCheckInDate, setMinCheckInDate] = useState(getTodayDateString());
 
   const openImageModal = (imgUrl) => {
     setModalImage(imgUrl);
@@ -452,6 +472,18 @@ const BanquetBookingData = ({ roomId }) => {
     },
   });
 
+  // Handler for phone input: only allow 10 digits, no unwanted text
+  const handlePhoneInput = (e) => {
+    let value = e.target.value.replace(/\D/g, '').slice(0, 10);
+    setValue("phone", value, { shouldValidate: true });
+  };
+
+  // Handler for email input: prevent unwanted text (no spaces, no commas, etc)
+  const handleEmailInput = (e) => {
+    let value = e.target.value.replace(/[^a-zA-Z0-9@._+-]/g, '');
+    setValue("email", value, { shouldValidate: true });
+  };
+
   const onSubmit = (data) => {
     const params = {
       guestName: data.guestName,
@@ -463,16 +495,16 @@ const BanquetBookingData = ({ roomId }) => {
     addRoomMutation.mutate(params);
   };
 
-
-
   // Get current room info
   const currentRoom = ROOM_TYPES.find(r => r.value === selectedRoomType)?.info || ROOM_TYPES[0].info;
 
   // Helper function to safely check array length
   const hasArrayItems = arr => Array.isArray(arr) && arr.length > 0;
 
-  console.log("roomTypeDataroomTypeDataroomTypeData" , roomTypeData);
-  
+  // For check-in min date
+  const todayDateString = minCheckInDate;
+
+  // console.log("roomTypeDataroomTypeDataroomTypeData" , roomTypeData);
 
   return (
     <>
@@ -725,6 +757,10 @@ const BanquetBookingData = ({ roomId }) => {
                   className="bookingx-form-control border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453]"
                   placeholder="Your Email"
                   {...register("email")}
+                  autoComplete="email"
+                  inputMode="email"
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                  onInput={handleEmailInput}
                 />
                 {errors.email && <span className="bookingx-error text-xs text-red-500">{errors.email.message}</span>}
               </div>
@@ -738,6 +774,10 @@ const BanquetBookingData = ({ roomId }) => {
                   className="bookingx-form-control border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453]"
                   placeholder="Your Phone"
                   {...register("phone")}
+                  inputMode="numeric"
+                  pattern="[0-9]{10}"
+                  maxLength={10}
+                  onInput={handlePhoneInput}
                 />
                 {errors.phone && <span className="bookingx-error text-xs text-red-500">{errors.phone.message}</span>}
               </div>
@@ -751,6 +791,7 @@ const BanquetBookingData = ({ roomId }) => {
                     id="bookingx-checkin"
                     className="bookingx-form-control border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453]"
                     {...register("checkIn")}
+                    min={todayDateString}
                   />
                   {errors.checkIn && <span className="bookingx-error text-xs text-red-500">{errors.checkIn.message}</span>}
                 </div>

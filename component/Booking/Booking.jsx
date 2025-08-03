@@ -15,14 +15,42 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import RoomFaqsPage from './RoomFaqsPage';
 
+// Helper to get today's date in yyyy-mm-dd format
+const getTodayDateString = () => {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+};
+
+// Strict validation for email and mobile (no unwanted text)
 const schema = yup.object().shape({
   guestName: yup.string().required("Guest name is required"),
-  email: yup.string().email("Invalid email").required("Email is required"),
+  email: yup
+    .string()
+    .required("Email is required")
+    .matches(
+      // RFC 5322 Official Standard email regex (covers most valid emails, blocks unwanted text)
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      "Please enter a valid email address"
+    ),
   phone: yup
     .string()
     .required("Phone number is required")
-    .matches(/^[0-9]{10,15}$/, "Phone number must be 10-15 digits"),
-  checkIn: yup.string().required("Check-in date is required"),
+    // Only digits, 10-15 length, no spaces, no +, no unwanted chars
+    .matches(/^[0-9]{10,15}$/, "Phone number must be 10-15 digits (numbers only)"),
+  checkIn: yup
+    .string()
+    .required("Check-in date is required")
+    .test("not-in-past", "Check-in date cannot be in the past", function (value) {
+      if (!value) return true;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const checkInDate = new Date(value);
+      checkInDate.setHours(0, 0, 0, 0);
+      return checkInDate >= today;
+    }),
   checkOut: yup
     .string()
     .required("Check-out date is required")
@@ -120,6 +148,9 @@ const Booking = ({ roomId }) => {
   // State for modal image preview
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState(null);
+
+  // For min date on check-in input
+  const [minCheckInDate, setMinCheckInDate] = useState(getTodayDateString());
 
   const openImageModal = (imgUrl) => {
     setModalImage(imgUrl);
@@ -470,8 +501,7 @@ const Booking = ({ roomId }) => {
   // Helper function to safely check array length
   const hasArrayItems = arr => Array.isArray(arr) && arr.length > 0;
 
-  console.log("roomTypeDataroomTypeDataroomTypeData" , roomTypeData);
-  
+  // console.log("roomTypeDataroomTypeDataroomTypeData" , roomTypeData);
 
   return (
     <>
@@ -609,33 +639,6 @@ const Booking = ({ roomId }) => {
               />
             </div>
           )}
-          {/* Available Offers */}
-          {/* {hasArrayItems(currentRoom.offers) && (
-            <div className="bookingx-section">
-              <h2 className="bookingx-section-title">Available Offers</h2>
-              <div className="bookingx-offers-grid">
-                {currentRoom.offers.map((offer, idx) => (
-                  <div className="bookingx-offer-item" key={idx}>{offer}</div>
-                ))}
-              </div>
-            </div>
-          )} */}
-          {/* Room Policies */}
-          {/* {hasArrayItems(currentRoom.policies) && (
-            <div className="bookingx-section">
-              <h2 className="bookingx-section-title">Room Policies</h2>
-              {currentRoom.policies.map((policy, idx) => (
-                <div className="bookingx-policy-section" key={idx}>
-                  <h3 className="bookingx-policy-title">{policy.title}</h3>
-                  <ul className="bookingx-policy-list">
-                    {Array.isArray(policy.items) && policy.items.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          )} */}
           {/* Amenities & Services */}
           {hasArrayItems(currentRoom.amenities) && (
             <div className="bookingx-section">
@@ -694,6 +697,9 @@ const Booking = ({ roomId }) => {
                   className="bookingx-form-control border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453]"
                   placeholder="Your Email"
                   {...register("email")}
+                  inputMode="email"
+                  autoComplete="email"
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                 />
                 {errors.email && <span className="bookingx-error text-xs text-red-500">{errors.email.message}</span>}
               </div>
@@ -707,6 +713,10 @@ const Booking = ({ roomId }) => {
                   className="bookingx-form-control border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453]"
                   placeholder="Your Phone"
                   {...register("phone")}
+                  inputMode="numeric"
+                  autoComplete="tel"
+                  pattern="[0-9]{10,15}"
+                  maxLength={15}
                 />
                 {errors.phone && <span className="bookingx-error text-xs text-red-500">{errors.phone.message}</span>}
               </div>
@@ -720,6 +730,7 @@ const Booking = ({ roomId }) => {
                     id="bookingx-checkin"
                     className="bookingx-form-control border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453]"
                     {...register("checkIn")}
+                    min={minCheckInDate}
                   />
                   {errors.checkIn && <span className="bookingx-error text-xs text-red-500">{errors.checkIn.message}</span>}
                 </div>
