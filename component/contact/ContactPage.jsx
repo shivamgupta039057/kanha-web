@@ -94,7 +94,7 @@ const ContactPage = () => {
                   <h3>The Kanha Hotel</h3>
                 </div>
                 <div className="luxury-p">
-                  <p>
+                  <p style={{ color: '#000000' }}>
                  New Kanha Hotel, Jaipur’s best newly opened hotel with premium amenities, is located in Govindpura, Kalwar Road. We proudly offer top-notch hospitality with facilities including a well-appointed hotel, an elegant banquet hall for celebrations, and a delightful restaurant serving delicious cuisine. Whether you're here for a stay, a function, or a fine dining experience, New Kanha Hotel ensures comfort, luxury, and exceptional service—all under one roof. A perfect destination for every occasion in the heart of Jaipur.
                   </p>
                 </div>
@@ -104,9 +104,9 @@ const ContactPage = () => {
                       <i className={info.icon}></i>
                     </div>
                     <div className="text">
-                      <p>{info.label}</p>
+                      <p style={{ color: '#000000' }}>{info.label}</p>
                       {info.type === 'address' ? (
-                        <address>{info.value}</address>
+                        <address style={{ color: '#000000' }} >{info.value}</address>
                       ) : (
                         <a href={info.href}>{info.value}</a>
                       )}

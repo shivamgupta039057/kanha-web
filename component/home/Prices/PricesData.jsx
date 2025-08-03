@@ -70,7 +70,7 @@ const PricesData = () => {
             >
               <div className="section-heading mb-3">
                 <h3 className="text-custom-black mb-0">Hotel Booking</h3>
-                <span>Types Of Room We Provide</span>
+                <span  style={{fontWeight : 'bold'}}>Types Of Room We Provide</span>
               </div>
             </div>
             <div className="sell-up-le">
@@ -86,7 +86,7 @@ const PricesData = () => {
                   <i className="flaticon-call"></i>
                 </div>
                 <div className="reservation-Description">
-                  <address> +91 9783252121 </address>
+                  <address  style={{fontWeight : 'bold'}}> +91 9783252121 </address>
                 </div>
               </div>
 
@@ -95,7 +95,7 @@ const PricesData = () => {
                   <i className="flaticon-mail"></i>
                 </div>
                 <div className="reservation-Description">
-                  <address> newkanha220@gmail.com </address>
+                  <address  style={{fontWeight : 'bold'}}> newkanha220@gmail.com </address>
                 </div>
               </div>
 
@@ -103,8 +103,8 @@ const PricesData = () => {
                 <div className="reservation-icon">
                   <i className="fa fa-globe"></i>
                 </div>
-                <div className="reservation-Description">
-                  <address> Kala Nagari, Kalwar Rd, opp. New Kanha Restaurant, Radha Vihar, Govindpura, Jaipur, Rajasthan 302012 </address>
+                <div className="reservation-Description  " >
+                  <address  style={{fontWeight : 'bold'}}> Kala Nagari, Kalwar Rd, opp. New Kanha Restaurant, Radha Vihar, Govindpura, Jaipur, Rajasthan 302012 </address>
                 </div>
               </div>
             </div>
@@ -129,7 +129,7 @@ const PricesData = () => {
                           {item.price}
                           <span>{item.period}</span>
                         </div>
-                        <ul className="list-unstyled list">
+                        <ul className="list-unstyled list " style={{ color: '#000000' }}>
                           {item.features.map((feature, i) => (
                             <li key={i}>
                               <i className="fa fa-check"></i> {feature}

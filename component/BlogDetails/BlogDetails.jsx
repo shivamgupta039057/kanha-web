@@ -131,18 +131,18 @@ const BlogDetails = ({ blogId }) => {
               {blog.content.map((section, idx) => (
                 <section key={idx}>
                   <h2 className="text-xl font-bold mb-3">{section.heading}</h2>
-                  <ul className="list-disc list-inside space-y-2 text-gray-700">
+                  <ul className="list-disc  font-bold list-inside space-y-2 text-black-700">
                     {section.points.map((point, i) => (
                       <li key={i}>{point}</li>
                     ))}
                   </ul>
                 </section>
               ))}
-              <section>
+              {/* <section>
                 <h2 className="text-xl font-bold mb-3">Conclusion</h2>
-                <p className="text-gray-700">
+                <p className="text-black-700  font-bold">
                   New Kanha Hotel is your perfect base to explore the heart of Jaipur with ease and comfort.                </p>
-              </section>
+              </section> */}
             </div>
           </article>
 

@@ -8,7 +8,7 @@ const aboutData = {
   title: "The New Kanha Hotel",
   subtitle: "Enjoy a New Kanha Experience",
   paragraphs: [
-    "New Kanha Hotel, Jaipur’s best newly opened hotel with premium amenities, is located in Govindpura, Kalwar Road. We proudly offer top-notch hospitality with facilities including a well-appointed hotel, an elegant banquet hall for celebrations, and a delightful restaurant serving delicious cuisine.", 
+    "New Kanha Hotel, Jaipur’s best newly opened hotel with premium amenities, is located in Govindpura, Kalwar Road. We proudly offer top-notch hospitality with facilities including a well-appointed hotel, an elegant banquet hall for celebrations, and a delightful restaurant serving delicious cuisine.",
     "Whether you're here for a stay, a function, or a fine dining experience, New Kanha Hotel ensures comfort, luxury, and exceptional service—all under one roof. A perfect destination for every occasion in the heart of Jaipur.",
     "Classic Kanha Hotel offers timeless elegance and comfort in the heart of the city. Our guests enjoy premium rooms, a spacious banquet hall, and a multi-cuisine restaurant.",
     "Perfect for business or leisure, Classic Kanha Hotel delivers exceptional service and memorable experiences for every guest."
@@ -25,7 +25,7 @@ const About = ({ data = aboutData }) => {
       <div className="container">
         <div className="row">
           <div className="col-lg-6">
-            <div >
+            <div>
               <div className="single-imagea">
                 <img src={data.image.src} className="image-fit" alt={data.image.alt} />
                 <img src='images/banquet.webp' className="image-fit" alt={data.image.alt} />
@@ -34,17 +34,19 @@ const About = ({ data = aboutData }) => {
           </div>
           <div className="col-lg-6">
             <div className="about-content">
-              <h3>{data.title}</h3>
-              <div className="luxury">{data.subtitle}</div>
+              <h3 >{data.title}</h3>
+              <div className="text-4xl sm:text-4xl md:text-5xl font-serif font-medium leading-tight text-black"style={{ color: 'black' }}>{data.subtitle}</div>
               {data.paragraphs.map((text, idx) => (
                 <React.Fragment key={idx}>
-                  <p>{text}</p>
+                  <p style={{ color: 'black' }}>{text}</p>
                   {idx < data.paragraphs.length - 1 && <br />}
                 </React.Fragment>
               ))}
               <br />
               <div className="reservation">
-                <img src={data.signature.src} alt={data.signature.alt} />
+                {data.signature.src && (
+                  <img src={data.signature.src} alt={data.signature.alt} />
+                )}
               </div>
             </div>
           </div>

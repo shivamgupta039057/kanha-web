@@ -27,24 +27,24 @@ const Banner = () => {
 
       {/* Overlay Content */}
       <div className="slide-item">
-      <div className="transform-center ">
-              <div className="container ">
-                <div className="row">
-                  <div
-                    className="col-lg-12 "
-                  >
-                    <div className="slider-content">
-                    <p>{bannerData.subheading}</p>
-                    <h1 className="text-custom-white"> {bannerData.heading} </h1>
-                      <Link href={"djdk"} className="btn-first btn-small">
-                        {bannerData.btnText}
-                      </Link>
-                    </div>
-                  </div>
+        <div className="transform-center ">
+          <div className="container ">
+            <div className="row">
+              <div
+                className="col-lg-12 "
+              >
+                <div className="slider-content">
+                  <p>{bannerData.subheading}</p>
+                  <h1 className="text-custom-white"> {bannerData.heading} </h1>
+                  <Link href={bannerData.btnLink} className="btn-first btn-small">
+                    {bannerData.btnText}
+                  </Link>
                 </div>
               </div>
             </div>
-    </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

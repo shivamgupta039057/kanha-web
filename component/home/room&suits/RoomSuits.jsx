@@ -5,7 +5,7 @@ const roomSuitsData = [
   {
     colClass: "col-lg-4",
     img: "/images/room/1.jpg",
-    price: "$150/Day",
+    price: "₹2500/Day",
     priceLink: "#",
     title: "Rooms",
     titleLink: "#",
@@ -24,7 +24,7 @@ const roomSuitsData = [
   {
     colClass: "col-lg-4",
     img: "/images/Banquetdkd.jpeg",
-    price: "$15/Hour",
+    price: "₹10000/Day",
     priceLink: "#",
     title: "Banquet",
     titleLink: "#",
@@ -41,7 +41,7 @@ const roomSuitsData = [
   {
     colClass: "col-lg-4",
     img: "/images/restaurent.jpeg",
-    price: "$5/ Min",
+    // price: "$5/ Min",
     priceLink: "#",
     title: "Restaurant",
     titleLink: "#",
@@ -64,7 +64,7 @@ const RoomSuits = () => {
         <div className="section-header">
           <div className="section-heading mb-3">
             <h3 className="text-custom-black mb-0">The New Kanha Hotel</h3>
-            <span>Rooms , Banquets & Restaurent </span>
+            <span  style={{fontWeight : 'bold'}}>Rooms , Banquets & Restaurent </span>
           </div>
         </div>
         <div className="row">
