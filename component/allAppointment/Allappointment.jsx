@@ -54,33 +54,16 @@ function Allappointment() {
     ],
     queryFn: () =>
       Apiservice.getAuth(
-        `${API_GET_ALL_BOOKING}?page=${paginationData.page}&perPage=${paginationData?.perPage}&startDate=${
-          watchedValues.date ?? ""
-        }&search=${watchedValues.searchQuery}&type=${
-          watchedValues.selectType?.value === "all"
-            ? ""
-            : watchedValues.selectType?.value === "onVisit" ||
-              watchedValues.selectType?.value === "onCall"
-            ? "offline"
-            : watchedValues.selectType?.value === "online"
-            ? "online"
-            : watchedValues.selectType?.value
-        }&slotType=${
-          watchedValues.selectType?.value == "online"
-            ? ""
-            : watchedValues.selectType?.value === "all"
-            ? ""
-            : watchedValues.selectType?.value
-        }`,
+        `${API_GET_ALL_BOOKING}`,
         token
       ),
     staleTime: 5 * 60 * 1000,
   });
-
-  // Refetch when pagination or form values change
   useEffect(() => {
-    refetch();
-  }, [paginationData.page, watchedValues, refetch]);
+    if(token) {
+      refetch();
+    }
+  }, []);
 
   useEffect(() => {
     setAllAppointment(PatientAppointments?.data?.data);
