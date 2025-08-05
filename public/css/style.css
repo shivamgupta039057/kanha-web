@@ -4220,10 +4220,15 @@ ul.ft_contact.ft_menu li a i:hover {
   .bookingx-form-group label {
 	display: block;
 	font-size: 13px;
-	color: #666;
+	color: #000;
 	margin-bottom: 6px;
 	font-weight: normal;
   }
+  .roomsuite-room-price {
+    text-align: center;
+    display: flex;
+    align-items: baseline;
+}
   .bookingx-form-control {
 	width: 100%;
 	padding: 12px;

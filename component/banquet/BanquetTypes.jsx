@@ -273,13 +273,13 @@ const BanquetTypes = ({ roomTypeData, isLoading }) => {
                   <div className="roomsuite-room-header">
                     <div>
                       <h2 className="roomsuite-room-title">{item.name || "Room"}</h2>
-                      <div className="roomsuite-room-type" style={{ color: "#666", fontSize: "0.9rem" }}>
+                      {/* <div className="roomsuite-room-type" style={{ color: "#000", fontSize: "0.9rem" }}>
                         {item.description || "Standard Room"}
-                      </div>
+                      </div> */}
                     </div>
                     <div className="roomsuite-room-price">
                       <div className="roomsuite-price-amount">
-                        ₹{item.price ? item.price.toLocaleString() : "N/A"}
+                        ₹{item.price ? item.price.toLocaleString() : "N/A"}/
                       </div>
                       <div className="roomsuite-price-period">per night</div>
                     </div>
@@ -575,7 +575,7 @@ const BanquetTypes = ({ roomTypeData, isLoading }) => {
           font-weight: bold;
         }
         .roomsuite-price-period {
-          color: #666;
+          color: #000;
           font-size: 0.9rem;
         }
         .roomsuite-room-capacity {
@@ -591,14 +591,14 @@ const BanquetTypes = ({ roomTypeData, isLoading }) => {
           display: flex;
           align-items: center;
           gap: 5px;
-          color: #555;
+          color: #000;
           font-weight: 500;
         }
         .roomsuite-capacity-icon {
           font-size: 1.2rem;
         }
         .roomsuite-room-description {
-          color: #666;
+          color: #000;
           line-height: 1.7;
           margin-bottom: 25px;
         }
@@ -627,7 +627,7 @@ const BanquetTypes = ({ roomTypeData, isLoading }) => {
           background: #f0f8ff;
           border-radius: 20px;
           font-size: 0.85rem;
-          color: #555;
+          color: #000;
         }
         .roomsuite-amenity-icon {
           color: #e7c742;

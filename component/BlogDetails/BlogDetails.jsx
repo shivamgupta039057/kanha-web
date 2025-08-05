@@ -1,8 +1,9 @@
+"use client"
 import SubHeader from '@/utils/SubHeader';
+import Link from 'next/link';
 import React from 'react'
 
 const BlogDetails = ({ blogId }) => {
-  console.log("blogIdblogId", blogId);
   const blogs = [{
     title: 'The Basics of Pre-Workout Nutrition',
     author: 'Keshav',
@@ -111,93 +112,91 @@ const BlogDetails = ({ blogId }) => {
   }
 ];
   const blog = blogs.find((b) => b.slug === blogId);
+
+  console.log("blogblogblog" , blog);
+  
+
   return (
-    <>    <SubHeader title="Blog Details" subtitle="Blog Details" rating="5" />
-      <main className="bg-[#f4f9ff] py-10 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <>
+      <SubHeader title="Blog Details" subtitle="Blog Details" rating="5" />
+      <main className="bg-gradient-to-br from-[#f4f9ff] to-[#e6eaf3] py-12 px-4 min-h-screen">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* === Main Blog Content === */}
-          <article className="lg:col-span-2 bg-white p-6 rounded shadow">
-            <p className="text-sm text-blue-600 mb-2">
-              By {blog.author} / {blog.date}
-            </p>
+          <article className="lg:col-span-2 bg-white p-8 rounded-3xl shadow-xl border border-gray-100" style={{ color: "#111" }}>
+            <h1 className="text-3xl md:text-4xl font-extrabold mb-4 text-center text-black tracking-tight leading-tight drop-shadow-lg">
+              {blog.title}
+            </h1>
+            <div className="flex items-center justify-center mb-6">
+              <div className="flex items-center gap-2">
+                <span className="text-base font-medium text-black/80">By {blog.author}</span>
+                <span className="mx-2 text-black/40">|</span>
+                <span className="text-base font-medium text-black/80">{blog.date}</span>
+              </div>
+            </div>
             <img
               src={blog.image}
               alt={blog.title}
               width={800}
               height={400}
-              className="rounded-lg w-full object-cover mb-6"
+              className="rounded-2xl w-full object-cover mb-8 shadow-lg border border-gray-200"
+              style={{ maxHeight: 400, objectFit: "cover" }}
             />
-            <div className="space-y-8">
+            <div className="space-y-10">
               {blog.content.map((section, idx) => (
                 <section key={idx}>
-                  <h2 className="text-xl font-bold mb-3">{section.heading}</h2>
-                  <ul className="list-disc  font-bold list-inside space-y-2 text-black-700">
+                  <h2 className="text-xl md:text-2xl font-bold mb-4 text-black border-l-4 border-blue-500 pl-4 bg-gradient-to-r from-blue-50 to-white py-2 rounded">
+                    {section.heading}
+                  </h2>
+                  <ul className="list-disc font-medium list-inside space-y-2 text-black text-bold text-lg pl-4">
                     {section.points.map((point, i) => (
                       <li key={i}>{point}</li>
                     ))}
                   </ul>
                 </section>
               ))}
-              {/* <section>
-                <h2 className="text-xl font-bold mb-3">Conclusion</h2>
-                <p className="text-black-700  font-bold">
-                  New Kanha Hotel is your perfect base to explore the heart of Jaipur with ease and comfort.                </p>
-              </section> */}
             </div>
           </article>
 
           {/* === Sidebar === */}
-          <aside className="space-y-6">
-            {/* Search */}
-            {/* <div className="bg-white p-4 rounded shadow">
-              <h3 className="text-lg font-semibold mb-3">Search</h3>
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div> */}
-
+          <aside className="space-y-8">
             {/* Categories */}
-            <div className="bg-white p-4 rounded shadow">
-              <h3 className="text-lg font-semibold mb-3">Categories</h3>
-              <ul className="space-y-2 text-blue-700">
-                <li><a href="#" className="hover:underline">Fitness Tips</a></li>
-                <li><a href="#" className="hover:underline">Nutrition</a></li>
-                <li><a href="#" className="hover:underline">Workout Plans</a></li>
-                <li><a href="#" className="hover:underline">Supplements</a></li>
+            <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+              <h3 className="text-xl font-bold mb-4 text-black border-b-2 border-blue-100 pb-2">Categories</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/blog/fitness-tips" className="!text-black hover:text-black hover:underline transition-colors duration-200">Fitness Tips</Link>
+                </li>
+                <li>
+                  <Link href="/blog/nutrition" className="!text-black hover:text-black hover:underline transition-colors duration-200">Nutrition</Link>
+                </li>
+                <li>
+                  <Link href="/blog/workout-plans" className="!text-black hover:text-black hover:underline transition-colors duration-200">Workout Plans</Link>
+                </li>
+                <li>
+                  <Link href="/blog/supplements" className="!text-black hover:text-black hover:underline transition-colors duration-200">Supplements</Link>
+                </li>
               </ul>
             </div>
 
             {/* Recent Posts */}
-            <div className="bg-white p-4 rounded shadow">
-              <h3 className="text-lg font-semibold mb-3">Recent Posts</h3>
-              <ul className="space-y-2 text-blue-700">
-                <li><a href="#" className="hover:underline">Benefits of Morning Cardio</a></li>
-                <li><a href="#" className="hover:underline">Top Protein Sources in Veg Diet</a></li>
-                <li><a href="#" className="hover:underline">How to Build a Home Gym</a></li>
+            <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+              <h3 className="text-xl font-bold mb-4 text-black border-b-2 border-blue-100 pb-2">Recent Posts</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/blog/benefits-of-morning-cardio" className="hover:underline !text-black transition-colors duration-200">Benefits of Morning Cardio</Link>
+                </li>
+                <li>
+                  <Link href="/blog/top-protein-sources-in-veg-diet" className="hover:underline !text-black transition-colors duration-200">Top Protein Sources in Veg Diet</Link>
+                </li>
+                <li>
+                  <Link href="/blog/how-to-build-a-home-gym" className="hover:underline !text-black transition-colors duration-200">How to Build a Home Gym</Link>
+                </li>
               </ul>
             </div>
-
-            {/* Tags */}
-            {/* <div className="bg-white p-4 rounded shadow">
-              <h3 className="text-lg font-semibold mb-3">Tags</h3>
-              <div className="flex flex-wrap gap-2">
-                {['fitness', 'workout', 'diet', 'health', 'training', 'protein'].map(tag => (
-                  <span
-                    key={tag}
-                    className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm hover:bg-blue-200 cursor-pointer"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-            </div> */}
           </aside>
         </div>
       </main>
     </>
-
   )
 }
 
