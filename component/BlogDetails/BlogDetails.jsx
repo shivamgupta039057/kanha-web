@@ -6,7 +6,7 @@ import React from 'react'
 const BlogDetails = ({ blogId }) => {
   const blogs = [
     {
-      title: 'The Basics of Pre-Workout Nutrition',
+      title: 'Deluxe & Super Deluxe Rooms at New Kanha Hotel',
       author: 'Keshav',
       slug: 'kanha-hotel',
       date: 'July 31, 2025',
