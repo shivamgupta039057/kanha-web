@@ -599,18 +599,18 @@ const Booking = ({ roomId }) => {
             <h2 className="bookingx-section-title">Overview</h2>
             {/* Accept HTML in overview/description */}
             {currentRoom.overview ? (
-              <div
+              <div style={{ color: "#000000", fontWeight: "bold" }}
                 className="bookingx-overview-text"
                 dangerouslySetInnerHTML={{ __html: currentRoom.overview }}
               />
             ) : (
-              <p className="bookingx-overview-text">{currentRoom.overview}</p>
+              <p  className="bookingx-overview-text">{currentRoom.overview}</p>
             )}
           </div>
           {/* Room Information */}
           <div className="bookingx-section">
             <h2 className="bookingx-section-title">Room Information</h2>
-            <div className="bookingx-room-info">
+            <div className="bookingx-room-info" style={{ color: "#000000", fontWeight: "bold" }}>
               <div className="bookingx-info-item">
                 <span className="bookingx-info-icon">🛏️</span>
                 <span>{currentRoom.beds}</span>
@@ -641,7 +641,7 @@ const Booking = ({ roomId }) => {
           )}
           {/* Amenities & Services */}
           {hasArrayItems(currentRoom.amenities) && (
-            <div className="bookingx-section">
+            <div className="bookingx-section" style={{ color: "#000000", fontWeight: "bold" }}>
               <h2 className="bookingx-section-title">Amenities & Services</h2>
               <div className="bookingx-amenities-grid">
                 {currentRoom.amenities.map((cat, idx) => (

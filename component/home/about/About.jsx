@@ -34,7 +34,7 @@ const About = ({ data = aboutData }) => {
           </div>
           <div className="col-lg-6">
             <div className="about-content">
-              <h3 >{data.title}</h3>
+              <h3 style={{ fontWeight: "bold" , fontSize : '20px' }} >{data.title}</h3>
               <div className="text-4xl sm:text-4xl md:text-5xl font-serif font-medium leading-tight text-black"style={{ color: 'black' }}>{data.subtitle}</div>
               {data.paragraphs.map((text, idx) => (
                 <React.Fragment key={idx}>

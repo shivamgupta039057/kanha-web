@@ -11,7 +11,7 @@ const pricesData = [
     img: "/images/extra/2.jpg",
     title: "Deluxe room with breakfast",
     price: "₹2250",
-    period: "/ month",
+    period: "/ day",
     features: [
       "Comfortable AC Rooms with elegant interiors",
       "Complimentary Wi-Fi for all guests",
@@ -23,7 +23,7 @@ const pricesData = [
     img: "/images/extra/3.jpg",
     title: "Super Deluxe room with breakfast ",
     price: "₹2750",
-    period: "/ month",
+    period: "/ day",
     features: [
       "Comfortable AC Rooms with elegant interiors",
       "Complimentary Wi-Fi for all guests",
@@ -74,7 +74,7 @@ const PricesData = () => {
               }}
             >
               <div className="section-heading mb-3" style={{ marginBottom: "2rem" }}>
-                <h3 className="text-custom-black mb-0">Hotel Booking</h3>
+                <h3 style={{ fontWeight: "bold" , fontSize : '20px' }}>Hotel Booking</h3>
                 <span style={{ fontWeight: "bold" }}>Types Of Room We Provide</span>
               </div>
               <div className="sell-up-le" style={{ flex: 1 }}>
@@ -146,9 +146,9 @@ const PricesData = () => {
                           {item.price}
                           <span>{item.period}</span>
                         </div>
-                        <ul className="list-unstyled list" style={{ color: "#000000" }}>
+                        <ul className="list-unstyled list" >
                           {item.features.map((feature, i) => (
-                            <li key={i}>
+                            <li  style={{ color: "#000000", fontWeight: "bold" }}   key={i}>
                               <i className="fa fa-check"></i> {feature}
                             </li>
                           ))}

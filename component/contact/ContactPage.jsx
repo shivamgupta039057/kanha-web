@@ -106,7 +106,7 @@ const ContactPage = () => {
                     <div className="text">
                       <p style={{ color: '#000000' }}>{info.label}</p>
                       {info.type === 'address' ? (
-                        <address style={{ color: '#000000' }} >{info.value}</address>
+                        <address style={{ color: '#000000' , fontWeight : "bold"}} >{info.value}</address>
                       ) : (
                         <a href={info.href}>{info.value}</a>
                       )}

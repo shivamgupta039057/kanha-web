@@ -6,7 +6,7 @@ import React from 'react'
 const BlogDetails = ({ blogId }) => {
   const blogs = [
     {
-      title: 'Deluxe & Super Deluxe Rooms at New Kanha Hotel',
+      title: 'Why New Kanha Hotel is the Perfect Stay in Jaipur',
       author: 'Keshav',
       slug: 'kanha-hotel',
       date: 'July 31, 2025',
@@ -120,7 +120,7 @@ const BlogDetails = ({ blogId }) => {
 
   return (
     <>
-      <SubHeader title="Blog Details" subtitle="Blog Details" rating="5" />
+      <SubHeader title={blog.title}   />
       <main className="bg-gradient-to-br from-[#f4f9ff] to-[#e6eaf3] py-12 px-4 min-h-screen">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* === Main Blog Content === */}
@@ -169,7 +169,7 @@ const BlogDetails = ({ blogId }) => {
                   <li key={recent.slug}>
                     <Link
                       href={`/blog/${recent.slug}`}
-                      className="hover:underline !text-black transition-colors duration-200"
+                      className="font-bold !text-blue-600 !hover:text-blue-800 !underline transition-colors duration-200 cursor-pointer"
                     >
                       {recent.title}
                     </Link>

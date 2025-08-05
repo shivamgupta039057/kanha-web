@@ -84,9 +84,9 @@ const Header = () => {
                         <li className="menu-item menu-item-has-children">
                           <a href="#">Pages</a>
                           <ul className="submenu custom">
-                            <li className="menu-item">
+                            {/* <li className="menu-item">
                               <Link href="/services">Services</Link>
-                            </li>
+                            </li> */}
                             <li className="menu-item">
                               <Link href="/facility">Facilites</Link>
                             </li>

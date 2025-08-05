@@ -297,7 +297,7 @@ const BanquetTypes = ({ roomTypeData, isLoading }) => {
                     {/* You can add more capacity info if available in item */}
                   </div>
 
-                  <div className="roomsuite-room-description">
+                  <div className="roomsuite-room-description" style={{ color: "#000000", fontWeight: "bold" }}>
                     {item.description ||
                       "Experience traditional Rajasthani decor in these beautifully designed rooms. The elegantly decorated deluxe rooms have all the modern facilities with comfortable accommodation in a Fresco style setting."}
                   </div>
@@ -306,7 +306,7 @@ const BanquetTypes = ({ roomTypeData, isLoading }) => {
                     <h3 className="roomsuite-amenities-title">
                       Key Amenities
                     </h3>
-                    <div className="roomsuite-amenities-grid">
+                    <div className="roomsuite-amenities-grid" style={{ color: "#000000", fontWeight: "bold" }}>
                       {Array.isArray(item.amenities) && item.amenities.length > 0 ? (
                         item.amenities.map((amenity, i) => (
                           <div className="roomsuite-amenity-item" key={i}>
@@ -333,7 +333,7 @@ const BanquetTypes = ({ roomTypeData, isLoading }) => {
         
           
           {/* Room Information */}
-          <div className="bookingx-section">
+          <div className="bookingx-section" style={{ color: "#000000", fontWeight: "bold" }}>
             <h2 className="bookingx-section-title">Events We Host</h2>
             <div className="bookingx-room-info">
               <div className="bookingx-info-item">
@@ -363,7 +363,7 @@ const BanquetTypes = ({ roomTypeData, isLoading }) => {
             </div>
           </div>
           {/* HTML Details Section */}
-           <div className="bookingx-section">
+           <div className="bookingx-section" style={{ color: "#000000", fontWeight: "bold" }}>
             <h2 className="bookingx-section-title">Banquet Information</h2>
             <div className="bookingx-room-info">
               <div className="bookingx-info-item">
@@ -423,7 +423,7 @@ const BanquetTypes = ({ roomTypeData, isLoading }) => {
           )} */}
           {/* Amenities & Services */}
           {hasArrayItems(currentRoom.amenities) && (
-            <div className="bookingx-section">
+            <div className="bookingx-section" style={{ color: "#000000", fontWeight: "bold" }}>
               <h2 className="bookingx-section-title">Amenities & Services</h2>
               <div className="bookingx-amenities-grid">
                 {currentRoom.amenities.map((cat, idx) => (

@@ -176,7 +176,7 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
                       {/* You can add more capacity info if available in item */}
                     </div>
 
-                    <div className="roomsuite-room-description">
+                    <div className="roomsuite-room-description" style={{ color: "#000000", fontWeight: "bold" }}>
                       {item.description ||
                         "Experience traditional Rajasthani decor in these beautifully designed rooms. The elegantly decorated deluxe rooms have all the modern facilities with comfortable accommodation in a Fresco style setting."}
                     </div>

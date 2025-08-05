@@ -63,7 +63,7 @@ const RoomSuits = () => {
       <div className="container">
         <div className="section-header">
           <div className="section-heading mb-3">
-            <h3 className="text-custom-black mb-0">The New Kanha Hotel</h3>
+            <h3 className="text-custom-black mb-0 font-bold" style={{ fontWeight: "bold" , fontSize : '20px' }}>The New Kanha Hotel</h3>
             <span  style={{fontWeight : 'bold'}}>Rooms , Banquets & Restaurent </span>
           </div>
         </div>

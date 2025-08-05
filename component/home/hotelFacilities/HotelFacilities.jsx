@@ -45,7 +45,7 @@ const HotelFacilities = () => {
       <div className="container">
         <div className="section-header">
           <div className="section-heading mb-3">
-            <h3 className="text-custom-black mb-0">Our Services</h3>
+            <h3 style={{ fontWeight: "bold" , fontSize : '20px' }}>Our Services</h3>
             <span style={{fontWeight : 'bold'}}>Hotel Facilities</span>
           </div>
         </div>
