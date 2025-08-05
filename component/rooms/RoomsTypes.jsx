@@ -117,7 +117,15 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
           {
             roomTypeData.map((item, idx) => {
               return (
-                <div className="roomsuite-room-card" key={item._id || idx}>
+                <div
+                  className="roomsuite-room-card"
+                  key={item._id || idx}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "100%",
+                  }}
+                >
                   <div className="roomsuite-room-image">
                     {item.images && item.images.length > 0 ? (
                       <img
@@ -132,7 +140,14 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
                       <div className="roomsuite-room-type-badge">Available</div>
                     )}
                   </div>
-                  <div className="roomsuite-room-content">
+                  <div
+                    className="roomsuite-room-content"
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      flex: 1,
+                    }}
+                  >
                     <div className="roomsuite-room-header">
                       <div>
                         <h2 className="roomsuite-room-title">{item.title || "Room"}</h2>
@@ -142,7 +157,7 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
                       </div>
                       <div className="roomsuite-room-price">
                         <div className="roomsuite-price-amount">
-                          ₹{item.price ? item.price.toLocaleString()  : "N/A" }/
+                          ₹{item.price ? item.price.toLocaleString() : "N/A" }/
                         </div>
                         {/* <span>(Tax excluded)</span> */}
                         <div className="roomsuite-price-period">per night</div>
@@ -192,7 +207,11 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
                       </div>
                     </div>
 
-                    <div className="roomsuite-room-actions">
+                    {/* Push actions to the bottom using marginTop: auto */}
+                    <div
+                      className="roomsuite-room-actions"
+                      style={{ marginTop: "auto", display: "flex", gap: "10px" }}
+                    >
                       <Link href={`/bookingPage/${item?._id}`} className="roomsuite-btn roomsuite-btn-primary">
                         Book Now
                       </Link>
