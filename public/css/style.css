@@ -4326,3 +4326,8 @@ ul.ft_contact.ft_menu li a i:hover {
 	  grid-template-columns: 1fr;
 	}
   }
+
+  .best-pricee-img img {
+    width: 100%;
+    height: auto;
+}

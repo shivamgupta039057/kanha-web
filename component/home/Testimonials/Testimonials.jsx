@@ -9,9 +9,9 @@ const testimonialsData = [
   { image: "/images/testimonial/1.jpeg" },
   { image: "/images/testimonial/2.jpeg" },
   { image: "/images/testimonial/1.jpeg" },
+  { image: "/images/testimonial/2.jpeg" },
   { image: "/images/testimonial/1.jpeg" },
-  { image: "/images/testimonial/1.jpeg" },
-  { image: "/images/testimonial/1.jpeg" },
+  { image: "/images/testimonial/2.jpeg" },
   // Add more images as needed
 ];
 
