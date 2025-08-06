@@ -35,7 +35,7 @@ const pricesData = [
 
 // Slider settings for react-slick
 const sliderSettings = {
-  dots: true,
+  dots: false,
   arrows: false,
   infinite: true,
   speed: 600,

@@ -107,9 +107,8 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
 
         {/* Rooms Grid */}
         <div className="roomsuite-rooms-grid">
-          {/* Deluxe Room */}
           {
-            roomTypeData.map((item, idx) => {
+            [...roomTypeData].reverse().map((item, idx) => {
               return (
                 <div
                   className="roomsuite-room-card"

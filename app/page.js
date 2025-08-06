@@ -24,6 +24,7 @@ export default function Home() {
    <Testimonials />
    <Blog />
    <GoogleMapEmbed/>
+   
    {/* <Partner /> */}
    </>
   );

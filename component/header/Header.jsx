@@ -126,7 +126,7 @@ const Header = () => {
                         height="20"
                         fill="none"
                         viewBox="0 0 24 24"
-                        style={{ marginRight: 6, color: "#b99365" }}
+                        style={{ marginRight: 6, color: "#ffc107" , }}
                       >
                         <path
                           fill="currentColor"
@@ -134,16 +134,16 @@ const Header = () => {
                         />
                       </svg>
                       <a
-                        href="tel:+919829000999"
+                        href="tel:+919783252121"
                         style={{
-                          color: "#b99365",
+                          color: "#ffc107",
                           textDecoration: "none",
                           fontWeight: 600,
                           fontSize: 18,
                           letterSpacing: 0.5,
                         }}
                       >
-                        +91 98290 00999
+                        +91 9783252121
                       </a>
                     </div>
                     {/* Menu and Hamburger */}
