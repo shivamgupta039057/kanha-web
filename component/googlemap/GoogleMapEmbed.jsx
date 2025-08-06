@@ -27,7 +27,7 @@ export default function GoogleMapEmbed() {
   }, []);
 
   return (
-    <div className="w-full h-[400px] mt-5 mb-5" ref={mapRef}>
+    <div className="w-full h-[400px]  mb-5" ref={mapRef}>
       <h3 style={{ textAlign: 'center', padding: '20px' }}>Find Our New Kanha Hotel</h3>
       <a
         href="https://www.google.com/maps/place/New+Kanha+Hotel/@26.9524546,75.6968611,17z"

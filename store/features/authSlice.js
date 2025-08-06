@@ -1,3 +1,4 @@
+import { TOKEN_NAME } from '@/utils/APIConstant';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -11,13 +12,15 @@ const authSlice = createSlice({
     setToken: (state, action) => {
       state.token = action.payload;
       if (typeof window !== 'undefined') {
-        localStorage.setItem('khana-token', action.payload);
+        localStorage.setItem(TOKEN_NAME, action.payload);
+        document.cookie = `${TOKEN_NAME}=${action.payload}; path=/;`;
       }
     },
     clearToken: (state) => {
       state.token = null;
       if (typeof window !== 'undefined') {
-        localStorage.removeItem('khana-token');
+        localStorage.removeItem(TOKEN_NAME);
+        document.cookie = `${TOKEN_NAME}=${action.payload}; path=/;`;
       }
     },
   },

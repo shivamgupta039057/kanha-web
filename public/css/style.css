@@ -4331,3 +4331,7 @@ ul.ft_contact.ft_menu li a i:hover {
     width: 100%;
     height: auto;
 }
+
+.slick-dots li.slick-active button:before  ,.slick-dots li button:before{
+	display: none;
+}

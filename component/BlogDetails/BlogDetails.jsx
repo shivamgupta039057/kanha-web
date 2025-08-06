@@ -125,14 +125,14 @@ const BlogDetails = ({ blogId }) => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* === Main Blog Content === */}
           <article className="lg:col-span-2 bg-white p-8 rounded-3xl shadow-xl border border-gray-100" style={{ color: "#111" }}>
-            <h1 className="text-3xl md:text-4xl font-extrabold mb-4 text-center text-black tracking-tight leading-tight drop-shadow-lg">
+            <h1 className="text-xl md:text-3xl font-extrabold mb-4 text-center text-black tracking-tight leading-tight drop-shadow-lg">
               {blog.title}
             </h1>
             <div className="flex items-center justify-center mb-6">
               <div className="flex items-center gap-2">
-                <span className="text-base font-medium text-black/80">By {blog.author}</span>
+                <span className="text-sm md:text-base font-medium text-black/80">By {blog.author}</span>
                 <span className="mx-2 text-black/40">|</span>
-                <span className="text-base font-medium text-black/80">{blog.date}</span>
+                <span className="text-sm md:text-base font-medium text-black/80">{blog.date}</span>
               </div>
             </div>
             <img
@@ -146,10 +146,10 @@ const BlogDetails = ({ blogId }) => {
             <div className="space-y-10">
               {blog.content.map((section, idx) => (
                 <section key={idx}>
-                  <h2 className="text-xl md:text-2xl font-bold mb-4 text-black border-l-4 border-blue-500 pl-4 bg-gradient-to-r from-blue-50 to-white py-2 rounded">
+                  <h2 className="text-base md:text-xl font-bold mb-4 text-black border-l-4 border-blue-500 pl-4 bg-gradient-to-r from-blue-50 to-white py-2 rounded">
                     {section.heading}
                   </h2>
-                  <ul className="list-disc font-medium list-inside space-y-2 text-black text-bold text-lg pl-4">
+                  <ul className="list-disc font-medium list-inside space-y-2 text-black text-bold text-sm md:text-lg pl-4">
                     {section.points.map((point, i) => (
                       <li key={i}>{point}</li>
                     ))}
@@ -163,13 +163,13 @@ const BlogDetails = ({ blogId }) => {
           <aside className="space-y-8">
             {/* Recent Posts */}
             <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-              <h3 className="text-xl font-bold mb-4 text-black border-b-2 border-blue-100 pb-2">Recent Posts</h3>
+              <h3 className="text-base md:text-xl font-bold mb-4 text-black border-b-2 border-blue-100 pb-2">Recent Posts</h3>
               <ul className="space-y-2">
                 {recentBlogs.map((recent) => (
                   <li key={recent.slug}>
                     <Link
                       href={`/blog/${recent.slug}`}
-                      className="font-bold !text-blue-600 !hover:text-blue-800 !underline transition-colors duration-200 cursor-pointer"
+                      className="font-bold !text-blue-600 !hover:text-blue-800 !underline transition-colors duration-200 cursor-pointer text-sm md:text-base"
                     >
                       {recent.title}
                     </Link>

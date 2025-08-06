@@ -6,12 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa";
 
-
-const getColClass = (idx) => {
-  if (idx === 0) return "col-lg-6";
-  return "col-lg-3";
-};
-
 const RoomsTypes = ({ roomTypeData, isLoading }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -212,12 +206,12 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
                       className="roomsuite-room-actions"
                       style={{ marginTop: "auto", display: "flex", gap: "10px" }}
                     >
-                      <Link href={`/bookingPage/${item?._id}`} className="roomsuite-btn roomsuite-btn-primary">
+                      <div onClick={() => handleBookHandle(item?._id)} className="roomsuite-btn roomsuite-btn-primary">
                         Book Now
-                      </Link>
-                      <Link href={`/bookingPage/${item?._id}`} className="roomsuite-btn roomsuite-btn-secondary">
+                      </div>
+                      <div onClick={() => handleBookHandle(item?._id)} className="roomsuite-btn roomsuite-btn-secondary">
                         View Details
-                      </Link>
+                      </div>
                     </div>
                   </div>
                 </div>

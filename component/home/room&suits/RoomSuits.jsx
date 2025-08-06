@@ -59,7 +59,7 @@ const roomSuitsData = [
 
 const RoomSuits = () => {
   return (
-    <section className="work-area bg-" id="work-we" style={{ backgroundColor: "#f8f5f0" }}>
+    <section className="work-area bg- pt-5" id="work-we" style={{ backgroundColor: "#f8f5f0" }}>
       <div className="container">
         <div className="section-header">
           <div className="section-heading mb-3">

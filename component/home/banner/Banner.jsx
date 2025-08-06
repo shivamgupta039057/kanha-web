@@ -36,8 +36,11 @@ const Banner = () => {
                 <div className="slider-content">
                   <p>{bannerData.subheading}</p>
                   <h1 className="text-custom-white"> {bannerData.heading} </h1>
-                  <Link href={bannerData.btnLink} className="btn-first btn-small">
-                    {bannerData.btnText}
+                  <Link
+                    href={bannerData.btnLink}
+                    className="btn-first btn-small !text-black hover:!text-white hover:!bg-black transition-colors duration-200"
+                  >
+                    <b>{bannerData.btnText}</b>
                   </Link>
                 </div>
               </div>

@@ -180,6 +180,9 @@ Version: 1.0.0
 }
 }
 @media (max-width: 576px) {
+	h1.subheader-h1{
+		font-size: 35px;
+	}
 	/*topbar*/
 	.header .topbar .rightside ul>li.book-appointment>a,  .header .topbar .rightside ul>li.login {
  padding: 8px 10px;

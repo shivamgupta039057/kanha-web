@@ -116,7 +116,7 @@ const ContactPage = () => {
               </div>
             </div>
             <div className="col-lg-5 mb-30 offset-md-1">
-              <form className="mb-md-80" onSubmit={handleSubmit} autoComplete="off">
+              <form onSubmit={handleSubmit} autoComplete="off">
                 <div className="contact-get-in-touch">
                   <h3>Get in touch</h3>
                 </div>
