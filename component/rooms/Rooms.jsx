@@ -18,16 +18,11 @@ const Rooms = () => {
     staleTime: 5 * 60 * 1000,
   });
 
-  console.log("dsfsdjkdhdjkfksdtokentokentoken", token);
-
-
   useEffect(() => {
     if (roomType) {
       setRoomTypeData(roomType.data.data)
     }
-  }, [roomType])
-
-  console.log("roomTypeData", roomTypeData);
+  }, [roomType]);
   return (
     // <div>Rooms</div>
     <>
