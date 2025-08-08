@@ -137,7 +137,7 @@ console.log("dsjkldfskldkldjfkldsjsklstablebookingDatatablebookingData" , tableb
             <div className="tabs mt-5">
               <div
                 style={{
-                  maxWidth: "900px",
+                  maxWidth: "1000px",
                   margin: "0 auto",
                   overflowX: "auto",
                   paddingBottom: "8px"
@@ -163,31 +163,71 @@ console.log("dsjkldfskldkldjfkldsjsklstablebookingDatatablebookingData" , tableb
                       onClick={() => setActiveTab(idx)}
                       style={{
                         cursor: "pointer",
-                        padding: "10px 24px",
-                        borderRadius: "24px 24px 0 0",
-                        background: "none",
-                        color: activeTab === idx ? "#222" : "#888",
-                        fontWeight: activeTab === idx ? 600 : 400,
-                        boxShadow: "none",
-                        border: activeTab === idx ? "2px solid #222" : "2px solid transparent",
-                        transition: "all 0.2s"
+                        padding: "6px 8px",
+                        borderRadius: "12px 12px 0 0",
+                        background: activeTab === idx ? "#fff" : "none",
+                        color: activeTab === idx ? "#222" : "#aaa",
+                        fontWeight: activeTab === idx ? 500 : 400,
+                        fontSize: "0.95rem",
+                        minWidth: "60px",
+                        maxWidth: "120px",
+                        textAlign: "center",
+                        border: activeTab === idx ? "1.5px solid #222" : "1.5px solid transparent",
+                        margin: "0 2px",
+                        whiteSpace: "nowrap",
+                        boxShadow: activeTab === idx ? "0 2px 8px rgba(0,0,0,0.07)" : "none",
+                        transition: "all 0.18s"
                       }}
                     >
-                      <a
-                        href="#"
-                        onClick={e => e.preventDefault()}
+                      <span
                         style={{
-                          textDecoration: "none",
-                          color: "inherit",
-                          fontSize: "1.05rem",
                           display: "block",
-                          whiteSpace: "nowrap"
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                          fontSize: "1em",
+                          fontWeight: "inherit",
+                          color: "inherit",
+                          padding: 0,
+                          margin: 0,
+                          lineHeight: 1.2
                         }}
+                        title={item.name}
                       >
-                        {item.name}
-                      </a>
+                        {item.name.length > 18
+                          ? item.name.slice(0, 16) + "…"
+                          : item.name}
+                      </span>
                     </li>
                   ))}
+                  <style jsx>{`
+                    @media (max-width: 900px) {
+                      .tabs-list {
+                        min-width: 400px;
+                        gap: 8px;
+                        padding: 0 4px;
+                      }
+                      .tabs-list li {
+                        padding: 8px 10px !important;
+                        font-size: 0.98rem !important;
+                        min-width: 80px !important;
+                        max-width: 140px !important;
+                      }
+                    }
+                    @media (max-width: 600px) {
+                      .tabs-list {
+                        min-width: 250px;
+                        gap: 4px;
+                        padding: 0 2px;
+                      }
+                      .tabs-list li {
+                        padding: 6px 6px !important;
+                        font-size: 0.92rem !important;
+                        min-width: 60px !important;
+                        max-width: 100px !important;
+                      }
+                    }
+                  `}</style>
                   {/* Hide scrollbar but keep scroll functionality */}
                   <style jsx>{`
                     .tabs-list {
