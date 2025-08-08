@@ -57,7 +57,7 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="keywords" content="#" />
         <meta name="description" content="#" />
-        <title>The New Kanha - Hotel Booking HTML5 Template | index</title>
+        <title>New Kanha Hotel | Hotel, Restaurant & Banquet Hall in Jaipur</title>
         {/* Fav and touch icons */}
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ab-1.jpg" />
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ab-1.jpg" />
