@@ -135,23 +135,92 @@ console.log("dsjkldfskldkldjfkldsjsklstablebookingDatatablebookingData" , tableb
           {/* Dynamic Restaurant Menu Tabs */}
           {roomTypeData && roomTypeData.length > 0 && (
             <div className="tabs mt-5">
-              <ul className="tabs-list">
-                {roomTypeData.map((item, idx) => (
-                  <li
-                    key={item._id}
-                    className={activeTab === idx ? "active" : ""}
-                    onClick={() => setActiveTab(idx)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <a
-                      href="#"
-                      onClick={e => e.preventDefault()}
+              <div
+                style={{
+                  maxWidth: "900px",
+                  margin: "0 auto",
+                  overflowX: "auto",
+                  paddingBottom: "8px"
+                }}
+              >
+                <ul
+                  className="tabs-list"
+                  style={{
+                    display: "flex",
+                    gap: "12px",
+                    minWidth: "600px",
+                    width: "fit-content",
+                    margin: 0,
+                    padding: "0 12px",
+                    listStyle: "none",
+                    borderBottom: "2px solid #eee",
+                  }}
+                >
+                  {roomTypeData.map((item, idx) => (
+                    <li
+                      key={item._id}
+                      className={activeTab === idx ? "active" : ""}
+                      onClick={() => setActiveTab(idx)}
+                      style={{
+                        cursor: "pointer",
+                        padding: "10px 24px",
+                        borderRadius: "24px 24px 0 0",
+                        background: "none",
+                        color: activeTab === idx ? "#222" : "#888",
+                        fontWeight: activeTab === idx ? 600 : 400,
+                        boxShadow: "none",
+                        border: activeTab === idx ? "2px solid #222" : "2px solid transparent",
+                        transition: "all 0.2s"
+                      }}
                     >
-                      {item.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+                      <a
+                        href="#"
+                        onClick={e => e.preventDefault()}
+                        style={{
+                          textDecoration: "none",
+                          color: "inherit",
+                          fontSize: "1.05rem",
+                          display: "block",
+                          whiteSpace: "nowrap"
+                        }}
+                      >
+                        {item.name}
+                      </a>
+                    </li>
+                  ))}
+                  {/* Hide scrollbar but keep scroll functionality */}
+                  <style jsx>{`
+                    .tabs-list {
+                      scrollbar-width: none; /* Firefox */
+                    }
+                    .tabs-list::-webkit-scrollbar {
+                      display: none; /* Chrome, Safari, Edge */
+                    }
+                    html {
+                      scrollbar-width: none; /* Firefox */
+                      -ms-overflow-style: none; /* IE and old Edge */
+                    }
+                  `}</style>
+                  {/* Show a visible scrollbar for the tab list */}
+                  <style jsx>{`
+                    .tabs-list {
+                      scrollbar-width: thin;
+                      scrollbar-color: #888 #eee;
+                    }
+                    .tabs-list::-webkit-scrollbar {
+                      height: 8px;
+                    }
+                    .tabs-list::-webkit-scrollbar-thumb {
+                      background: #888;
+                      border-radius: 4px;
+                    }
+                    .tabs-list::-webkit-scrollbar-track {
+                      background: #eee;
+                      border-radius: 4px;
+                    }
+                  `}</style>
+                </ul>
+              </div>
               {roomTypeData.map((item, idx) => (
                 <div
                   key={item._id}
