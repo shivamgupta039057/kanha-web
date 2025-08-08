@@ -16,12 +16,6 @@ const CustomeBookingHeader = () => {
   const token = useSelector((state) => state.auth.token);
   console.log("djfsklsjsdlsdtokentokentokentokentokentoken", token);
   useEffect(() => {
-    if(token == null){
-      dispatch(openLoginModal());
-
-    }
-  },[token])
-  useEffect(() => {
     // Import token from localStorage if available
     let localhostToken = typeof window !== 'undefined' ? localStorage.getItem('khana-token') : null;
     // Convert string "null" to actual null

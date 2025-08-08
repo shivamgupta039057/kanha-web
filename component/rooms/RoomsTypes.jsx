@@ -13,11 +13,7 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
   const [selectedTab, setSelectedTab] = useState(0);
 
   const handleBookHandle = (id) => {
-    if (token) {
-      router.push(`/bookingPage/${id}`);
-    } else {
-      dispatch(openLoginModal());
-    }
+    router.push(`/bookingPage/${id}`);
   };
 
   console.log("roomTypeDataroomTypeDataroomTypeData", roomTypeData);

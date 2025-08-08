@@ -9,28 +9,26 @@ import { clearToken, setToken } from '@/store/features/authSlice';
 import { openLoginModal, closeLoginModal } from '@/store/features/loginModalSlice';
 import { TOKEN_NAME } from '@/utils/APIConstant';
 
-// Add: bookingPage login modal trigger logic
-function checkBookingPageLoginModal(dispatch) {
-  // Only run in browser
-  if (typeof window === "undefined") return;
-  // Check if we are on /bookingPage or its subpaths
-  if (window.location.pathname.startsWith("/bookingPage")) {
-    fetch(window.location.pathname, { method: "GET" })
-      .then(res => {
-        if (res.headers.get('x-open-login-modal') === 'true') {
-          dispatch(openLoginModal());
-        }
-        // ...other logic if needed
-      })
-      .catch(() => {});
-  }
-}
-
 const Header = () => {
   const dispatch = useDispatch();
   const { isOpen: showLogin } = useSelector((state) => state.loginModal);
   const token = useSelector((state) => state.auth.token);
   const [menuActive, setMenuActive] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile on mount and on resize
+  useEffect(() => {
+    const checkMobile = () => {
+      if (typeof window !== "undefined") {
+        setIsMobile(window.innerWidth <= 768);
+      }
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  console.log("ffffffffffffftokentokentokentoken" , token);
 
   useEffect(() => {
     // Import token from localStorage if available
@@ -44,9 +42,6 @@ const Header = () => {
   }, [dispatch]);
 
   // bookingPage login modal logic
-  useEffect(() => {
-    checkBookingPageLoginModal(dispatch);
-  }, [dispatch]);
 
   // Optional: Close menu on route change or login modal open
   useEffect(() => {
@@ -64,6 +59,37 @@ const Header = () => {
       document.body.style.overflow = '';
     };
   }, [menuActive]);
+
+  // Phone number JSX for reuse
+  const phoneNumberJSX = (
+    <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        fill="none"
+        viewBox="0 0 24 24"
+        style={{ marginRight: 6, color: "#ffc107" }}
+      >
+        <path
+          fill="currentColor"
+          d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"
+        />
+      </svg>
+      <a
+        href="tel:+919783252121"
+        style={{
+          color: "#ffc107",
+          textDecoration: "none",
+          fontWeight: 600,
+          fontSize: 18,
+          letterSpacing: 0.5,
+        }}
+      >
+        +91 9783252121
+      </a>
+    </span>
+  );
 
   return (
     <>
@@ -105,47 +131,25 @@ const Header = () => {
                         />
                       </Link>
                     </div>
-                    {/* Phone Number */}
-                    <div
-                      className="header-phone"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 8,
-                        fontWeight: 600,
-                        fontSize: 18,
-                        color: "#ffc107",
-                        whiteSpace: "nowrap",
-                        marginLeft: typeof window !== "undefined" && window.innerWidth <= 768 ? 100 : 180,
-                        marginRight: 16,
-                      }}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        style={{ marginRight: 6, color: "#ffc107" , }}
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"
-                        />
-                      </svg>
-                      <a
-                        href="tel:+919783252121"
+                    {/* Phone Number (Desktop only) */}
+                    {!isMobile && (
+                      <div
+                        className="header-phone"
                         style={{
-                          color: "#ffc107",
-                          textDecoration: "none",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 8,
                           fontWeight: 600,
                           fontSize: 18,
-                          letterSpacing: 0.5,
+                          color: "#ffc107",
+                          whiteSpace: "nowrap",
+                          marginLeft: 180,
+                          marginRight: 16,
                         }}
                       >
-                        +91 9783252121
-                      </a>
-                    </div>
+                        {phoneNumberJSX}
+                      </div>
+                    )}
                     {/* Menu and Hamburger */}
                     <div
                       style={{
@@ -215,7 +219,6 @@ const Header = () => {
                                 onClick={() => {
                                   dispatch(clearToken());
                                   dispatch(openLoginModal());
-                                  localStorage.removeItem("profileDetails");
                                   setMenuActive(false);
                                 }}
                                 className="inline-block px-6 py-2 rounded-full font-semibold text-white bg-[#b99365] hover:bg-[#a07c44] shadow transition-all duration-200 border-2 border-[#b99365] hover:border-[#a07c44] focus:outline-none focus:ring-2 focus:ring-[#b99365] focus:ring-offset-2"
@@ -237,6 +240,12 @@ const Header = () => {
                               >
                                 Login
                               </button>
+                            </li>
+                          )}
+                          {/* Phone number in mobile menu */}
+                          {isMobile && menuActive && (
+                            <li className="menu-item" style={{ marginTop: 12 }}>
+                              {phoneNumberJSX}
                             </li>
                           )}
                         </ul>

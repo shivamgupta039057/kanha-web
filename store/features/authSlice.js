@@ -20,7 +20,7 @@ const authSlice = createSlice({
       state.token = null;
       if (typeof window !== 'undefined') {
         localStorage.removeItem(TOKEN_NAME);
-        document.cookie = `${TOKEN_NAME}=${action.payload}; path=/;`;
+        document.cookie = `${TOKEN_NAME}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;`;
       }
     },
   },

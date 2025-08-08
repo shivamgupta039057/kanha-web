@@ -8,12 +8,13 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { Apiservice, imgBaseUrl } from "@/services/apiservices";
 import { toast } from "react-toastify";
 import { API_BOOKING_ROOM, API_GET_BANQUET_DETAILS, API_GET_ROOM_DETAILS } from '@/utils/APIConstant';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { usePayment } from "@/utils/usePayment";
 import { useRouter } from 'next/navigation';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import RoomFaqsPage from './RoomFaqsPage';
+import { openLoginModal } from '@/store/features/loginModalSlice';
 
 // Helper to get today's date in yyyy-mm-dd format
 const getTodayDateString = () => {
@@ -137,6 +138,7 @@ const ImageModal = ({ isOpen, imageUrl, onClose }) => {
 };
 
 const Booking = ({ roomId }) => {
+  const dispatch = useDispatch();
   const { submitPayment } = usePayment();
   const RAZORPAY_KEY_ID = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "YOUR_RAZORPAY_KEY_ID";
   const submittedRef = useRef(false);
@@ -473,14 +475,19 @@ const Booking = ({ roomId }) => {
   });
 
   const onSubmit = (data) => {
-    const params = {
-      guestName: data.guestName,
-      email: data.email,
-      phone: data.phone,
-      checkIn: data.checkIn,
-      checkOut: data.checkOut
-    };
-    addRoomMutation.mutate(params);
+    if (token) {
+      const params = {
+        guestName: data.guestName,
+        email: data.email,
+        phone: data.phone,
+        checkIn: data.checkIn,
+        checkOut: data.checkOut
+      };
+      addRoomMutation.mutate(params);
+    } else {
+      dispatch(openLoginModal());
+    }
+   
   };
 
   const handleBookAnother = () => {
