@@ -7,14 +7,22 @@ import dynamic from 'next/dynamic';
 const LoginModal = dynamic(() => import("@/component/auth/LoginModal"), { ssr: false });
 import { clearToken, setToken } from '@/store/features/authSlice';
 import { openLoginModal, closeLoginModal } from '@/store/features/loginModalSlice';
-import { TOKEN_NAME } from '@/utils/APIConstant';
+import { API_GET_ROOMS, TOKEN_NAME } from '@/utils/APIConstant';
 
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { Apiservice } from '@/services/apiservices';
+import { GuestInfoPopup } from './custumeSidebarPopup';
+
+// GuestInfoPopup: Step-by-step guest info flow
 const Header = () => {
   const dispatch = useDispatch();
   const { isOpen: showLogin } = useSelector((state) => state.loginModal);
   const token = useSelector((state) => state.auth.token);
   const [menuActive, setMenuActive] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Popup state
+  const [showGuestPopup, setShowGuestPopup] = useState(false);
 
   // Detect mobile on mount and on resize
   useEffect(() => {
@@ -28,7 +36,13 @@ const Header = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  console.log("ffffffffffffftokentokentokentoken" , token);
+  // Show guest info popup after 3 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowGuestPopup(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     // Import token from localStorage if available
@@ -62,38 +76,71 @@ const Header = () => {
 
   // Phone number JSX for reuse
   const phoneNumberJSX = (
-    <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        fill="none"
-        viewBox="0 0 24 24"
-        style={{ marginRight: 6, color: "#ffc107" }}
-      >
-        <path
-          fill="currentColor"
-          d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"
-        />
-      </svg>
-      <a
-        href="tel:+919783252121"
-        style={{
-          color: "#ffc107",
-          textDecoration: "none",
-          fontWeight: 600,
-          fontSize: 18,
-          letterSpacing: 0.5,
-        }}
-      >
-        +91 9783252121
-      </a>
-    </span>
+    <div className='block'>
+      <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          fill="none"
+          viewBox="0 0 24 24"
+          style={{ marginRight: 6, color: "#ffc107" }}
+        >
+          <path
+            fill="currentColor"
+            d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"
+          />
+        </svg>
+        <a
+          href="tel:+919783252121"
+          style={{
+            color: "#ffc107",
+            textDecoration: "none",
+            fontWeight: 600,
+            fontSize: 14,
+            letterSpacing: 0.5,
+          }}
+        >
+          +91 9783252121
+        </a>
+
+      </span> 
+
+      <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          fill="none"
+          viewBox="0 0 24 24"
+          style={{ marginRight: 6, color: "#ffc107" }}
+        >
+          <path
+            fill="currentColor"
+            d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"
+          />
+        </svg>
+
+        <a
+          href="tel:+919352999963"
+          style={{
+            color: "#ffc107",
+            textDecoration: "none",
+            fontWeight: 600,
+            fontSize: 14,
+            letterSpacing: 0.5,
+          }}
+        >
+          +91 9352999963
+        </a>
+      </span>
+    </div>
+
   );
 
   return (
     <>
-       <header className="header">
+      <header className="header">
         <div className="navigation-wrapper">
           <div className="container">
             <div className="row">
@@ -332,6 +379,8 @@ const Header = () => {
         {showLogin && (
           <LoginModal isOpen={showLogin} onClose={() => dispatch(closeLoginModal())} />
         )}
+        {/* Guest Info Popup */}
+        <GuestInfoPopup open={showGuestPopup} onClose={() => setShowGuestPopup(false)} />
       </header>
     </>
   );

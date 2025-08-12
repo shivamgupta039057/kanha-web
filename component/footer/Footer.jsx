@@ -17,7 +17,7 @@ const Footer = () => {
                 </p>
                 <ul className="ft_contact ft_menu">
                   <li>
-                    <Link href="tel:+919783252121">
+                    <Link href="tel:+919352999963">
                       <i className="fas fa-phone-volume p-0" style={{ color: "#fff" }}></i>
                     </Link>
                   </li>
@@ -33,6 +33,69 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
+              {/*  */}
+
+              <div className='flex gap-3'>
+                <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    style={{ marginRight: 6, color: "#ffc107" }}
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"
+                    />
+                  </svg>
+                  <a
+                    href="tel:+919783252121"
+                    style={{
+                      color: "#ffc107",
+                      textDecoration: "none",
+                      fontWeight: 600,
+                      fontSize: 14,
+                      letterSpacing: 0.5,
+                    }}
+                  >
+                    +91 9783252121
+                  </a>
+
+                </span> <span className="text-white">,</span>
+
+                <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    style={{ marginRight: 6, color: "#ffc107" }}
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"
+                    />
+                  </svg>
+
+                  <a
+                    href="tel:+919352999963"
+                    style={{
+                      color: "#ffc107",
+                      textDecoration: "none",
+                      fontWeight: 600,
+                      fontSize: 14,
+                      letterSpacing: 0.5,
+                    }}
+                  >
+                    +91 9352999963
+                  </a>
+                </span>
+              </div>
+
+              {/*  */}
             </div>
             <div className="col-lg-4 col-sm-6">
               <div className="ft_widgets">
@@ -54,17 +117,17 @@ const Footer = () => {
                   <li>
                     <Link href="/contact"><i className="fa fa-caret-right"></i>Contact US</Link>
                   </li>
-                
+
                 </ul>
               </div>
             </div>
-          
+
             <div className="col-lg-4 col-sm-6">
               <div className="ft_widgets">
                 <h5 className="ft_title">Privacy Policy</h5>
                 <div className="border-border"></div>
                 <ul className="ft_menu">
-                 
+
                   <li>
                     <Link href="/privacy-policy"><i className="fa fa-caret-right"></i>Privacy Policy</Link>
                   </li>
