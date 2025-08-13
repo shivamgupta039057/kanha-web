@@ -63,7 +63,6 @@ const Blog = ({ posts = blogPosts }) => {
       staleTime: 5 * 60 * 1000,
     });
 
-    console.log("blogdetailsblogdetails", blogdetails);
     
   const router = useRouter();
   return (

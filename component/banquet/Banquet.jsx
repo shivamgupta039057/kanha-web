@@ -22,7 +22,6 @@ const Banquet = () => {
     staleTime: 5 * 60 * 1000,
   });
 
-  console.log("dsfsdjkdhdjkfksdtokentokentoken", token);
 
 
   useEffect(() => {

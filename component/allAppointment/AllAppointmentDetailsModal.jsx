@@ -9,7 +9,6 @@ const AllAppointmentDetailsModal = ({
   setIsModal,
   AppointMentModalData,
 }) => {
-  console.log("AppointMentModalDataAppointMentModalData", AppointMentModalData);
 
   const router = useRouter();
   return (

@@ -62,7 +62,6 @@ const ContactPage = () => {
         return await Apiservice.postAuth(`${API_ADD_CONTACT_DETAILS}`, data, token);
       },
       onSuccess: async (response) => {
-       console.log("response", response);
        toast.success(response.data.message || "Contact details submitted successfully.");
         setSubmitted(true);
         setForm(initialFormState);

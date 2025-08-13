@@ -14,7 +14,6 @@ const CustomeBookingHeader = () => {
   const dispatch = useDispatch();
   const { isOpen: showLogin } = useSelector((state) => state.loginModal);
   const token = useSelector((state) => state.auth.token);
-  console.log("djfsklsjsdlsdtokentokentokentokentokentoken", token);
   useEffect(() => {
     // Import token from localStorage if available
     let localhostToken = typeof window !== 'undefined' ? localStorage.getItem('khana-token') : null;
@@ -22,14 +21,12 @@ const CustomeBookingHeader = () => {
     if (localhostToken === "null") {
       localhostToken = null;
     }
-    console.log("localhostTokenlocalhostTokenlocalhostToken", typeof (localhostToken), localhostToken);
 
     dispatch(setToken(localhostToken));
     // You can use localhostToken as needed here
   }, []);
 
 
-  console.log("tokendsfkljdsklllllllllllllllllllllllll", token !== null);
 
 
 

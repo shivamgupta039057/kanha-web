@@ -55,7 +55,6 @@ const SignupModal = ({ isOpen, onClose, onSwitchToLogin }) => {
  
   const addRoomMutation = useMutation({
     mutationFn: async (data) => {
-      console.log("dddddFormDataFormDataFormData", data);
       return await Apiservice.post(`${API_KHANA_SIGNUP}`, data);
     },
     onSuccess: (res) => {

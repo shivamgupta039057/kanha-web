@@ -13,7 +13,7 @@ export const GuestInfoPopup = ({ open, onClose }) => {
       queryKey: ["get-roomTypeData"],
       queryFn: () => Apiservice.get(`${API_GET_ROOMS}`),
 
-      staleTime: 5 * 60 * 1000,
+      staleTime: 4 * 60 * 1000,
     });
   
     useEffect(() => {
@@ -31,7 +31,6 @@ export const GuestInfoPopup = ({ open, onClose }) => {
       checkIn: '',
       checkOut: '',
     });
-  console.log("roomTypeDataroomTypeDataroomTypeData" ,  roomType);
   
 
     const addRoomMutation = useMutation({
@@ -95,7 +94,6 @@ export const GuestInfoPopup = ({ open, onClose }) => {
         },
       });
   
-    console.log("formformformformform" , form);
     
     const [errors, setErrors] = useState({});
   

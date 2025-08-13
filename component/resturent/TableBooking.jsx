@@ -20,7 +20,6 @@ const TableBooking = ({ tablebookingData, isLoading }) => {
     }
   };
 
-  console.log("tablebookingDatatablebookingDatatablebookingData" , tablebookingData);
   
 
   // Prepare data for tabs and details

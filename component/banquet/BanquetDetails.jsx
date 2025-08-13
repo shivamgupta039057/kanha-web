@@ -14,7 +14,6 @@ const RoomsDetails = ({ roomId }) => {
         staleTime: 5 * 60 * 1000,
     });
 
-    console.log("ssssssssssroomTypeDetails", isLoading);
     
 
 
@@ -25,7 +24,6 @@ const RoomsDetails = ({ roomId }) => {
     }, [roomType]);
 
 
-    console.log("roomTypeDetails", roomTypeDetails);
 
     return (
         <section className="min-h-screen bg-[#f8f5f0] py-10">

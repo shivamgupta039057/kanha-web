@@ -26,7 +26,6 @@ const ResturentPage = () => {
     staleTime: 5 * 60 * 1000,
   });
 
-  console.log("tableListtableList" , tableList);
   useEffect(() => {
     setTableBookingData(tableList?.data?.data)
   },[tableList]);
@@ -36,7 +35,6 @@ const ResturentPage = () => {
       setRoomTypeData(menulist?.data?.data)
     }
   }, [menulist]);
-console.log("dsjkldfskldkldjfkldsjsklstablebookingDatatablebookingData" , tablebookingData , tableList);
 
   // If the menu data changes and the current activeTab is out of bounds, reset to 0
   useEffect(() => {

@@ -16,7 +16,6 @@ const RoomsTypes = ({ roomTypeData, isLoading }) => {
     router.push(`/bookingPage/${id}`);
   };
 
-  console.log("roomTypeDataroomTypeDataroomTypeData", roomTypeData);
 
 
   // Prepare data for tabs and details

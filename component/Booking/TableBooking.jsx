@@ -470,7 +470,6 @@ const TableBooking = ({ roomId }) => {
   // Helper function to safely check array length
   const hasArrayItems = arr => Array.isArray(arr) && arr.length > 0;
 
-  console.log("roomTypeDataroomTypeDataroomTypeData" , roomTypeData);
   
 
   return (
