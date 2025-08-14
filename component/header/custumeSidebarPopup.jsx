@@ -213,14 +213,14 @@ export const GuestInfoPopup = ({ open, onClose }) => {
               border: "none",
               fontSize: 22,
               cursor: "pointer",
-              color: "#b99365",
+              color: "#ffc107",
               fontWeight: 700,
             }}
             aria-label="Close"
           >
             ×
           </button>
-          <h3 style={{ marginBottom: 18, color: "#b99365", textAlign: "center" }}>
+          <h3 style={{ marginBottom: 18, color: "#ffc107", textAlign: "center" }}>
             Guest Information
           </h3>
           <form
@@ -236,9 +236,9 @@ export const GuestInfoPopup = ({ open, onClose }) => {
                     width: 18,
                     height: 18,
                     borderRadius: "50%",
-                    background: step === s ? "#b99365" : "#eee",
+                    background: step === s ? "#ffc107" : "#eee",
                     display: "inline-block",
-                    border: step === s ? "2px solid #b99365" : "2px solid #eee",
+                    border: step === s ? "2px solid #ffc107" : "2px solid #eee",
                     transition: "background 0.2s",
                   }}
                 />
@@ -434,7 +434,7 @@ export const GuestInfoPopup = ({ open, onClose }) => {
                 <button
                   type="submit"
                   style={{
-                    background: "#b99365",
+                    background: "#ffc107",
                     color: "#fff",
                     border: "none",
                     borderRadius: 6,
@@ -452,7 +452,7 @@ export const GuestInfoPopup = ({ open, onClose }) => {
                 <button
                   type="submit"
                   style={{
-                    background: "#b99365",
+                    background: "#ffc107",
                     color: "#fff",
                     border: "none",
                     borderRadius: 6,
