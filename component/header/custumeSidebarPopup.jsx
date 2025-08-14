@@ -4,17 +4,23 @@ import { API_BOOKING_ROOM, API_GET_ROOMS } from "@/utils/APIConstant";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 export const GuestInfoPopup = ({ open, onClose }) => {
     const token = useSelector((state) => state.auth.token);
     const dispatch = useDispatch();
+    const RAZORPAY_KEY_ID = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "YOUR_RAZORPAY_KEY_ID";
+    
     const [roomTypeData, setRoomTypeData] = useState([]);
+    console.log("tokentokentoken" , token)
     const { data: roomType, isLoading } = useQuery({
       queryKey: ["get-roomTypeData"],
       queryFn: () => Apiservice.get(`${API_GET_ROOMS}`),
 
       staleTime: 4 * 60 * 1000,
     });
+
+    
   
     useEffect(() => {
       if (roomType) {
@@ -24,18 +30,18 @@ export const GuestInfoPopup = ({ open, onClose }) => {
     // Step 0: Name, Step 1: Email, Step 2: Contact, Step 3: Room & Dates, Step 4: Review/Submit
     const [step, setStep] = useState(0);
     const [form, setForm] = useState({
-      firstName: '',
-      email: '',
-      contact: '',
-      roomType: '',
-      checkIn: '',
-      checkOut: '',
-    });
-  
+      firstName:  '',
+      email:  '',
+      contact:   '',
+      roomType:  '',
+      checkIn:  '',
+      checkOut:  '',
+    });  
 
     const addRoomMutation = useMutation({
         mutationFn: async (data) => {
-          return await Apiservice.postAuth(`${API_BOOKING_ROOM}/${form.roomType}`, data, token);
+          const {roomType , ...param} = data;
+          return await Apiservice.postAuth(`${API_BOOKING_ROOM}/${roomType}`, param, token);
         },
         onSuccess: async (response) => {
           const { amount } = response.data.data.payment;
@@ -151,16 +157,19 @@ export const GuestInfoPopup = ({ open, onClose }) => {
         // Here you can send form data to API or handle as needed
         // onClose();
   
-        if (token) {
+        if (token != null && token !== "") {
           const params = {
             guestName: form.firstName,
             email: form.email,
             phone: form.contact,
             checkIn: form.checkIn,
-            checkOut: form.checkOut
+            checkOut: form.checkOut,
+            roomType: form.roomType,
           };
           addRoomMutation.mutate(params);
         } else {
+          localStorage.setItem("guestInfo", JSON.stringify(form));
+          onClose();
           dispatch(openLoginModal());
         }
       }
@@ -337,7 +346,7 @@ export const GuestInfoPopup = ({ open, onClose }) => {
                     {roomTypeData && roomTypeData.length > 0 ? (
                       roomTypeData.map((room) => (
                         <option key={room._id || room.id || room.title} value={room._id}>
-                          {room.title}
+                          {room.title} - ₹{room.price} / night
                         </option>
                       ))
                     ) : (

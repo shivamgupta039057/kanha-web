@@ -7,22 +7,110 @@ import dynamic from 'next/dynamic';
 const LoginModal = dynamic(() => import("@/component/auth/LoginModal"), { ssr: false });
 import { clearToken, setToken } from '@/store/features/authSlice';
 import { openLoginModal, closeLoginModal } from '@/store/features/loginModalSlice';
-import { API_GET_ROOMS, TOKEN_NAME } from '@/utils/APIConstant';
+import { API_BOOKING_ROOM, API_GET_ROOMS, TOKEN_NAME } from '@/utils/APIConstant';
 
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Apiservice } from '@/services/apiservices';
 import { GuestInfoPopup } from './custumeSidebarPopup';
+import { AlignEndVertical } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 // GuestInfoPopup: Step-by-step guest info flow
 const Header = () => {
+
+
   const dispatch = useDispatch();
   const { isOpen: showLogin } = useSelector((state) => state.loginModal);
+  const RAZORPAY_KEY_ID = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "YOUR_RAZORPAY_KEY_ID";
   const token = useSelector((state) => state.auth.token);
   const [menuActive, setMenuActive] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
+
   // Popup state
   const [showGuestPopup, setShowGuestPopup] = useState(false);
+  const addRoomMutation = useMutation({
+    mutationFn: async (data) => {
+      const { roomType, ...param } = data;
+      return await Apiservice.postAuth(`${API_BOOKING_ROOM}/${roomType}`, param, token);
+    },
+    onSuccess: async (response) => {
+      localStorage.removeItem('guestInfo'); // Clear guest info after successful booking
+      const { amount } = response.data.data.payment;
+      const { id } = response.data.data.razorpayOrder;
+
+      if (response && response.data.status) {
+        const loadRazorpayScript = () => {
+          return new Promise((resolve) => {
+            if (window.Razorpay) return resolve(true);
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+            document.body.appendChild(script);
+          });
+        };
+
+        const isScriptLoaded = await loadRazorpayScript();
+        if (!isScriptLoaded) {
+          toast.error("Failed to load Razorpay. Check your connection.");
+          return;
+        }
+
+        const options = {
+          key: RAZORPAY_KEY_ID,
+          amount: amount, // in paise
+          currency: response?.order?.currency || "INR",
+          name: "Your Company Name",
+          description: "Room Booking Payment",
+          order_id: id,
+          handler: function (paymentResponse) {
+            toast.success("Payment successful!");
+            router.push(`/confirm-booking/${"44444444444"}`);
+          },
+          prefill: {
+            name: response?.user?.name || "",
+            email: response?.user?.email || "",
+            contact: response?.user?.phone || "",
+          },
+          theme: {
+            color: "#F37254",
+          },
+        };
+
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+        toast.success(response.data.message);
+        reset();
+        forceUpdate();
+      } else {
+        toast.error(response && response.data && response.data.message ? response.data.message : "Failed to add room.");
+      }
+    },
+    onError: (error) => {
+      console.log("errorerrorerrorerror" , error);
+      localStorage.removeItem('guestInfo');      
+      toast.error(error.response?.data?.message || "An error occurred while booking the room.");
+    },
+  });
+
+  useEffect(() => {
+    if (token) {
+      const guestInfo = JSON.parse(typeof window !== 'undefined' ? localStorage.getItem('guestInfo') : null) || {};
+      if(guestInfo && Object.keys(guestInfo).length > 0 && token && token !== "null") {
+        const params = {
+          guestName: guestInfo.firstName,
+          email: guestInfo.email,
+          phone: guestInfo.contact,
+          checkIn: guestInfo.checkIn,
+          checkOut: guestInfo.checkOut,
+          roomType: guestInfo.roomType,
+        };
+        addRoomMutation.mutate(params);
+      }
+    }
+  }, [token])
+
 
   // Detect mobile on mount and on resize
   useEffect(() => {
@@ -104,7 +192,7 @@ const Header = () => {
           +91 9783252121
         </a>
 
-      </span> 
+      </span>
 
       <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
         <svg
