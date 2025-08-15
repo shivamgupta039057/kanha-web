@@ -69,7 +69,7 @@ export const GuestInfoPopup = ({ open, onClose }) => {
               key: RAZORPAY_KEY_ID,
               amount: amount, // in paise
               currency: response?.order?.currency || "INR",
-              name: "Your Company Name",
+              name: "New Kanha Hotel",
               description: "Room Booking Payment",
               order_id: id,
               handler: function (paymentResponse) {
@@ -369,6 +369,7 @@ export const GuestInfoPopup = ({ open, onClose }) => {
                     value={form.checkIn}
                     onChange={handleChange}
                     required
+                    min={new Date().toISOString().split("T")[0]}
                     style={{
                       width: "100%",
                       padding: "8px 10px",
@@ -391,6 +392,7 @@ export const GuestInfoPopup = ({ open, onClose }) => {
                     value={form.checkOut}
                     onChange={handleChange}
                     required
+                    min={form.checkIn ? form.checkIn : new Date().toISOString().split("T")[0]}
                     style={{
                       width: "100%",
                       padding: "8px 10px",

@@ -61,7 +61,7 @@ const Header = () => {
           key: RAZORPAY_KEY_ID,
           amount: amount, // in paise
           currency: response?.order?.currency || "INR",
-          name: "Your Company Name",
+          name: "New Kanha Hotel",
           description: "Room Booking Payment",
           order_id: id,
           handler: function (paymentResponse) {

@@ -96,7 +96,7 @@ function BookingAll({OderId}) {
                         {moment(bookingData?.doctor?.date).format(
                           "DD MMM YYYY"
                         )}{" "}
-                        {bookingData?.slot?.start} to {bookingData?.slot?.end}
+                        {bookingData?.slot?.start} 
                       </span>
                     </>
                   )}
@@ -105,7 +105,7 @@ function BookingAll({OderId}) {
                   onClick={handleAppointmentAll}
                   className="text-sm font-medium py-2 px-8 bg-secondary mt-4 block w-max mx-auto rounded-lg text-white cursor-pointer"
                 >
-                  View All Rooms{" "}
+                  View All Booking{" "}
                 </div>
               </div>
             </>

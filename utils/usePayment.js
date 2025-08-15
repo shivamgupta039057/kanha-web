@@ -51,7 +51,7 @@ export const usePayment = () => {
         key: RAZORPAY_KEY_ID,
         amount: response?.order?.amount, // in paise
         currency: response?.order?.currency || "INR",
-        name: "Your Company Name",
+        name: "New Kanha Hotel",
         description: "Room Booking Payment",
         order_id: response?.order?.id,
         handler: function (paymentResponse) {

@@ -443,7 +443,7 @@ const Booking = ({ roomId }) => {
           key: RAZORPAY_KEY_ID,
           amount: amount, // in paise
           currency: response?.order?.currency || "INR",
-          name: "Your Company Name",
+          name: "New Kanha Hotel",
           description: "Room Booking Payment",
           order_id: id,
           handler: function (paymentResponse) {
@@ -750,6 +750,12 @@ const Booking = ({ roomId }) => {
                     id="bookingx-checkout"
                     className="bookingx-form-control border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453]"
                     {...register("checkOut")}
+                    min={
+                      // If checkIn is selected, set min to checkIn date, else today
+                      (typeof watch === "function" && watch("checkIn")) 
+                        ? watch("checkIn") 
+                        : minCheckInDate
+                    }
                   />
                   {errors.checkOut && <span className="bookingx-error text-xs text-red-500">{errors.checkOut.message}</span>}
                 </div>
