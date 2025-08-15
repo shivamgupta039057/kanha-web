@@ -281,7 +281,7 @@ const BanquetTypes = ({ roomTypeData, isLoading }) => {
                       <div className="roomsuite-price-amount">
                         ₹{item.price ? item.price.toLocaleString() : "N/A"}/
                       </div>
-                      <div className="roomsuite-price-period">per night</div>
+                      <div className="roomsuite-price-period">Per Hour</div>
                     </div>
                   </div>
 

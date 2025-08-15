@@ -8,13 +8,15 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { Apiservice, imgBaseUrl } from "@/services/apiservices";
 import { toast } from "react-toastify";
 import { API_BOOKING_BANQUET, API_BOOKING_ROOM, API_GET_BANQUET_DETAILS, API_GET_ROOM_DETAILS } from '@/utils/APIConstant';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { usePayment } from "@/utils/usePayment";
 import { useRouter } from 'next/navigation';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import BanqueteFaqsPage from './BanqueteFaqsPage';
 import BanquetContact from '../banquet/banquetContact';
+import { openLoginModal } from '@/store/features/loginModalSlice';
+
 
 // Updated validation schema for phone and email
 const schema = yup.object().shape({
@@ -27,23 +29,13 @@ const schema = yup.object().shape({
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       "Please enter a valid email address"
     ),
-  phone: yup
-    .string()
-    .required("Phone number is required")
-    .matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits"),
-  checkIn: yup.string().required("Check-in date is required"),
-  checkOut: yup
-    .string()
-    .required("Check-out date is required")
-    .test("is-after", "Check-out must be after check-in", function (value) {
-      const { checkIn } = this.parent;
-      if (!checkIn || !value) return true;
-      return new Date(value) > new Date(checkIn);
-    }),
-  adults: yup.number().min(1).max(4).required("Select number of adults"),
-  kids: yup.number().min(0).max(3).required("Select number of kids"),
-  roomType: yup.string().required("Select room type"),
-  specialRequirement: yup.string().max(500, "Too long").nullable()
+  // phone: yup
+  //   .string()
+  //   .required("Phone number is required")
+  //   .matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits"),
+  // eventDate: yup.string().required("Event date is required"),
+  // startTime: yup.string().required("Start time is required"),
+  // endTime: yup.string().required("End time is required"),
 });
 
 const getProfileDetails = () => {
@@ -120,6 +112,7 @@ const ImageModal = ({ isOpen, imageUrl, onClose }) => {
 // Helper to get today's date in yyyy-mm-dd format
 const getTodayDateString = () => {
   const today = new Date();
+
   const yyyy = today.getFullYear();
   const mm = String(today.getMonth() + 1).padStart(2, '0');
   const dd = String(today.getDate()).padStart(2, '0');
@@ -127,6 +120,7 @@ const getTodayDateString = () => {
 };
 
 const BanquetBookingData = ({ roomId }) => {
+  const dispatch = useDispatch();
   const { submitPayment } = usePayment();
   const RAZORPAY_KEY_ID = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "YOUR_RAZORPAY_KEY_ID";
   const submittedRef = useRef(false);
@@ -173,12 +167,12 @@ const BanquetBookingData = ({ roomId }) => {
         // Accept HTML in description/overview
         overview: roomTypeData?.description || "",
         beds: `${roomTypeData.capacity} Capacity`,
-        Weddings  : "Weddings & Receptions",
-        Birthday  : "Birthday Parties",
-        Baby  : "Baby Showers",
-        Anniversary  : "Anniversary Celebrations",
-        Corporate  : "Corporate Events & Conferences",
-        Religious  : "Religious Functions",
+        Weddings: "Weddings & Receptions",
+        Birthday: "Birthday Parties",
+        Baby: "Baby Showers",
+        Anniversary: "Anniversary Celebrations",
+        Corporate: "Corporate Events & Conferences",
+        Religious: "Religious Functions",
         size: "Up to 200 guests in floating setup",
         count: "100+ guests in seated dining",
         occupancy: "Customizable arrangements for buffet, stage, DJ, mandap, etc",
@@ -221,7 +215,7 @@ const BanquetBookingData = ({ roomId }) => {
               "In-house catering & decoration",
               "Clean restrooms & changing rooms",
               "Power backup",
-              "Ample parking space" , 
+              "Ample parking space",
               "Event planning assistance"
             ]
           },
@@ -256,7 +250,7 @@ const BanquetBookingData = ({ roomId }) => {
               "Telephone"
             ]
           },
-      
+
         ],
         // Added new details as per instruction
         type: roomTypeData?.type || "AC",
@@ -485,14 +479,24 @@ const BanquetBookingData = ({ roomId }) => {
   };
 
   const onSubmit = (data) => {
-    const params = {
-      guestName: data.guestName,
-      email: data.email,
-      phone: data.phone,
-      checkIn: data.checkIn,
-      checkOut: data.checkOut
-    };
-    addRoomMutation.mutate(params);
+
+
+    if (token) {
+      const params = {
+        guestName: data.guestName,
+        email: data.email,
+        phone: data.phone,
+        eventDate: data.eventDate,
+        startTime: data.startTime,
+        endTime: data.endTime,
+
+      };
+      addRoomMutation.mutate(params);
+    } else {
+
+      dispatch(openLoginModal({ booking: true }));
+    }
+
   };
 
   // Get current room info
@@ -630,18 +634,18 @@ const BanquetBookingData = ({ roomId }) => {
                 <span className="bookingx-info-icon">🥂</span>
                 <span>{currentRoom.Anniversary}</span>
               </div>
-               <div className="bookingx-info-item">
+              <div className="bookingx-info-item">
                 <span className="bookingx-info-icon">🏢</span>
                 <span>{currentRoom.Corporate}</span>
               </div>
-               <div className="bookingx-info-item">
+              <div className="bookingx-info-item">
                 <span className="bookingx-info-icon">🙏</span>
                 <span>{currentRoom.Religious}</span>
               </div>
             </div>
           </div>
           {/* HTML Details Section */}
-           <div className="bookingx-section">
+          <div className="bookingx-section">
             <h2 className="bookingx-section-title">Banquet Information</h2>
             <div className="bookingx-room-info" style={{ color: "#000000", fontWeight: "bold" }}>
               <div className="bookingx-info-item">
@@ -726,95 +730,116 @@ const BanquetBookingData = ({ roomId }) => {
             top: "24px",
             zIndex: 30,
             background: "transparent",
-            height: "fit-content"
+            height: "fit-content",
+            width: "100%", // Make the sidebar take full width of its container
+            maxWidth: "520px", // Increase max width for a wider sidebar
+            minWidth: "380px", // Set a minimum width for better appearance
+            margin: "0 auto" // Center the sidebar if possible
           }}
         >
-          <div className="bookingx-booking-sidebar shadow-lg rounded-lg border border-gray-200 bg-white">
+          <div
+            className="bookingx-booking-sidebar shadow-lg rounded-lg border border-gray-200 bg-white"
+            style={{
+              width: "100%",
+              maxWidth: "520px", // Match the section's maxWidth
+              minWidth: "380px"
+            }}
+          >
             <div className="bookingx-booking-header text-center text-white bg-[#aa8453] py-4 text-lg font-bold">
-              Book Banquet
+              Book Room
             </div>
-            <form className="bookingx-booking-form p-6" onSubmit={handleSubmit(onSubmit)}>
-              <div className="bookingx-form-group mb-4">
-                <label htmlFor="bookingx-guest-name" className="block text-sm font-medium text-gray-700 mb-1">
+            <form className="bookingx-booking-form p-8" onSubmit={handleSubmit(onSubmit)}>
+              {/* Guest Name */}
+              <div className="bookingx-form-group mb-6">
+                <label htmlFor="bookingx-guest-name" className="block text-base font-medium text-gray-700 mb-2">
                   <span className="bookingx-icon mr-1">👤</span>Enter Your Name
                 </label>
                 <input
                   type="text"
                   id="bookingx-guest-name"
-                  className="bookingx-form-control border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453]"
+                  className="bookingx-form-control border border-gray-300 rounded px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453] text-base"
                   placeholder="Your Name"
                   {...register("guestName")}
                 />
-                {errors.guestName && <span className="bookingx-error text-xs text-red-500">{errors.guestName.message}</span>}
+                {errors.guestName && <span className="bookingx-error text-sm text-red-500">{errors.guestName.message}</span>}
               </div>
-              <div className="bookingx-form-group mb-4">
-                <label htmlFor="bookingx-email" className="block text-sm font-medium text-gray-700 mb-1">
+              {/* Email */}
+              <div className="bookingx-form-group mb-6">
+                <label htmlFor="bookingx-email" className="block text-base font-medium text-gray-700 mb-2">
                   <span className="bookingx-icon mr-1">✉️</span>Enter Email Id
                 </label>
                 <input
                   type="email"
                   id="bookingx-email"
-                  className="bookingx-form-control border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453]"
+                  className="bookingx-form-control border border-gray-300 rounded px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453] text-base"
                   placeholder="Your Email"
                   {...register("email")}
-                  autoComplete="email"
                   inputMode="email"
-                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                  onInput={handleEmailInput}
+                  autoComplete="email"
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                 />
-                {errors.email && <span className="bookingx-error text-xs text-red-500">{errors.email.message}</span>}
+                {errors.email && <span className="bookingx-error text-sm text-red-500">{errors.email.message}</span>}
               </div>
-              <div className="bookingx-form-group mb-4">
-                <label htmlFor="bookingx-contact" className="block text-sm font-medium text-gray-700 mb-1">
+              {/* Contact Number */}
+              <div className="bookingx-form-group mb-6">
+                <label htmlFor="bookingx-contact" className="block text-base font-medium text-gray-700 mb-2">
                   <span className="bookingx-icon mr-1">📞</span>Enter Contact Number
                 </label>
                 <input
                   type="tel"
                   id="bookingx-contact"
-                  className="bookingx-form-control border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453]"
+                  className="bookingx-form-control border border-gray-300 rounded px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453] text-base"
                   placeholder="Your Phone"
                   {...register("phone")}
                   inputMode="numeric"
-                  pattern="[0-9]{10}"
-                  maxLength={10}
-                  onInput={handlePhoneInput}
+                  autoComplete="tel"
+                  pattern="[0-9]{10,15}"
+                  maxLength={15}
                 />
-                {errors.phone && <span className="bookingx-error text-xs text-red-500">{errors.phone.message}</span>}
+                {errors.phone && <span className="bookingx-error text-sm text-red-500">{errors.phone.message}</span>}
               </div>
-              <div className="bookingx-date-row flex gap-3 mb-4">
-                <div className="bookingx-form-group flex-1">
-                  <label htmlFor="bookingx-checkin" className="block text-sm font-medium text-gray-700 mb-1">
-                    <span className="bookingx-icon mr-1">📅</span>Check-in Date
-                  </label>
-                  <input
-                    type="date"
-                    id="bookingx-checkin"
-                    className="bookingx-form-control border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453]"
-                    {...register("checkIn")}
-                    min={todayDateString}
-                  />
-                  {errors.checkIn && <span className="bookingx-error text-xs text-red-500">{errors.checkIn.message}</span>}
-                </div>
-                <div className="bookingx-form-group flex-1">
-                  <label htmlFor="bookingx-checkout" className="block text-sm font-medium text-gray-700 mb-1">
-                    <span className="bookingx-icon mr-1">📅</span>Check-out Date
-                  </label>
-                  <input
-                    type="date"
-                    id="bookingx-checkout"
-                    className="bookingx-form-control border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453]"
-                    {...register("checkOut")}
-                    min={
-                      typeof watch === "function" && watch("checkIn")
-                        ? watch("checkIn")
-                        : todayDateString
-                    }
-                  />
-                  {errors.checkOut && <span className="bookingx-error text-xs text-red-500">{errors.checkOut.message}</span>}
-                </div>
+              {/* Event Date */}
+              <div className="bookingx-form-group mb-6">
+                <label htmlFor="bookingx-event-date" className="block text-base font-medium text-gray-700 mb-2">
+                  <span className="bookingx-icon mr-1">📅</span>Event Date
+                </label>
+                <input
+                  type="date"
+                  id="bookingx-event-date"
+                  className="bookingx-form-control border border-gray-300 rounded px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453] text-base"
+                  {...register("eventDate")}
+                  min={minCheckInDate}
+                />
+                {errors.eventDate && <span className="bookingx-error text-sm text-red-500">{errors.eventDate.message}</span>}
+              </div>
+              {/* Start Time */}
+              <div className="bookingx-form-group mb-6">
+                <label htmlFor="bookingx-start-time" className="block text-base font-medium text-gray-700 mb-2">
+                  <span className="bookingx-icon mr-1">⏰</span>Start Time
+                </label>
+                <input
+                  type="time"
+                  id="bookingx-start-time"
+                  className="bookingx-form-control border border-gray-300 rounded px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453] text-base"
+                  {...register("startTime")}
+                />
+                {errors.startTime && <span className="bookingx-error text-sm text-red-500">{errors.startTime.message}</span>}
+              </div>
+              {/* End Time */}
+              <div className="bookingx-form-group mb-6">
+                <label htmlFor="bookingx-end-time" className="block text-base font-medium text-gray-700 mb-2">
+                  <span className="bookingx-icon mr-1">⏰</span>End Time
+                </label>
+                <input
+                  type="time"
+                  id="bookingx-end-time"
+                  className="bookingx-form-control border border-gray-300 rounded px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-[#aa8453] text-base"
+                  {...register("endTime")}
+                />
+                {errors.endTime && <span className="bookingx-error text-sm text-red-500">{errors.endTime.message}</span>}
               </div>
               <button
-                className="bookingx-book-button w-full bg-[#aa8453] hover:bg-[#8a6a3a] text-black py-3 rounded font-bold transition-colors duration-200 disabled:opacity-60"
+                className="bookingx-book-button w-full bg-[#aa8453] hover:bg-[#8a6a3a] text-black py-4 rounded font-bold text-lg transition-colors duration-200 disabled:opacity-60"
                 type="submit"
                 disabled={isSubmitting}
               >
@@ -823,9 +848,9 @@ const BanquetBookingData = ({ roomId }) => {
             </form>
           </div>
         </section>
-      
+
       </div>
-        <BanquetContact />
+      <BanquetContact />
       <BanqueteFaqsPage />
     </>
   );

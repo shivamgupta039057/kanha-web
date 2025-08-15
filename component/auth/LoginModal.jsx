@@ -91,11 +91,11 @@ const LoginModal = ({ isOpen, onClose }) => {
 
   const emailSignInMutation = useMutation({
     mutationFn: async (data) => {
-      const res = await Apiservice.post(`${API_KHANA_LOGIN}`, data);
-      return res || {};
+      return await Apiservice.post(`${API_KHANA_LOGIN}`, data);
     },
     onSuccess: (res) => {
-      
+      console.log("sdklfjsdklfjdfklresresresres" , res);
+
       if (res && res.data && res.data.status) {
         dispatch(setToken(res.data.token));
         toast.success(res.data.message);
@@ -108,8 +108,10 @@ const LoginModal = ({ isOpen, onClose }) => {
     },
     onError: (error) => {
       console.log("errorerrorerrorerror" , error);
-      
+      console.error("Login error:", error);
+      if (error.response && error.response.data) {
       toast.error(error && error.message ? error.message : "An error occurred while logging in.");
+      }
     },
   });
 
