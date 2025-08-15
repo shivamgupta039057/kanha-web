@@ -16,7 +16,7 @@ const TableBooking = ({ tablebookingData, isLoading }) => {
     if (token) {
       router.push(`/bookingPage/${id}`);
     } else {
-      dispatch(openLoginModal());
+      dispatch(openLoginModal({ booking: false }));
     }
   };
 

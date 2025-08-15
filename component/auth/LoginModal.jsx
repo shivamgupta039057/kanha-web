@@ -9,7 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { Apiservice } from "@/services/apiservices";
 import { API_KHANA_LOGIN, API_KHANA_OTP_LOGIN, API_VERFIY_OTP } from "@/utils/APIConstant";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setToken } from '../../store/features/authSlice';
 
 const SignupModal = dynamic(() => import("@/component/auth/SignupModal"), { ssr: false });
@@ -42,6 +42,7 @@ const otpSchema = yup.object().shape({
 
 const LoginModal = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
+  const { booking } = useSelector((state) => state.loginModal);
 
   // Email/password form
   const {
@@ -210,7 +211,9 @@ const LoginModal = ({ isOpen, onClose }) => {
             >
               &times;
             </button>
-            <h2 className="text-2xl font-bold text-[#171717] mb-2 text-center">Sign in</h2>
+            <h2 className="text-2xl font-bold text-[#171717] mb-2 text-center">
+              {booking ? "You Need To Signup First" : "Sign in"}
+            </h2>
             <p className="text-sm text-gray-500 mb-6 text-center">
               Don’t have an account?{" "}
               <button

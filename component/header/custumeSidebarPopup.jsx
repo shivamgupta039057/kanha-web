@@ -170,7 +170,7 @@ export const GuestInfoPopup = ({ open, onClose }) => {
         } else {
           localStorage.setItem("guestInfo", JSON.stringify(form));
           onClose();
-          dispatch(openLoginModal());
+          dispatch(openLoginModal({ booking: false }));
         }
       }
     };

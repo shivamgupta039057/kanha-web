@@ -353,7 +353,7 @@ const Header = () => {
                                 type="button"
                                 onClick={() => {
                                   dispatch(clearToken());
-                                  dispatch(openLoginModal());
+                                  dispatch(openLoginModal({ booking: false }));
                                   setMenuActive(false);
                                 }}
                                 className="inline-block px-6 py-2 rounded-full font-semibold text-white bg-[#b99365] hover:bg-[#a07c44] shadow transition-all duration-200 border-2 border-[#b99365] hover:border-[#a07c44] focus:outline-none focus:ring-2 focus:ring-[#b99365] focus:ring-offset-2"
@@ -367,7 +367,7 @@ const Header = () => {
                               <button
                                 type="button"
                                 onClick={() => {
-                                  dispatch(openLoginModal());
+                                  dispatch(openLoginModal({ booking: false }));
                                   setMenuActive(false);
                                 }}
                                 className="inline-block px-6 py-2 rounded-full font-semibold text-white bg-[#b99365] hover:bg-[#a07c44] shadow transition-all duration-200 border-2 border-[#b99365] hover:border-[#a07c44] focus:outline-none focus:ring-2 focus:ring-[#b99365] focus:ring-offset-2"

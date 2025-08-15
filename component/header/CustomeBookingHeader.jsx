@@ -132,7 +132,7 @@ const CustomeBookingHeader = () => {
                           <li className="menu-item">
                             <button
                               type="button"
-                              onClick={() => dispatch(openLoginModal())}
+                              onClick={() => dispatch(openLoginModal({ booking: false }))}
 
                               className="inline-block px-6 py-2 rounded-full font-semibold text-black bg-[#b99365] hover:bg-[#a07c44] shadow transition-all duration-200 border-2 border-[#b99365] hover:border-[#a07c44] focus:outline-none focus:ring-2 focus:ring-[#b99365] focus:ring-offset-2"
                               style={{ minWidth: 90, textAlign: 'center', letterSpacing: 1 }}

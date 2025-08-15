@@ -485,7 +485,8 @@ const Booking = ({ roomId }) => {
       };
       addRoomMutation.mutate(params);
     } else {
-      dispatch(openLoginModal());
+      
+      dispatch(openLoginModal({ booking: true }));
     }
    
   };
