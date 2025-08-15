@@ -328,9 +328,11 @@ const Header = () => {
                               <li className="menu-item">
                                 <Link href="/faq" onClick={() => setMenuActive(false)}>FAQ</Link>
                               </li>
-                              <li className="menu-item">
+                             {
+                              token ? ( <li className="menu-item">
                                 <Link href="/allOrder" onClick={() => setMenuActive(false)}>My Bookings</Link>
-                              </li>
+                              </li>) : null
+                             }
                             </ul>
                           </li>
                           {/* <li className="menu-item menu-item-has-children">
