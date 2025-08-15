@@ -63,7 +63,7 @@ const AllAppointmentHeader = ({
             />
           </div>
           {/* Select Type */}
-          <div>
+          {/* <div>
             <Controller
               name="selectType"
               control={control}
@@ -88,7 +88,7 @@ const AllAppointmentHeader = ({
                 </select>
               )}
             />
-          </div>
+          </div> */}
           {/* Date Picker */}
           <div className="flex justify-between max-sm:ms-auto items-center max-sm:flex-wrap">
             <div className=" ">

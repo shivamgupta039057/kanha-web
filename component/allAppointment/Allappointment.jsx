@@ -72,7 +72,7 @@ function Allappointment() {
 
   return (
     <>
-       <SubHeader title="Rooms & Banquets" subtitle="Rooms & Banquets" rating="5" />
+       <SubHeader title="Bookings" subtitle="Bookings" rating="5" />
       <AllAppointmentHeader
         control={control}
         setValue={setValue}

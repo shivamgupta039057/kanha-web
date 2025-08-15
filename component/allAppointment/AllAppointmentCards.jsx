@@ -14,7 +14,7 @@ const AllAppointmentCards = ({ item }) => {
 
   return (
     <React.Fragment>
-      <div className="bg-white shadow p-4 w-full rounded-lg relative">
+      <div className="bg-white shadoPayment Detailsw p-4 w-full rounded-lg relative">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           {/* Guest Name */}
           <div className="flex items-center gap-4">
@@ -57,7 +57,7 @@ const AllAppointmentCards = ({ item }) => {
             <div className="text-sm font-semibold flex items-center mt-1">
               <span className="text-gray-500 font-bold capitalize">
                 {item?.bookingType === "room"
-                  ? `Room Booking (${item.status})`
+                  ? `Booking Status (${item.status})`
                   : `${item.bookingType} (${item.status})`}
               </span>
               <span className="px-2 text-gray-300">|</span>
@@ -84,48 +84,9 @@ const AllAppointmentCards = ({ item }) => {
             </div>
           </div>
           {/* Details Button */}
-          <div className="flex gap-2">
-            {(item.status === "pending" || item.status === "confirmed") && (
-              <div
-                onClick={() => {
-                  setIsModal(true);
-                  setBookingData(item);
-                }}
-                className="rounded-full size-8 *:size-full p-2 bg-gray-200 hover:text-white hover:bg-secondary text-secondary duration-700 max-sm:absolute max-sm:right-4 max-sm:top-4"
-              >
-                <svg
-                  stroke="currentColor"
-                  fill="currentColor"
-                  strokeWidth="0"
-                  viewBox="0 0 512 512"
-                  height="200px"
-                  width="200px"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M255.8 112c-80.4 0-143.8 50.6-219.6 133.3-5.5 6.1-5.6 15.2-.1 21.3C101 338.3 158.2 400 255.8 400c96.4 0 168.7-77.7 220.1-134 5.3-5.8 5.6-14.6.5-20.7C424 181.8 351.5 112 255.8 112zm4.4 233.9c-53 2.4-96.6-41.2-94.1-94.1 2.1-46.2 39.5-83.6 85.7-85.7 53-2.4 96.6 41.2 94.1 94.1-2.1 46.2-39.5 83.6-85.7 85.7z"></path>
-                  <path d="M256 209c0-6 1.1-11.7 3.1-16.9-1 0-2-.1-3.1-.1-36.9 0-66.6 31.4-63.8 68.9 2.4 31.3 27.6 56.5 58.9 58.9 37.5 2.8 68.9-26.9 68.9-63.8 0-1.3-.1-2.6-.1-3.9-5.6 2.5-11.7 3.9-18.2 3.9-25.2 0-45.7-21.1-45.7-47z"></path>
-                </svg>
-              </div>
-            )}
-          </div>
+          
           {/* Actions */}
-          <div className="flex align-middle gap-3">
-            <div
-              className="px-5 py-2 cursor-pointer text-white rounded-lg bg-secondary w-full sm:w-auto text-center"
-              onClick={() => router.push(`/invoice/${item._id}`)}
-            >
-              Invoice
-            </div>
-            {/* If paymentId exists, show payment link */}
-            {item?.paymentId && (
-              <div
-                className="px-5 py-2 cursor-pointer text-white rounded-lg bg-secondary w-full sm:w-auto text-center"
-                onClick={() => window.open(`/payment/${item.paymentId}`, '_blank')}
-              >
-                Payment Details
-              </div>
-            )}
-          </div>
+        
         </div>
       </div>
       {isModal && (
