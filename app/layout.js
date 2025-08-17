@@ -51,8 +51,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-       <head>
-        {/* Facebook Pixel Code */}
+     
+      <head>
+         {/* Facebook Pixel Code */}
         <Script
           id="facebook-pixel"
           strategy="afterInteractive"
@@ -80,8 +81,6 @@ export default function RootLayout({ children }) {
           />
         </noscript>
         {/* End Facebook Pixel Code */}
-      </head>
-      <head>
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
