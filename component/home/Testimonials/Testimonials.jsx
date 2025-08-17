@@ -40,7 +40,7 @@ const Testimonials = () => {
     <section
       className="work-area bg-ght area"
       id="work-re"
-      style={{ backgroundImage: "url(/images/subheader.jpg)" }}
+      style={{ backgroundImage: "url(/images/about-3.webp)" }}
     >
       <div className="container">
         <div className="section-header">

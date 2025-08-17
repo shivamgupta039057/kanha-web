@@ -2979,10 +2979,12 @@ float: left;
 
 }
 .hover-sec-img {
+	 height: 230px; 
 	width: 100%;
-	height: auto;
-	overflow: hidden;
+  object-fit: cover;   
+  border-radius: 6px;
 }
+
 .category {
 	position: absolute;
 	top: 20px;
