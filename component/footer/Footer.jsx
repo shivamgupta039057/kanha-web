@@ -132,7 +132,7 @@ const Footer = () => {
                     <Link href="/refund-policy"><i className="fa fa-caret-right"></i>Refund Policy</Link>
                   </li>
                   <li>
-                    <Link href="/refund-policy"><i className="fa fa-caret-right"></i>Term of use</Link>
+                    <Link href="/terms-conditions"><i className="fa fa-caret-right"></i>Terms and conditions</Link>
                   </li>
                 </ul>
               </div>
