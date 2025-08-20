@@ -17,8 +17,6 @@ import { toast } from 'react-toastify';
 
 // GuestInfoPopup: Step-by-step guest info flow
 const Header = () => {
-
-
   const dispatch = useDispatch();
   const { isOpen: showLogin } = useSelector((state) => state.loginModal);
   const RAZORPAY_KEY_ID = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "YOUR_RAZORPAY_KEY_ID";
@@ -26,6 +24,8 @@ const Header = () => {
   const [menuActive, setMenuActive] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
+  // State for opening/closing the "Pages" dropdown in mobile
+  const [pagesDropdownOpen, setPagesDropdownOpen] = useState(false);
 
   // Popup state
   const [showGuestPopup, setShowGuestPopup] = useState(false);
@@ -111,7 +111,6 @@ const Header = () => {
     }
   }, [token])
 
-
   // Detect mobile on mount and on resize
   useEffect(() => {
     const checkMobile = () => {
@@ -162,6 +161,13 @@ const Header = () => {
     };
   }, [menuActive]);
 
+  // Close dropdown when menu closes or on desktop
+  useEffect(() => {
+    if (!menuActive || !isMobile) {
+      setPagesDropdownOpen(false);
+    }
+  }, [menuActive, isMobile]);
+
   // Phone number JSX for reuse
   const phoneNumberJSX = (
     <div className='block'>
@@ -191,9 +197,7 @@ const Header = () => {
         >
           +91 9783252121
         </a>
-
       </span>
-
       <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -208,7 +212,6 @@ const Header = () => {
             d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z"
           />
         </svg>
-
         <a
           href="tel:+919352999963"
           style={{
@@ -223,7 +226,6 @@ const Header = () => {
         </a>
       </span>
     </div>
-
   );
 
   return (
@@ -313,27 +315,62 @@ const Header = () => {
                           <li className="menu-item">
                             <Link href="/resturent" onClick={() => setMenuActive(false)}>Restaurant</Link>
                           </li>
-                          <li className="menu-item menu-item-has-children">
-                            <a href="#" onClick={e => e.preventDefault()}>Pages</a>
-                            <ul className="submenu custom">
-                              {/* <li className="menu-item">
-                                <Link href="/services" onClick={() => setMenuActive(false)}>Services</Link>
-                              </li> */}
-                              <li className="menu-item">
-                                <Link href="/facility" onClick={() => setMenuActive(false)}>Facilites</Link>
-                              </li>
-                              <li className="menu-item">
-                                <Link href="/gallery" onClick={() => setMenuActive(false)}>Gallery</Link>
-                              </li>
-                              <li className="menu-item">
-                                <Link href="/faq" onClick={() => setMenuActive(false)}>FAQ</Link>
-                              </li>
-                             {
-                              token ? ( <li className="menu-item">
-                                <Link href="/allOrder" onClick={() => setMenuActive(false)}>My Bookings</Link>
-                              </li>) : null
-                             }
-                            </ul>
+                          <li
+                            className={
+                              `menu-item menu-item-has-children` +
+                              (isMobile && pagesDropdownOpen ? " open" : "")
+                            }
+                          >
+                            {/* On mobile, clicking the anchor toggles the dropdown */}
+                            <a
+                              href="#"
+                              onClick={e => {
+                                e.preventDefault();
+                                if (isMobile) {
+                                  setPagesDropdownOpen((prev) => !prev);
+                                }
+                              }}
+                              aria-expanded={isMobile ? pagesDropdownOpen : undefined}
+                              aria-haspopup="true"
+                            >
+                              Pages
+                              {isMobile && (
+                                <span
+                                  style={{
+                                    marginLeft: 8,
+                                    display: 'inline-block',
+                                    transform: pagesDropdownOpen ? 'rotate(90deg)' : 'rotate(0deg)',
+                                    transition: 'transform 0.2s'
+                                  }}
+                                >
+                                  ▶
+                                </span>
+                              )}
+                            </a>
+                            {/* Show submenu always on desktop, only if open on mobile */}
+                            {(isMobile ? pagesDropdownOpen : true) && (
+                              <ul className="submenu custom">
+                                {/* <li className="menu-item">
+                                  <Link href="/services" onClick={() => setMenuActive(false)}>Services</Link>
+                                </li> */}
+                                <li className="menu-item">
+                                  <Link href="/facility" onClick={() => setMenuActive(false)}>Facilites</Link>
+                                </li>
+                                <li className="menu-item">
+                                  <Link href="/gallery" onClick={() => setMenuActive(false)}>Gallery</Link>
+                                </li>
+                                <li className="menu-item">
+                                  <Link href="/faq" onClick={() => setMenuActive(false)}>FAQ</Link>
+                                </li>
+                                {
+                                  token ? (
+                                    <li className="menu-item">
+                                      <Link href="/allOrder" onClick={() => setMenuActive(false)}>My Bookings</Link>
+                                    </li>
+                                  ) : null
+                                }
+                              </ul>
+                            )}
                           </li>
                           {/* <li className="menu-item menu-item-has-children">
                             <a href="#">Blog</a>

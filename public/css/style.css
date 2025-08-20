@@ -1217,7 +1217,7 @@ ul.m-0.p-0.main li {
 	font-weight: 600;
 	text-transform: uppercase;
 	display: block;
-	color: #000;
+	color: #000 !important;
 }
 .menu-item-has-children .submenu>.menu-item:hover>a {
 	background-color: #000;
@@ -4334,4 +4334,8 @@ ul.ft_contact.ft_menu li a i:hover {
 
 .slick-dots li.slick-active button:before  ,.slick-dots li button:before{
 	display: none;
+}
+
+li.menu-item.menu-item-has-children.open ul {
+    display: block !important;
 }
