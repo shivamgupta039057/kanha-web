@@ -35,8 +35,11 @@ const Footer = () => {
               </div>
               {/*  */}
 
-              <div className='flex gap-3'>
-                <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+              <div className="flex gap-3 md:flex-row flex-col mb-3 md:items-center items-start md:text-left text-left">
+                <span
+                  className="flex items-center gap-1"
+                  style={{ marginBottom: 4 }}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -62,10 +65,12 @@ const Footer = () => {
                   >
                     +91 9783252121
                   </a>
-
-                </span> <span className="text-white">,</span>
-
-                <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                </span>
+                <span className="text-white md:inline hidden">,</span>
+                <span
+                  className="flex items-center gap-1"
+                  style={{ marginBottom: 4 }}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
