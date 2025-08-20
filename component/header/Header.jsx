@@ -81,8 +81,7 @@ const Header = () => {
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
         toast.success(response.data.message);
-        reset();
-        forceUpdate();
+        // forceUpdate();
       } else {
         toast.error(response && response.data && response.data.message ? response.data.message : "Failed to add room.");
       }
