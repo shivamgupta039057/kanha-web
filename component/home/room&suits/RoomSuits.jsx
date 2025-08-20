@@ -4,7 +4,7 @@ import React from "react";
 const roomSuitsData = [
   {
     colClass: "col-lg-4",
-    img: "/images/room/1.jpg",
+    img: "/images/DeluxeRoom.png",
     price: "₹2500/Day",
     priceLink: "#",
     title: "Rooms",
@@ -69,7 +69,7 @@ const RoomSuits = () => {
         </div>
         <div className="row">
           {roomSuitsData.map((room, idx) => (
-            <div className={room.colClass} key={idx}>
+            <div  style={{position:'relative'}}  className={room.colClass} key={idx}>
               <div
                 className="femg"
                 data-aos="fade-down"
@@ -83,7 +83,7 @@ const RoomSuits = () => {
                   <a href={room.priceLink}>{room.price}</a>
                 </span>
                 <div className="con">
-                  <h5>
+                  <h5 className="card-overlay">
                     <a href={room.titleLink}>{room.title}</a>
                   </h5>
                   <div className="line"></div>

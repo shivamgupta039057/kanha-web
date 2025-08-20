@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 // Dynamic data for prices/services
 const pricesData = [
   {
-    img: "/images/extra/2.jpg",
+    img: "/images/DeluxeRoom.png",
     title: "Deluxe room with breakfast",
     price: "₹2250",
     period: "/ day",
@@ -20,7 +20,7 @@ const pricesData = [
     aos: "zoom-in-up",
   },
   {
-    img: "/images/extra/3.jpg",
+    img: "/images/SuperDeluxe.png",
     title: "Super Deluxe room with breakfast ",
     price: "₹2750",
     period: "/ day",
@@ -74,7 +74,7 @@ const PricesData = () => {
               }}
             >
               <div className="section-heading mb-3" style={{ marginBottom: "2rem" }}>
-                <h3 style={{ fontWeight: "bold" , fontSize : '20px' }}>Hotel Booking</h3>
+                <h3 style={{ fontWeight: "bold", fontSize: '20px' }}>Hotel Booking</h3>
                 <span style={{ fontWeight: "bold" }}>Types Of Room We Provide</span>
               </div>
               <div className="sell-up-le" style={{ flex: 1 }}>
@@ -84,6 +84,8 @@ const PricesData = () => {
                 <p>
                   Each room features modern amenities like free Wi-Fi, room service, and clean interiors. Whether for business or leisure, enjoy a peaceful and premium stay at New Kanha Hotel.
                 </p>
+                <p>
+                  Whether you're here for a stay, a function, or a fine dining experience, New Kanha Hotel ensures comfort, luxury, and exceptional service—all under one roof. A perfect destination for every occasion in the heart of Jaipur.                </p>
 
                 <div className="reservation-section">
                   <div className="reservation-icon">
@@ -132,7 +134,7 @@ const PricesData = () => {
                       style={{ display: "flex", flexDirection: "column", height: "100%", justifyContent: "center" }}
                     >
                       <div className="best-pricee-img">
-                        <img src={item.img} alt={item.title} />
+                        <img src={item.img} style={{ width: '400px', height: '400px' }} alt={item.title} />
                       </div>
                       <div className="headi-clean">
                         <h4>
@@ -148,7 +150,7 @@ const PricesData = () => {
                         </div>
                         <ul className="list-unstyled list" >
                           {item.features.map((feature, i) => (
-                            <li  style={{ color: "#000000", fontWeight: "bold" }}   key={i}>
+                            <li style={{ color: "#000000", fontWeight: "bold" }} key={i}>
                               <i className="fa fa-check"></i> {feature}
                             </li>
                           ))}
