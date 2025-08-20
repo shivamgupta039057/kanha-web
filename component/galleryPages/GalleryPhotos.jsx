@@ -49,7 +49,7 @@ const GalleryPhotos = () => {
           </div>
         </div>
       </section>
-      <section className="work-area bg-lit" id="work-aa">
+      <section className="work-area bg-lit pt-0" id="work-aa">
         <div className="container">
           <div className="section-header">
             <div className="section-heading mb-3">
@@ -59,11 +59,22 @@ const GalleryPhotos = () => {
           </div>
           <div >
             <div >
-              <video
+              {/* <video
                 className="align-self-center " style={{ width: '100%', height: '50%' }}
                 autoPlay
                 loop
                 muted
+                playsInline
+              >
+                <source src="/bannerVideo.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video> */}
+
+              <video
+                className="align-self-center " style={{ width: '100%', height: '50%' }}
+                autoPlay
+                loop
+                controls
                 playsInline
               >
                 <source src="/bannerVideo.mp4" type="video/mp4" />
