@@ -169,12 +169,25 @@ const Header = () => {
 
   // Phone number JSX for reuse
   const phoneNumberJSX = (
-    <div className='block'>
-      <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+    <div
+      className="block"
+      style={{
+        marginTop: isMobile ? 0 : undefined, // Remove extra margin in mobile
+        marginBottom: isMobile ? 0 : undefined,
+        position: isMobile ? "relative" : undefined,
+        top: isMobile ? "-4px" : undefined, // Move up a little in mobile
+      }}
+    >
+      <span style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        marginBottom: isMobile ? 2 : 0,
+      }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
+          width={isMobile ? 15 : 18}
+          height={isMobile ? 15 : 18}
           fill="none"
           viewBox="0 0 24 24"
           style={{ marginRight: 6, color: "#ffc107" }}
@@ -190,18 +203,23 @@ const Header = () => {
             color: "#ffc107",
             textDecoration: "none",
             fontWeight: 600,
-            fontSize: 14,
+            fontSize: isMobile ? 12 : 14,
             letterSpacing: 0.5,
           }}
         >
           +91 9783252121
         </a>
       </span>
-      <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <span style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        marginTop: isMobile ? 2 : 0,
+      }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
+          width={isMobile ? 15 : 18}
+          height={isMobile ? 15 : 18}
           fill="none"
           viewBox="0 0 24 24"
           style={{ marginRight: 6, color: "#ffc107" }}
@@ -217,7 +235,7 @@ const Header = () => {
             color: "#ffc107",
             textDecoration: "none",
             fontWeight: 600,
-            fontSize: 14,
+            fontSize: isMobile ? 12 : 14,
             letterSpacing: 0.5,
           }}
         >
@@ -281,6 +299,7 @@ const Header = () => {
                           whiteSpace: "nowrap",
                           marginLeft: 180,
                           marginRight: 16,
+                          
                         }}
                       >
                         {phoneNumberJSX}
@@ -498,6 +517,9 @@ const Header = () => {
                       justifyContent: "center",
                       marginTop: 12,
                       marginBottom: 8,
+                      position: "absolute",
+                          top: 13,
+                          right: "24%",
                     }}
                   >
                     {phoneNumberJSX}
