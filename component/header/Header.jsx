@@ -267,7 +267,7 @@ const Header = () => {
                         />
                       </Link>
                     </div>
-                    {/* Phone Number (Desktop only) */}
+                    {/* Phone Number (Desktop only, but now also show in mobile outside hamburger) */}
                     {!isMobile && (
                       <div
                         className="header-phone"
@@ -371,20 +371,7 @@ const Header = () => {
                               </ul>
                             )}
                           </li>
-                          {/* <li className="menu-item menu-item-has-children">
-                            <a href="#">Blog</a>
-                            <ul className="submenu custom">
-                              <li className="menu-item">
-                                <Link href="/blog" onClick={() => setMenuActive(false)}>Blog</Link>
-                              </li>
-                              <li className="menu-item">
-                                <Link href="/blog-1" onClick={() => setMenuActive(false)}>Blog-Right</Link>
-                              </li>
-                              <li className="menu-item">
-                                <Link href="/blog-2" onClick={() => setMenuActive(false)}>Blog Details</Link>
-                              </li>
-                            </ul>
-                          </li> */}
+                        
                           <li className="menu-item">
                             <Link href="/contact" onClick={() => setMenuActive(false)}>Contact</Link>
                           </li>
@@ -418,12 +405,12 @@ const Header = () => {
                               </button>
                             </li>
                           )}
-                          {/* Phone number in mobile menu */}
-                          {isMobile && menuActive && (
+                          {/* Phone number in mobile menu - REMOVED as per instruction */}
+                          {/* {isMobile && menuActive && (
                             <li className="menu-item" style={{ marginTop: 12 }}>
                               {phoneNumberJSX}
                             </li>
-                          )}
+                          )} */}
                         </ul>
                       </div>
                       <div className="hamburger-menu">
@@ -501,6 +488,21 @@ const Header = () => {
                     </div>
                   </div>
                 </nav>
+                {/* Phone number in mobile view, outside hamburger/menu */}
+                {isMobile && (
+                  <div
+                    className="header-phone-mobile"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginTop: 12,
+                      marginBottom: 8,
+                    }}
+                  >
+                    {phoneNumberJSX}
+                  </div>
+                )}
               </div>
             </div>
           </div>
